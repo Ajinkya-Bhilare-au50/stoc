@@ -68,3 +68,67 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+-----------Inside App.JS--------------------------------------------------------
+<div>
+      <NavbarWithMegaMenu />
+      <OfferPopup />
+      <TradingViewTickerTape />
+      <HeroPage />
+
+      <ContactUs />
+
+      <FAQSection />
+      <Accordian />
+      <Feedbacksection />
+
+      <TradingStats />
+      <CourseList />
+
+      <StickyFooter />
+      <ScrollUpButton />
+    </div>
+-----------------------------------------------------------------------------------------------------------
+
+react Router Documentation
+
+import * as React from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <div>
+        <h1>Hello World</h1>
+        <Link to="about">About Us</Link>
+      </div>
+    ),
+  },
+  {
+    path: "about",
+    element: <div>About</div>,
+  },
+]);
+
+const App = () => (
+  <RouterProvider router={router}>
+    <Route />
+  </RouterProvider>
+);
+
+export default App;
+----------------------------------------------------------------------------------------------------------------
+Learning React Router Dom
+
+passing router object array in app.js as mentioned below
+    <div>
+      <RouterProvider router={router}>
+        <Route />
+      </RouterProvider>
+    </div>
