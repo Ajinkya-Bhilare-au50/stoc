@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+// this component is for the blue bar shown on the top
 const Scrollindicator = () => {
   const [scrollPercent, setScrollPercent] = useState(0);
 

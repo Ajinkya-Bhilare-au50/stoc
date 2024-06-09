@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import candlestickImage from "./images/candlestickbackground.jpg";
 import { Link } from "react-router-dom";
+import { AiOutlineStock, AiOutlineCode } from "react-icons/ai";
+
 
 const containerVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -40,27 +42,30 @@ const HeroPage = () => {
           Master Stock Dynamics
         </motion.h1>
         <motion.p className="text-lg md:text-xl mb-8" variants={itemVariants}>
-          Unlock Your Potential with Stock Experts
+          Unlock Your Potential with Experts
         </motion.p>
         <div className="flex space-x-4">
           <motion.div variants={itemVariants}>
             <Link
               to="/stockcoursepage"
-              className="bg-yellow-800 hover:bg-yellow-900 text-black px-8 py-3 rounded-md shadow-md"
+              className="bg-yellow-800 hover:bg-yellow-900 text-black px-8 py-3 rounded-md shadow-md flex items-center space-x-2"
             >
-              Stock Courses
+              <AiOutlineStock className="text-black" />
+              <span className="font-bold">Stock Courses</span>
             </Link>
           </motion.div>
           <motion.div variants={itemVariants}>
             <Link
-              to="/"
-              className="bg-yellow-800 hover:bg-yellow-900 text-black px-8 py-3 rounded-md shadow-md"
+              to="/codingcoursespage"
+              className="bg-yellow-800 hover:bg-yellow-900 text-black px-8 py-3 rounded-md shadow-md flex items-center space-x-2"
             >
-              Coding Courses
+              <AiOutlineCode className="text-black" />
+              <span className="font-bold">Coding Courses</span>
             </Link>
           </motion.div>
         </div>
       </div>
+      
     </motion.div>
   );
 };

@@ -1,21 +1,68 @@
 import React from "react";
+import { motion } from "framer-motion";
+
 
 const Feedback = ({ name, role, avatarUrl, rating, content }) => {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.5, delay: 0.2 } },
+  };
+
   return (
-    <div className="m-4 bg-customGray w-80 hover:shadow-lg">
-      <div className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none border border-gray-300">
+    <motion.div
+      className="m-4 bg-customGray w-80 hover:shadow-lg"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div
+        className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none border border-gray-300"
+        variants={itemVariants}
+      >
         <div className="mx-4 mt-4 flex items-center gap-4 overflow-hidden rounded-xl bg-transparent bg-clip-border pt-0 pb-4 sm:pb-8 text-gray-700 shadow-none">
-          <img
+          <motion.img
             src={avatarUrl}
             alt={name}
             className="inline-block h-12 w-12 rounded-full object-cover object-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           />
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center justify-between">
-              <h5 className="block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+          <motion.div
+            className="flex flex-col gap-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <motion.div
+              className="flex items-center justify-between"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <motion.h5
+                className="block font-sans text-lg font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
                 {name}
-              </h5>
-              <div className="flex items-center px-2 gap-0">
+              </motion.h5>
+              <motion.div
+                className="flex items-center px-2 gap-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 1 }}
+              >
                 {[...Array(rating)].map((_, index) => (
                   <svg
                     key={index}
@@ -24,6 +71,9 @@ const Feedback = ({ name, role, avatarUrl, rating, content }) => {
                     fill="currentColor"
                     aria-hidden="true"
                     className="h-4 w-4 text-customYellow"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 1 }}
                   >
                     <path
                       fillRule="evenodd"
@@ -32,21 +82,32 @@ const Feedback = ({ name, role, avatarUrl, rating, content }) => {
                     ></path>
                   </svg>
                 ))}
-              </div>
-            </div>
-            <p className="block font-sans text-sm font-light leading-relaxed text-blue-gray-900 antialiased">
+              </motion.div>
+            </motion.div>
+            <motion.p
+              className="block font-sans text-sm font-light leading-relaxed text-blue-gray-900 antialiased"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+            >
               {role}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </div>
         <hr className="my-2 border-gray-300" /> {/* Horizontal line */}
         <div className="mb-2 p-4 sm:p-0 h-32">
-          <p className="p-4 block font-sans text-sm font-light leading-relaxed text-inherit antialiased">
+          <motion.p
+            className="p-4 block font-sans text-sm font-light leading-relaxed text-inherit antialiased"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.4 }}
+          >
             "{content}"
-          </p>
+          </motion.p>
         </div>
-      </div>
-    </div>
+     
+      </motion.div>
+    </motion.div>
   );
 };
 

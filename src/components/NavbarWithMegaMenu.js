@@ -34,10 +34,10 @@ import {
 
 const navListMenuItems = [
   {
-    title: "Products",
+    title: "Stock Courses",
     description: "Find the perfect solution for your needs.",
     icon: SquaresPlusIcon,
-    redirect: "/",
+    redirect: "/stockcoursepage",
   },
   {
     title: "About Us",
@@ -49,13 +49,13 @@ const navListMenuItems = [
     title: "Blog",
     description: "Find the perfect solution for your needs.",
     icon: Bars4Icon,
-    redirect: "/",
+    redirect: "/blogpage",
   },
   {
-    title: "Services",
+    title: "Coding Courses",
     description: "Learn how we can help you achieve your goals.",
     icon: SunIcon,
-    redirect: "/",
+    redirect: "/codingcoursespage",
   },
   {
     title: "Support",
@@ -139,7 +139,7 @@ function NavListMenu() {
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
-              Resources
+              Courses
               <ChevronDownIcon
                 strokeWidth={2.5}
                 className={`hidden h-3 w-3 transition-transform lg:block ${
@@ -223,7 +223,7 @@ export function NavbarWithMegaMenu() {
             className="mr-4 cursor-pointer py-1.5 lg:ml-2"
           >
             <img src={logo} alt="Logo" className="h-8 w-auto inline-flex m-2" />
-            SNIPER TRADING
+            SNIPER CODING
           </Typography>
         </Link>
         <div className="hidden lg:block">

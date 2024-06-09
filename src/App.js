@@ -25,6 +25,7 @@ import {
 } from "react-router-dom";
 import StockCoursesPage from "./components/StockCoursesPage";
 import CodingCoursesPage from "./components/CodingCoursesPage";
+import BlogPage from "./components/BlogPage";
 
 //routing implementation inside function named createBrowserRouter Pass object
 const router = createBrowserRouter([
@@ -76,6 +77,8 @@ const router = createBrowserRouter([
         <Feedbacksection />
         <TradingStats />
         <StickyFooter />
+        <ScrollUpButton />
+        <Scrollindicator />
       </div>
     ),
   },
@@ -114,6 +117,17 @@ const router = createBrowserRouter([
         <OfferPopup />
 
         <CodingCoursesPage />
+      </div>
+    ),
+  },
+  {
+    path: "blogpage",
+    element: (
+      <div>
+        <NavbarWithMegaMenu />
+        <OfferPopup />
+
+        <BlogPage />
       </div>
     ),
   },

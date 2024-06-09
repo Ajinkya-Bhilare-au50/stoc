@@ -19,11 +19,20 @@ const OfferPopup = () => {
     setExpirationDate(formattedDate);
 
     // Close the popup after expiration
-    const timeout = setTimeout(() => {
+    const expirationTimeout = setTimeout(() => {
       setShowPopup(false);
     }, expiration.getTime() - currentDate.getTime());
 
-    return () => clearTimeout(timeout);
+    // Close the popup after 4 seconds
+    const hideTimeout = setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+
+    // Clear the timeout when component unmounts
+    return () => {
+      clearTimeout(expirationTimeout);
+      clearTimeout(hideTimeout);
+    };
   }, []);
 
   return (
@@ -34,7 +43,7 @@ const OfferPopup = () => {
     >
       <div className="flex justify-between items-center max-w-md mx-auto gap-4">
         <p className="text-white font-bold text-center flex-grow">
-          🎉 Get Up to 60% OFF on Courses, Learning Paths & PRO | Sale Ends on{" "}
+          🎉 Get Up to 5% OFF on Courses, Learning Paths & PRO | Sale Ends on{" "}
           {expirationDate}
         </p>
         <button
