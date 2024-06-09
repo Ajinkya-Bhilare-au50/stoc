@@ -93,7 +93,7 @@ function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const renderItems = navListMenuItems.map(
-    ({ icon, title, description,redirect }, key) => (
+    ({ icon, title, description, redirect }, key) => (
       <Link to={redirect} key={key}>
         <MenuItem className="flex items-center gap-3 rounded-lg">
           <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
@@ -178,9 +178,11 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <Link to="/">Home</Link>
-        </ListItem>
+        <Link to="/">
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            Home
+          </ListItem>
+        </Link>
       </Typography>
       <NavListMenu />
       <Typography
@@ -190,9 +192,11 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <Link to="/contact">Contact Us</Link>
-        </ListItem>
+        <Link to="/contact">
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            Contact Us
+          </ListItem>
+        </Link>
       </Typography>
     </List>
   );
@@ -211,25 +215,31 @@ export function NavbarWithMegaMenu() {
   return (
     <Navbar className="mx-auto max-w-full bg-indigo-50 py-2">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
-        >
-          <img src={logo} alt="Logo" className="h-8 w-auto inline-flex m-2" />
-          SNIPER TRADING
-        </Typography>
+        <Link to="/">
+          <Typography
+            as="a"
+            href="#"
+            variant="h6"
+            className="mr-4 cursor-pointer py-1.5 lg:ml-2"
+          >
+            <img src={logo} alt="Logo" className="h-8 w-auto inline-flex m-2" />
+            SNIPER TRADING
+          </Typography>
+        </Link>
         <div className="hidden lg:block">
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          <Button variant="text" size="sm" color="blue-gray">
-            Log In
-          </Button>
-          <Button variant="gradient" size="sm">
-            Sign In
-          </Button>
+          <Link to="/Login">
+            <Button variant="text" size="sm" color="blue-gray">
+              Log In
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button variant="gradient" size="sm">
+              Sign Up
+            </Button>
+          </Link>
         </div>
         <IconButton
           variant="text"

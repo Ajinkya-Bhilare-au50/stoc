@@ -1,9 +1,30 @@
 import React from "react";
+import { motion } from "framer-motion";
 import candlestickImage from "./images/candlestickbackground.jpg";
+import { Link } from "react-router-dom";
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, when: "beforeChildren", staggerChildren: 0.3 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const HeroPage = () => {
   return (
-    <div className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-24 px-4 h-screen">
+    <motion.div
+      className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-24 px-4 h-screen"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
       {/* Candlestick background image overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-opacity-40"
@@ -12,17 +33,35 @@ const HeroPage = () => {
         }}
       ></div>
       <div className="max-w-4xl mx-auto relative z-10">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <motion.h1
+          className="text-4xl md:text-6xl font-bold mb-4"
+          variants={itemVariants}
+        >
           Master Stock Dynamics
-        </h1>
-        <p className="text-lg md:text-xl mb-8">
+        </motion.h1>
+        <motion.p className="text-lg md:text-xl mb-8" variants={itemVariants}>
           Unlock Your Potential with Stock Experts
-        </p>
-        <button className="bg-yellow-800 hover:bg-yellow-900   text-white px-8 py-3 rounded-md shadow-md">
-          Explore
-        </button>
+        </motion.p>
+        <div className="flex space-x-4">
+          <motion.div variants={itemVariants}>
+            <Link
+              to="/stockcoursepage"
+              className="bg-yellow-800 hover:bg-yellow-900 text-black px-8 py-3 rounded-md shadow-md"
+            >
+              Stock Courses
+            </Link>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <Link
+              to="/"
+              className="bg-yellow-800 hover:bg-yellow-900 text-black px-8 py-3 rounded-md shadow-md"
+            >
+              Coding Courses
+            </Link>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

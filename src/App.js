@@ -2,16 +2,16 @@ import "./App.css";
 import Accordian from "./components/Accordian";
 import ContactUs from "./components/Contactus";
 import CourseList from "./components/Courselist";
-
+import Scrollindicator from "./components/ScrollIndicator";
 import DropdownMenu from "./components/Dropdownmenu";
-
+import Login from "./components/Login";
 import FAQSection from "./components/Faqsection";
 import Feedback from "./components/Feedback";
 import Feedbacksection from "./components/Feedbacksection";
 import HeroPage from "./components/Heropage";
 import IndicesData from "./components/Indicesdata";
-
-import {NavbarWithMegaMenu} from "./components/NavbarWithMegaMenu";
+import Signup from "./components/Signup";
+import { NavbarWithMegaMenu } from "./components/NavbarWithMegaMenu";
 import OfferPopup from "./components/Offerpopup";
 import ScrollUpButton from "./components/Scrollupbutton";
 import StickyFooter from "./components/Stickyfooter";
@@ -23,6 +23,9 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import StockCoursesPage from "./components/StockCoursesPage";
+import CodingCoursesPage from "./components/CodingCoursesPage";
+
 //routing implementation inside function named createBrowserRouter Pass object
 const router = createBrowserRouter([
   {
@@ -31,11 +34,13 @@ const router = createBrowserRouter([
       <div>
         <NavbarWithMegaMenu />
         <TradingViewTickerTape />
+
         <OfferPopup />
         <HeroPage />
         <TradingStats />
         <StickyFooter />
         <ScrollUpButton />
+        <Scrollindicator />
       </div>
     ),
   },
@@ -68,18 +73,55 @@ const router = createBrowserRouter([
       <div>
         <NavbarWithMegaMenu />
         <OfferPopup />
-        < Feedbacksection/>
+        <Feedbacksection />
         <TradingStats />
         <StickyFooter />
       </div>
     ),
   },
-]);
+  {
+    path: "Signup",
+    element: (
+      <div>
+        <Signup />
+      </div>
+    ),
+  },
+  {
+    path: "Login",
+    element: (
+      <div>
+        <Login />
+      </div>
+    ),
+  },
+  {
+    path: "stockcoursepage",
+    element: (
+      <div>
+        <NavbarWithMegaMenu />
+        <OfferPopup />
 
+        <StockCoursesPage />
+      </div>
+    ),
+  },
+  {
+    path: "codingcoursespage",
+    element: (
+      <div>
+        <NavbarWithMegaMenu />
+        <OfferPopup />
+
+        <CodingCoursesPage />
+      </div>
+    ),
+  },
+]);
 
 function App() {
   return (
-    <div>
+    <div onCopy={(event)=>{event.preventDefault()}}>
       <RouterProvider router={router}>
         <Route />
       </RouterProvider>
