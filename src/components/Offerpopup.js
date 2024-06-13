@@ -26,7 +26,7 @@ const OfferPopup = () => {
     // Close the popup after 4 seconds
     const hideTimeout = setTimeout(() => {
       setShowPopup(false);
-    }, 3000);
+    }, 15000);
 
     // Clear the timeout when component unmounts
     return () => {

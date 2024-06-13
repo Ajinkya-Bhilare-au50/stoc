@@ -26,6 +26,7 @@ import {
 import StockCoursesPage from "./components/StockCoursesPage";
 import CodingCoursesPage from "./components/CodingCoursesPage";
 import BlogPage from "./components/BlogPage";
+import SpecialOffer from "./components/SpecialOffer";
 
 //routing implementation inside function named createBrowserRouter Pass object
 const router = createBrowserRouter([
@@ -65,6 +66,18 @@ const router = createBrowserRouter([
         <FAQSection />
         <TradingStats />
         <StickyFooter />
+      </div>
+    ),
+  },
+  {
+    path: "specialoffer",
+    element: (
+      <div>
+        <NavbarWithMegaMenu />
+        <SpecialOffer />
+
+        <TradingStats />
+      
       </div>
     ),
   },
@@ -135,7 +148,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div onCopy={(event)=>{event.preventDefault()}}>
+    <div
+      onCopy={(event) => {
+        event.preventDefault();
+      }}
+    >
       <RouterProvider router={router}>
         <Route />
       </RouterProvider>

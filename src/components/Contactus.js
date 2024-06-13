@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaFacebook,
@@ -6,9 +6,17 @@ import {
   FaInstagram,
   FaLinkedin,
   FaGithub,
+  FaCheckCircle,
 } from "react-icons/fa";
 
 const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const formVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } },
@@ -17,6 +25,27 @@ const ContactUs = () => {
   const infoVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.4 } },
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowSuccess(true);
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 3000); // Hide success message after 3 seconds
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
@@ -30,6 +59,7 @@ const ContactUs = () => {
             variants={formVariants}
             initial="hidden"
             animate="visible"
+            onSubmit={handleSubmit}
           >
             <h3 className="text-xl font-semibold mb-4">Send us a message</h3>
             <div className="mb-4">
@@ -40,6 +70,8 @@ const ContactUs = () => {
                 type="text"
                 id="name"
                 name="name"
+                value={formData.name}
+                onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 placeholder="Your Name"
               />
@@ -52,6 +84,8 @@ const ContactUs = () => {
                 type="email"
                 id="email"
                 name="email"
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 placeholder="Your Email"
               />
@@ -63,6 +97,8 @@ const ContactUs = () => {
               <textarea
                 id="message"
                 name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows="4"
                 className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 placeholder="Your Message"
@@ -74,6 +110,12 @@ const ContactUs = () => {
             >
               Send Message
             </button>
+            {showSuccess && (
+              <div className="flex items-center mt-4 text-green-600">
+                <FaCheckCircle className="mr-2" />
+                <span>Your message has been sent successfully!</span>
+              </div>
+            )}
           </motion.form>
           {/* Contact Information */}
           <motion.div
@@ -85,7 +127,7 @@ const ContactUs = () => {
             <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
             <p className="mb-2 text-gray-800">
               <span className="font-semibold">Address:</span> F-203, Mega Street
-              building, Navi Mumbai, India
+              building Nerul, Navi Mumbai, India
             </p>
             <p className="mb-2 text-gray-800">
               <span className="font-semibold">Phone:</span> 8104986663

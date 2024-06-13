@@ -85,7 +85,7 @@ const navListMenuItems = [
     title: "Special Offers",
     description: "Explore limited-time deals and bundles",
     icon: TagIcon,
-    redirect: "/",
+    redirect: "/specialoffer",
   },
 ];
 

@@ -8,45 +8,71 @@ function Feedbacksection() {
       name: "Tania Andrew",
       role: "Frontend Lead @ Google",
       avatarUrl:
-        "https://a.storyblok.com/f/191576/1200x800/215e59568f/round_profil_picture_after_.webp",
+        "https://i.pinimg.com/originals/ac/f1/4e/acf14e593ef673ce81c1057040c3c897.jpg",
       rating: 5,
       content:
         "I found solution to all my design needs from Creative Tim. I use them as a freelancer in my hobby projects for fun! And its really affordable, very humble guys !!!",
     },
     {
-      name: "John Doe",
+      name: "Rahul Sharma",
       role: "Software Engineer",
-      avatarUrl: "https://storage2.timheuer.com/boratcircle.png",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kaWFuJTIwbWFufGVufDB8fDB8fHww",
       rating: 4,
       content:
         "Creative Tim's products have greatly improved our project's UI/UX. Highly recommended!",
     },
     {
-      name: "John Doe",
-      role: "Software Engineer",
+      name: "Anjali Patel",
+      role: "Product Manager",
       avatarUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwQQTS4NPqnCGbJPd4x7O_YJNOJ5gH6KkejH3nhVfIhxwwJPHEotjPs0VCpGg-UcybvxM&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgZFCU4yspu_jxm-Zno7VXTD6K_5BMBwQRAw&usqp=CAU",
       rating: 4,
       content:
-        "Creative Tim's products have greatly improved our project's UI/UX. Highly recommended!",
+        "The courses are extremely informative and practical. They have helped me advance in my career!",
     },
     {
-      name: "John Doe",
-      role: "Software Engineer",
+      name: "Vikram Gupta",
+      role: "Data Scientist",
       avatarUrl:
-        "https://marketplace.canva.com/EAFXS8-cvyQ/1/0/1600w/canva-brown-and-light-brown%2C-circle-framed-instagram-profile-picture-2PE9qJLmPac.jpg",
+        "https://images.pexels.com/photos/2590287/pexels-photo-2590287.jpeg?cs=srgb&dl=pexels-okaybhargav-2590287.jpg&fm=jpg",
       rating: 4,
       content:
-        "Creative Tim's products have greatly improved our project's UI/UX. Highly recommended!",
+        "I've learned so much from these courses. The instructors are top-notch and the content is very engaging.",
     },
     {
-      name: "John Doe",
-      role: "Software Engineer",
+      name: "Priya Mehta",
+      role: "UI/UX Designer",
       avatarUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwVRR689h-rJJsTMJbY7w4zLP30xxYflNRy6HM164ZjtcJHhgL8su7kCJgBLqdJOx_2D4&usqp=CAU",
+        "https://i.pinimg.com/236x/59/a9/b8/59a9b8a7a40ea4ebbce8f3fa9a745e51.jpg",
       rating: 4,
       content:
-        "Creative Tim's products have greatly improved our project's UI/UX. Highly recommended!",
+        "Creative Tim's products have been a game-changer for my projects. The UI/UX is simply amazing!",
+    },
+    {
+      name: "Amit Verma",
+      role: "Full Stack Developer",
+      avatarUrl: "https://randomuser.me/api/portraits/men/32.jpg",
+      rating: 5,
+      content:
+        "The courses provided by Creative Tim are very detailed and easy to follow. They have significantly improved my coding skills.",
+    },
+    {
+      name: "Sneha Rao",
+      role: "Graphic Designer",
+      avatarUrl:
+        "https://qph.cf2.quoracdn.net/main-qimg-4effc688bcf20e8c8593e98ab9280f39-lq",
+      rating: 4,
+      content:
+        "Creative Tim's design resources are top-notch. They have elevated my work to a professional level.",
+    },
+    {
+      name: "Rohan Singh",
+      role: "Project Manager",
+      avatarUrl: "https://randomuser.me/api/portraits/men/45.jpg",
+      rating: 4,
+      content:
+        "The structured courses and comprehensive materials have helped me manage my projects more effectively.",
     },
     // Add more testimonial objects as needed
   ];

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"; // Import icons from React-icons
+import { motion } from "framer-motion"; // Import motion from Framer Motion
 
 const faqData = [
   {
@@ -39,6 +40,7 @@ const faqData = [
       "While not mandatory, having access to trading platforms and financial analysis tools can enhance your learning experience in our trading courses.",
     isOpen: false,
   },
+  // Add more FAQs here
 ];
 
 const FAQSection = () => {
@@ -58,9 +60,12 @@ const FAQSection = () => {
       </div>
       <div className="space-y-6 ">
         {faqItems.map((item, index) => (
-          <div
+          <motion.div
             key={index}
-            className="border-b pb-4 hover:bg-gray-100 transition duration-300"
+            className="border-b pb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
             <button
               className="flex items-center justify-between w-full font-medium text-gray-900  p-2"
@@ -72,9 +77,16 @@ const FAQSection = () => {
               </span>
             </button>
             {item.isOpen && (
-              <p className="text-gray-600 mt-2 px-2">{item.answer}</p>
+              <motion.p
+                className="text-gray-600 mt-2 px-2"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {item.answer}
+              </motion.p>
             )}
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
