@@ -13,8 +13,10 @@ import {
 
 const Sidebar = ({ courses }) => {
   return (
-    <div className="hidden sm:block w-full sm:w-1/4 pt-20 p-4 rounded-lg sticky top-0">
-      <h2 className="text-xl font-bold text-yellow-300 mb-4">Other Courses</h2>
+    <div className="hidden sm:block w-full sm:w-1/4 pt-0 p-4 rounded-lg sticky top-0">
+      <h2 className="text-xl p-2 bg-blue-900 font-bold text-center text-yellow-300 mb-4">
+        Other Courses
+      </h2>
       <ul className="space-y-4">
         {courses.map((course, index) => (
           <li key={index} className="bg-gray-700 p-3 rounded-lg">
@@ -104,6 +106,8 @@ const StockCoursesPage = () => {
       ],
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, reading materials, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
+      QrImage:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Qr-1.svg/220px-Qr-1.svg.png",
     },
     {
       title: "Course 2: Advanced Stock Market Strategies",
@@ -163,6 +167,8 @@ const StockCoursesPage = () => {
       ],
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, reading materials, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
+      QrImage:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Qr-1.svg/220px-Qr-1.svg.png",
     },
     {
       title: "Course 3: Advanced Futures and Options Strategies",
@@ -244,6 +250,8 @@ const StockCoursesPage = () => {
       ],
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, reading materials, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
+      QrImage:
+        "https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg",
     },
   ];
 
@@ -317,6 +325,7 @@ const StockCoursesPage = () => {
                       <TabList>
                         <Tab>Course Content</Tab>
                         <Tab>How to Use</Tab>
+                        <Tab>Pay Online</Tab>
                       </TabList>
                       <TabPanel>
                         {course.syllabus.map((module, moduleIndex) => (
@@ -376,6 +385,33 @@ const StockCoursesPage = () => {
                       </TabPanel>
                       <TabPanel>
                         <p className="text-gray-400">{course.howToUse}</p>
+                      </TabPanel>
+
+                      <TabPanel>
+                        <div className="flex flex-col items-center p-4 rounded-lg shadow-md border border-gray-200 relative">
+                          <div className="w-48 h-48 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex justify-center items-center mb-4 relative overflow-hidden">
+                            <img
+                              src={course.QrImage}
+                              alt={`QR for ${course.title}`}
+                              className="w-40 h-40 object-cover rounded-lg z-10"
+                            />
+                            <motion.div
+                              className="absolute top-0 left-0 w-full h-full bg-white"
+                              animate={{
+                                y: ["-100%", "100%"],
+                                transition: {
+                                  duration: 2.5,
+                                  repeat: Infinity,
+                                  repeatType: "reverse",
+                                  ease: "linear",
+                                },
+                              }}
+                            />
+                          </div>
+                          <p className="text-sm text-gray-700 font-semibold">
+                            Scan this QR to Pay Online
+                          </p>
+                        </div>
                       </TabPanel>
                     </Tabs>
                   </div>
