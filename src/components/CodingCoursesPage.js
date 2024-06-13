@@ -159,7 +159,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => (
         </TabPanel>
         <TabPanel>
           <motion.div
-            className="flex flex-col items-center text-center space-y-4"
+            className="flex flex-col items-center text-center space-y-4 relative"
             variants={tabVariants}
             initial="hidden"
             animate="visible"
@@ -167,11 +167,33 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => (
             <p className="text-lg text-blue-900">
               Scan the QR code below to pay online:
             </p>
-            <img
-              src={course.qrCode} // Use course-specific QR code image URL
-              alt="QR Code"
-              className="w-32 h-32"
-            />
+            <div className="relative overflow-hidden rounded-lg w-24 h-24">
+              <img
+                src={course.qrCode}
+                alt="QR Code"
+                className="w-full h-full object-cover rounded-lg"
+                onLoad={(e) => {
+                  const imgWidth = e.target.width;
+                  const imgHeight = e.target.height;
+                  const gradientDiv = e.target.nextElementSibling;
+                  gradientDiv.style.width = `${imgWidth}px`;
+                  gradientDiv.style.height = `${imgHeight}px`;
+                }}
+              />
+              <motion.div
+                className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-green-100"
+                animate={{
+                  y: ["-100%", "100%"],
+                  transition: {
+                    duration: 2, // Increased duration for smoother movement
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "linear",
+                    delay: 0.5, // Added delay for gradual start
+                  },
+                }}
+              />
+            </div>
           </motion.div>
         </TabPanel>
       </Tabs>
