@@ -5,11 +5,16 @@ import { motion } from "framer-motion";
 import { BsBook } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+import { BiBook, BiCheckCircle, BiCreditCard } from "react-icons/bi";
+
+import "react-tabs/style/react-tabs.css";
+
 import {
   MdDescription,
   MdOutlineLibraryBooks,
   MdInfoOutline,
 } from "react-icons/md";
+import Drawer from "./Drawer";
 
 const Sidebar = ({ courses }) => {
   return (
@@ -266,13 +271,25 @@ const StockCoursesPage = () => {
       },
     }));
   };
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.toLocaleString("default", { month: "long" });
+  const year = today.getFullYear();
 
+  const stockBatchStart = `${month} ${day}, ${year}`;
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-center text-yellow-300">
-          Stock Market Courses
-        </h1>
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-bold mb-8 mt-4 text-center text-yellow-300 sm:text-left sm:flex sm:items-center sm:justify-center">
+            <Drawer
+              courseType="Stock Market"
+              batchStartInfo={stockBatchStart}
+            />
+            <span className="sm:ml-4 mt-10 sm:mt-0 "><div className="pt-5"></div>Stock Market Courses</span>
+          </h1>
+        </div>
+
         <div className="flex flex-wrap">
           <div className="w-full sm:w-3/4">
             <motion.div
@@ -322,16 +339,26 @@ const StockCoursesPage = () => {
                   </div>
                   <div className="mt-4">
                     <Tabs>
-                      <TabList>
-                        <Tab>Course Content</Tab>
-                        <Tab>How to Use</Tab>
-                        <Tab>Pay Online</Tab>
+                      <TabList className="flex sm:flex-col gap-4 sm:mb-4 flex-wrap md:flex-row cursor-pointer">
+                        <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                          <BiBook className="text-blue-500 text-lg" />
+                          <span className="ml-4 mr-2">Course Content</span>
+                        </Tab>
+                        <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                          <BiCheckCircle className="text-green-500 text-lg" />
+                          <span className="ml-4 mr-2">How to Use</span>
+                        </Tab>
+                        <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                          <BiCreditCard className="text-yellow-500 text-lg" />
+                          <span className="ml-4 mr-2">Pay Online</span>
+                        </Tab>
                       </TabList>
-                      <TabPanel>
+
+                      <TabPanel className={"mt-4"}>
                         {course.syllabus.map((module, moduleIndex) => (
                           <motion.div
                             key={moduleIndex}
-                            className="bg-gray-700 p-4 mb-4 rounded-lg"
+                            className="bg-gray-700 p-4 mb-4 rounded-lg "
                             variants={tabVariants}
                           >
                             <div
@@ -387,9 +414,9 @@ const StockCoursesPage = () => {
                         <p className="text-gray-400">{course.howToUse}</p>
                       </TabPanel>
 
-                      <TabPanel>
-                        <div className="flex flex-col items-center p-4 rounded-lg shadow-md border border-gray-200 relative">
-                          <div className="w-48 h-48 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex justify-center items-center mb-4 relative overflow-hidden">
+                      <TabPanel className={"bg-yellow-100"}>
+                        <div className="flex flex-col items-center p-4 rounded-lg shadow-md border border-gray-300 ">
+                          <div className="w-48 h-48 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex justify-center items-center mb-4 relative overflow-hidden shadow-lg">
                             <img
                               src={course.QrImage}
                               alt={`QR for ${course.title}`}
@@ -408,8 +435,12 @@ const StockCoursesPage = () => {
                               }}
                             />
                           </div>
-                          <p className="text-sm text-gray-700 font-semibold">
-                            Scan this QR to Pay Online
+                          <p className="text-lg text-gray-700 font-semibold mb-2">
+                            Scan this QR Code to Pay Online
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            Use your mobile device's QR scanner to complete the
+                            payment process.
                           </p>
                         </div>
                       </TabPanel>

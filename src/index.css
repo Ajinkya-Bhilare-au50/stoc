@@ -2,4 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.react-tabs__tab--selected:focus {
+  border-bottom: 5px solid #3182ce; /* Blue color for the bottom border */
+}

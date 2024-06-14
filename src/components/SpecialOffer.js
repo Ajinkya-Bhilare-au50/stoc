@@ -23,8 +23,11 @@ const SpecialOffer = () => {
 
   const getEndDate = () => {
     const date = new Date(endDate);
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return date.toLocaleDateString(undefined, options);
+    return date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
@@ -38,7 +41,7 @@ const SpecialOffer = () => {
   }, []);
 
   const containerVariants = {
-    hidden: { opacity: 0, y: -50 },
+    hidden: { opacity: 0, y: -20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -52,77 +55,53 @@ const SpecialOffer = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
       <motion.div
-        className="max-w-2xl bg-white rounded-lg shadow-xl p-8 text-center text-gray-800"
+        className="max-w-md bg-white rounded-lg shadow-xl p-4 text-center text-gray-800"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         <motion.h1
-          className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-600"
+          className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-600"
           variants={itemVariants}
         >
           Special Offer!
         </motion.h1>
-        <motion.p className="text-lg mb-6" variants={itemVariants}>
+        <motion.p className="text-sm mb-4" variants={itemVariants}>
           Get 5% off on all our premium courses. Limited time offer, don't miss
           out!
         </motion.p>
-        <motion.div
-          className="flex justify-center mb-6"
+        <motion.img
+          src="https://img.freepik.com/premium-vector/square-sticker-with-5-percent-discount-sale-tag-yellow-red-offer-price-tag-price-discount-symbol_668376-114.jpg"
+          alt="Special Offer"
+          className="rounded-lg shadow-lg w-48 h-48 object-cover mx-auto mb-4"
+          whileHover={{ scale: 1.05 }}
           variants={itemVariants}
-        >
-          <motion.img
-            src="https://img.freepik.com/premium-vector/square-sticker-with-5-percent-discount-sale-tag-yellow-red-offer-price-tag-price-discount-symbol_668376-114.jpg"
-            alt="Special Offer"
-            className="rounded-lg shadow-lg w-64 h-64 object-cover"
-            whileHover={{ scale: 1.05 }}
-          />
-        </motion.div>
+        />
         <motion.button
-          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-full font-semibold hover:from-purple-600 hover:to-blue-500 transition-all"
+          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-full font-semibold hover:from-purple-600 hover:to-blue-500 transition-all mb-2"
           variants={itemVariants}
           whileHover={{ scale: 1.1 }}
         >
           Get Offer
         </motion.button>
-        <motion.div className="mt-6 text-xl" variants={itemVariants}>
-          <div className="flex justify-center">
-            <div> Offer valid till: &nbsp;</div>
-            <div className="font-semibold">{getEndDate()}</div>
-          </div>
-          <div className="flex justify-center space-x-4 mt-2">
-            <div className="flex flex-col items-center">
-              <span className="font-bold text-4xl text-gradient-to-r from-purple-400 to-blue-600">
-                {timeLeft.days || "0"}
-              </span>
-              <span className="text-sm text-gray-700">Days</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-bold text-4xl text-gradient-to-r from-purple-400 to-blue-600">
-                {timeLeft.hours || "0"}
-              </span>
-              <span className="text-sm text-gray-700">Hours</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-bold text-4xl text-gradient-to-r from-purple-400 to-blue-600">
-                {timeLeft.minutes || "0"}
-              </span>
-              <span className="text-sm text-gray-700">Minutes</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-bold text-4xl text-gradient-to-r from-purple-400 to-blue-600">
-                {timeLeft.seconds || "0"}
-              </span>
-              <span className="text-sm text-gray-700">Seconds</span>
-            </div>
-          </div>
+        <motion.div className="text-xs" variants={itemVariants}>
+          Offer valid till:{" "}
+          <span className="font-semibold">{getEndDate()}</span>
+        </motion.div>
+        <motion.div className="text-xs mt-2" variants={itemVariants}>
+          <span className="font-semibold">{timeLeft.days || "0"}</span> Days{" "}
+          <span className="font-semibold">{timeLeft.hours || "0"}</span> Hours{" "}
+          <span className="font-semibold">{timeLeft.minutes || "0"}</span>{" "}
+          Minutes{" "}
+          <span className="font-semibold">{timeLeft.seconds || "0"}</span>{" "}
+          Seconds
         </motion.div>
       </motion.div>
     </div>

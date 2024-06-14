@@ -77,7 +77,6 @@ const router = createBrowserRouter([
         <SpecialOffer />
 
         <TradingStats />
-      
       </div>
     ),
   },
@@ -99,7 +98,9 @@ const router = createBrowserRouter([
     path: "Signup",
     element: (
       <div>
+        <NavbarWithMegaMenu />
         <Signup />
+        <StickyFooter />
       </div>
     ),
   },
@@ -107,7 +108,9 @@ const router = createBrowserRouter([
     path: "Login",
     element: (
       <div>
+        <NavbarWithMegaMenu />
         <Login />
+        <StickyFooter />
       </div>
     ),
   },

@@ -78,7 +78,7 @@ function Feedbacksection() {
   ];
 
   return (
-    <div className="bg-gray-100 p-6">
+    <div className="bg-gray-100 p-6 cursor-pointer">
       <h1 className=" bg-gray-100 text-center text-3xl font-bold ">
         Testimonial
       </h1>

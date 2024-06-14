@@ -1,19 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const Signup = () => {
-   const navigate = useNavigate();
-  const handleSubmit = async(event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // console.log({
-    //   firstName: data.get("firstName"),
-    //   lastName: data.get("lastName"),
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    //   allowExtraEmails: data.get("allowExtraEmails"),
-    // });
+
     try {
       const response = await axios.post("http://localhost:3000/signup", {
         firstName: data.get("firstName"),
@@ -22,8 +17,7 @@ const Signup = () => {
         password: data.get("password"),
         allowExtraEmails: data.get("allowExtraEmails"),
       });
-      console.log(response.data); // Log the response from the server
-      // Redirect to login page after successful signup
+      console.log(response.data);
       navigate("/login");
     } catch (error) {
       console.error("Error signing up:", error);
@@ -34,7 +28,7 @@ const Signup = () => {
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-8 rounded-md shadow-md max-w-md w-full">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Sign up</h1>
+          <h1 className="text-3xl font-bold mb-4">Sign Up</h1>
           <p className="text-sm mb-6">
             Already have an account?{" "}
             <Link to="/login" className="text-blue-500 hover:underline">
@@ -49,7 +43,7 @@ const Signup = () => {
               id="firstName"
               name="firstName"
               placeholder="First Name"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <input
@@ -57,7 +51,7 @@ const Signup = () => {
               id="lastName"
               name="lastName"
               placeholder="Last Name"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <input
@@ -65,7 +59,7 @@ const Signup = () => {
               id="email"
               name="email"
               placeholder="Email Address"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <input
@@ -73,15 +67,15 @@ const Signup = () => {
               id="password"
               name="password"
               placeholder="Password"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-            <div className="px-2 py-2 flex justify-center">
+            <div className="flex items-center">
               <input
                 type="checkbox"
                 id="allowExtraEmails"
                 name="allowExtraEmails"
-                className="mr-2  self-start"
+                className="mr-2"
               />
               <label htmlFor="allowExtraEmails" className="text-sm">
                 I want to receive inspiration, marketing promotions and updates
