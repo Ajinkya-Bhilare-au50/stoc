@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { BsClockFill } from "react-icons/bs";
 import { BsFillPersonFill, BsStarFill } from "react-icons/bs";
+
 import "react-tabs/style/react-tabs.css";
 import { motion } from "framer-motion";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
@@ -15,6 +16,17 @@ import {
 } from "react-icons/ai";
 
 // Animation Variants
+const badgeVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: [1, 0.9, 1],
+    scale: [1, 1.1, 1],
+    transition: {
+      duration: 1.5,
+      ease: "easeInOut",
+    },
+  },
+};
 const containerVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -34,7 +46,6 @@ const tabVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-
 const CourseCard = ({ course, expandedModules, toggleModule }) => {
   function calculateDiscountedPrice(price, discountPercentage) {
     if (discountPercentage === 0 || isNaN(discountPercentage)) {
@@ -52,19 +63,42 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
       variants={itemVariants}
     >
       {/* Image and Description */}
-      <div className="flex flex-col sm:flex-row items-center mb-6 space-y-6 sm:space-y-0 sm:space-x-6">
-        <div className="sm:w-1/4 flex flex-col items-center justify-center mb-4 sm:mb-0 relative">
-          <div className="relative">
+
+      <div className="flex relative flex-col sm:flex-row items-center mb-6 space-y-6 sm:space-y-0 sm:space-x-6">
+        {/* Add top selling or top trending badge */}
+        {course.isTopSelling && (
+          <motion.span
+            className="absolute top-0 sm:right-0 bg-red-600 text-white py-1 px-2 rounded-br-lg text-xs font-semibold z-20"
+            style={{ zIndex: 40 }} // Ensure higher z-index
+            initial="hidden"
+            animate="visible"
+            variants={badgeVariants}
+          >
+            Top Selling
+          </motion.span>
+        )}
+        {course.isTopTrending && (
+          <motion.span
+            className="absolute top-0  sm:right-0 bg-orange-800 text-white py-1 px-2 rounded-bl-lg text-xs font-semibold z-20"
+            style={{ zIndex: 40 }} // Ensure higher z-index
+            initial="hidden"
+            animate="visible"
+            variants={badgeVariants}
+          >
+            Top Trending
+          </motion.span>
+        )}
+        <div className="sm:w-1/4 flex flex-col items-center justify-center mb-4 sm:mb-0 relative w-full sm:w-auto">
+          <div className="">
             <img
               src={course.image}
               alt={course.title}
               className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-full"
             />
-            {/* Circular badge for instructor name */}
           </div>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 text-center sm:text-left">
           <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-blue-900">
             {course.title}
           </h2>
@@ -74,7 +108,6 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
           </p>
         </div>
       </div>
-
       {/* Tabs */}
       <Tabs>
         <TabList className="flex flex-wrap gap-2 mb-4">
@@ -326,7 +359,6 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
           </motion.div>
         </TabPanel>
       </Tabs>
-
       {/* Additional content */}
     </motion.div>
   );
@@ -356,8 +388,10 @@ const CodingCoursesPage = () => {
       duration: "6 weeks",
       price: 3999,
       discountPercentage: 3,
-      enrollments: 45,
+      enrollments: 25,
       reviews: 10,
+      isTopSelling: true,
+      isTopTrending: false,
       instructorName: "Ajinkya Sir",
       instructorImage:
         "https://media.licdn.com/dms/image/D4D03AQH_icmUii_T_A/profile-displayphoto-shrink_200_200/0/1681055382341?e=2147483647&v=beta&t=bxDPZ2zHx-bBke9SlpZkesheb9vvMtDXolKStj8fOnU",
@@ -402,7 +436,7 @@ const CodingCoursesPage = () => {
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, coding exercises, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
       image:
-        "https://w7.pngwing.com/pngs/201/90/png-transparent-logo-html-html5-thumbnail.png",
+        "https://w7.pngwing.com/pngs/290/579/png-transparent-html-html-logo-html-5-html-five-logo-html-5-logo-programming-langugae-3d-icon-thumbnail.png",
       qrCode: "https://www.qrcode-monkey.com/img/default-preview-qr.svg", // QR code URL for Course 1
     },
     {
@@ -414,6 +448,8 @@ const CodingCoursesPage = () => {
       discountPercentage: 3,
       enrollments: 45,
       reviews: 10,
+      isTopSelling: true,
+      isTopTrending: false,
       instructorName: "Ajinkya Sir",
       instructorImage:
         "https://media.licdn.com/dms/image/D4D03AQH_icmUii_T_A/profile-displayphoto-shrink_200_200/0/1681055382341?e=2147483647&v=beta&t=bxDPZ2zHx-bBke9SlpZkesheb9vvMtDXolKStj8fOnU",
@@ -471,8 +507,10 @@ const CodingCoursesPage = () => {
       duration: "12 weeks",
       price: 7999,
       discountPercentage: 2,
-      enrollments: 45,
+      enrollments: 32,
       reviews: 10,
+      isTopSelling: true,
+      isTopTrending: false,
       instructorName: "Ajinkya Sir",
       instructorImage:
         "https://media.licdn.com/dms/image/D4D03AQH_icmUii_T_A/profile-displayphoto-shrink_200_200/0/1681055382341?e=2147483647&v=beta&t=bxDPZ2zHx-bBke9SlpZkesheb9vvMtDXolKStj8fOnU",
@@ -572,8 +610,10 @@ const CodingCoursesPage = () => {
       qrCode:
         "https://www.investopedia.com/thmb/hJrIBjjMBGfx0oa_bHAgZ9AWyn0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/qr-code-bc94057f452f4806af70fd34540f72ad.png",
       discountPercentage: 2,
-      enrollments: 45,
+      enrollments: 18,
       reviews: 10,
+      isTopSelling: false,
+      isTopTrending: true,
       instructorName: "Ajinkya Sir",
       instructorImage:
         "https://media.licdn.com/dms/image/D4D03AQH_icmUii_T_A/profile-displayphoto-shrink_200_200/0/1681055382341?e=2147483647&v=beta&t=bxDPZ2zHx-bBke9SlpZkesheb9vvMtDXolKStj8fOnU",
@@ -585,8 +625,10 @@ const CodingCoursesPage = () => {
       duration: "8 weeks",
       price: 4999,
       discountPercentage: 2,
-      enrollments: 45,
+      enrollments: 16,
       reviews: 10,
+      isTopSelling: false,
+      isTopTrending: true,
       instructorName: "Ajinkya Sir",
       instructorImage:
         "https://media.licdn.com/dms/image/D4D03AQH_icmUii_T_A/profile-displayphoto-shrink_200_200/0/1681055382341?e=2147483647&v=beta&t=bxDPZ2zHx-bBke9SlpZkesheb9vvMtDXolKStj8fOnU",
@@ -673,7 +715,7 @@ const CodingCoursesPage = () => {
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col items-center py-10">
       <h1 className="text-3xl sm:text-4xl gap-2 font-extrabold text-blue-900 mb-6 flex items-center justify-between">
-        <Drawer courseType="Stock Market" batchStartInfo={codeBatchStart} />
+        <Drawer courseType="Coding " batchStartInfo={codeBatchStart} />
         <span>Coding Courses</span>
       </h1>
 

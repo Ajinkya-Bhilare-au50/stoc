@@ -9,6 +9,7 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 
+
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -128,7 +129,7 @@ const ContactUs = () => {
             <p className="mb-2 text-gray-800">
               <span className="font-semibold">Address:</span> F-203, Mega Street
               building Nerul, Navi Mumbai, India
-            </p>
+            </p> 
             <p className="mb-2 text-gray-800">
               <span className="font-semibold">Phone:</span> 8104986663
             </p>

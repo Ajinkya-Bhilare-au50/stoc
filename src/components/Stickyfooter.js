@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Developer from "./Developer.js";
+import Banner from "./Banner.js";
 const StickyFooter = () => {
   const [showFooter, setShowFooter] = useState(false);
   const [timer, setTimer] = useState(7200); // Timer in seconds (2 hours)
@@ -49,7 +50,7 @@ const StickyFooter = () => {
 
         {/* Sticky Footer */}
         <div
-          className={`fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex flex-col md:flex-row justify-center items-center ${
+          className={`fixed z-10 bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex flex-col md:flex-row justify-center items-center ${
             showFooter ? "block" : "hidden"
           }`}
         >
@@ -66,7 +67,7 @@ const StickyFooter = () => {
                 onClick={handleEnrollNow}
                 className="bg-yellow-800 hover:bg-yellow-900 px-6 py-2 rounded-md"
               >
-                Subscribe
+                Subscribe 
               </button>
             </div>
           </div>

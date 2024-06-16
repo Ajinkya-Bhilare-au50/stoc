@@ -27,6 +27,7 @@ import StockCoursesPage from "./components/StockCoursesPage";
 import CodingCoursesPage from "./components/CodingCoursesPage";
 import BlogPage from "./components/BlogPage";
 import SpecialOffer from "./components/SpecialOffer";
+import Banner from "./components/Banner";
 
 //routing implementation inside function named createBrowserRouter Pass object
 const router = createBrowserRouter([
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
 
         <OfferPopup />
         <HeroPage />
+        <Banner/>
         <TradingStats />
         <StickyFooter />
         <ScrollUpButton />
