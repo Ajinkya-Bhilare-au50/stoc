@@ -6,6 +6,7 @@ import { BsBook } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { BiBook, BiCheckCircle, BiCreditCard } from "react-icons/bi";
+import { MdPerson } from "react-icons/md"; // Assuming MdPerson is your instructor icon
 
 import "react-tabs/style/react-tabs.css";
 
@@ -61,6 +62,10 @@ const StockCoursesPage = () => {
       duration: "6 weeks",
       price: "₹ 3999",
       instructor: "Ajinkya Sir",
+      instructorImage:
+        "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
+      isTopSelling: true,
+      isTopTrending: false,
       image:
         "https://cdn.pixabay.com/photo/2024/01/06/02/44/ai-generated-8490532_640.png",
       rating: "4.5",
@@ -120,6 +125,10 @@ const StockCoursesPage = () => {
       duration: "8 weeks",
       price: "₹ 4999",
       instructor: "Ajinkya Sir",
+      instructorImage:
+        "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
+      isTopSelling: false,
+      isTopTrending: true,
       image:
         "https://img.freepik.com/free-vector/gradient-stock-market-concept_23-2149166910.jpg?size=626&ext=jpg&ga=GA1.1.1141335507.1717804800&semt=ais_user",
       rating: "4.8",
@@ -181,6 +190,10 @@ const StockCoursesPage = () => {
       duration: "10 weeks",
       price: "₹ 5999",
       instructor: "Ajinkya Sir",
+      instructorImage:
+        "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
+      isTopSelling: true,
+      isTopTrending: false,
       image:
         "https://t3.ftcdn.net/jpg/03/12/92/74/360_F_312927435_NVvwOxvswQgNu97Y1m8VvtEPTVL9AnEN.jpg",
       rating: "4.9",
@@ -286,7 +299,9 @@ const StockCoursesPage = () => {
               courseType="Stock Market"
               batchStartInfo={stockBatchStart}
             />
-            <span className="sm:ml-4 mt-10 sm:mt-0 "><div className="pt-5"></div>Stock Market Courses</span>
+            <span className="sm:ml-4 mt-10 sm:mt-0 ">
+              <div className="pt-5"></div>Stock Market Courses
+            </span>
           </h1>
         </div>
 
@@ -303,7 +318,7 @@ const StockCoursesPage = () => {
                   className="bg-gray-800 p-6 mb-6 rounded-lg shadow-lg"
                   variants={itemVariants}
                 >
-                  <div className="flex flex-col md:flex-row items-center">
+                  <div className="flex flex-col md:flex-row items-center rounded-lg   relative">
                     <div className="md:w-1/3">
                       <img
                         src={course.image}
@@ -315,28 +330,57 @@ const StockCoursesPage = () => {
                       <h2 className="text-2xl font-bold mb-4 text-yellow-300">
                         {course.title}
                       </h2>
-                      <p className="text-gray-400 mb-2">
+                      <p className="text-gray-400 mb-2 flex items-center">
                         <MdDescription className="inline-block mr-2 text-yellow-300" />
                         {course.description}
                       </p>
-                      <p className="text-gray-400 mb-2">
+                      <p className="text-gray-400 mb-2 flex items-center">
                         <BsBook className="inline-block mr-2 text-yellow-300" />
                         Duration: {course.duration}
                       </p>
-                      <p className="text-gray-400 mb-2">
+                      <p className="text-gray-400 mb-2 flex items-center">
                         <FaStar className="inline-block mr-2 text-yellow-300" />
                         Rating: {course.rating} ({course.reviews} reviews)
                       </p>
-                      <p className="text-gray-400 mb-2">
-                        <MdOutlineLibraryBooks className="inline-block mr-2 text-yellow-300" />
-                        Instructor: {course.instructor}
-                      </p>
-                      <p className="text-gray-400 mb-4">
+                      <div className="flex items-center mb-2">
+                        <span className="text-gray-400 mr-2">
+                          <MdPerson className="inline-block mr-1 text-yellow-300" />
+                          Instructor:
+                        </span>
+                        <div className="flex items-center">
+                          <img
+                            src={course.instructorImage}
+                            alt={course.instructor}
+                            className="rounded-full w-8 h-8 mr-2"
+                          />
+                          <span>{course.instructor}</span>
+                        </div>
+                      </div>
+                      <p className="text-gray-400 mb-4 flex items-center">
                         <MdInfoOutline className="inline-block mr-2 text-yellow-300" />
                         Price: {course.price}
                       </p>
+                      <div className="flex justify-start gap-2">
+                        <button className="bg-yellow-300 text-gray-900 px-4 py-2 rounded-md hover:bg-yellow-400 transition-colors duration-300">
+                          Enroll Now
+                        </button>
+                        <button className="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors duration-300">
+                          Add to Cart
+                        </button>
+                      </div>
+                      {course.isTopSelling && (
+                        <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 rounded-tr-lg rounded-bl-lg z-50">
+                          Top Selling
+                        </div>
+                      )}
+                      {course.isTopTrending && (
+                        <div className="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tl-lg rounded-br-lg z-50">
+                          Top Trending
+                        </div>
+                      )}
                     </div>
                   </div>
+
                   <div className="mt-4">
                     <Tabs>
                       <TabList className="flex sm:flex-col gap-4 sm:mb-4 flex-wrap md:flex-row cursor-pointer">
