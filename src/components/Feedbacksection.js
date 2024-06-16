@@ -80,10 +80,10 @@ function Feedbacksection() {
   return (
     <div className="bg-gray-100 p-6">
       <h1 className="text-center text-3xl font-bold">Testimonial</h1>
-      <div className="flex flex-wrap justify-center  p-4 rounded-lg shadow-md max-h-full overflow-y-auto ">
+      <div className="flex flex-wrap justify-center   max-h-full overflow-y-auto m-12">
         {testimonialDataArray.map((testimonial, index) => (
-          <div key={index} className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-2 ">
-            <div className="w-full h-full flex items-center justify-center p-4 rounded-lg shadow-lg bg-green-50">
+          <div key={index} className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4  ">
+            <div className="w-full h-full flex items-center justify-center  ">
               <Feedback
                 name={testimonial.name}
                 role={testimonial.role}
