@@ -22,14 +22,14 @@ const Feedback = ({ name, role, avatarUrl, rating, content }) => {
 
   return (
     <motion.div
-      className="m-2 bg-customGray w-full sm:w-80 hover:shadow-lg" // Adjust width for mobile responsiveness
+      className="m-2 bg-White w-full sm:w-80 " // Adjust width for mobile responsiveness
       initial="hidden"
       animate="visible"
       variants={containerVariants}
       style={{ minHeight: "300px", height: getHeight(content) }} // Set dynamic height based on content length
     >
       <motion.div
-        className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none border border-gray-300"
+        className="relative flex flex-col rounded-xl bg-transparent  text-gray-700 shadow-none "
         variants={itemVariants}
         style={{ height: "100%" }}
       >
