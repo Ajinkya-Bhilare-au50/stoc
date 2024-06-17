@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"; // Import icons from React-icons
-import { motion } from "framer-motion"; // Import motion from Framer Motion
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { motion } from "framer-motion";
 
 const faqData = [
   {
@@ -40,7 +40,6 @@ const faqData = [
       "While not mandatory, having access to trading platforms and financial analysis tools can enhance your learning experience in our trading courses.",
     isOpen: false,
   },
-  // Add more FAQs here
 ];
 
 const FAQSection = () => {
@@ -54,11 +53,11 @@ const FAQSection = () => {
   };
 
   return (
-    <div id="FAQsection" className="max-w-5xl mx-auto py-10 px-8 my-14 h-auto">
-      <div className="flex justify-center">
-        <h2 className="text-3xl font-bold mb-4">FAQs</h2>
+    <div id="FAQsection" className="max-w-5xl mx-auto py-10 px-8 my-14">
+      <div className="flex justify-center mb-8">
+        <h2 className="text-3xl font-bold text-gray-800">FAQs</h2>
       </div>
-      <div className="space-y-6 ">
+      <div className="space-y-6">
         {faqItems.map((item, index) => (
           <motion.div
             key={index}
@@ -68,7 +67,7 @@ const FAQSection = () => {
             transition={{ duration: 0.3 }}
           >
             <button
-              className="flex items-center justify-between w-full font-medium text-gray-900  p-2"
+              className="flex items-center justify-between w-full font-medium text-gray-900 p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all duration-200"
               onClick={() => toggleDrawer(index)}
             >
               {item.question}
@@ -78,7 +77,7 @@ const FAQSection = () => {
             </button>
             {item.isOpen && (
               <motion.p
-                className="text-gray-600 mt-2 px-2"
+                className="text-gray-600 mt-2 px-4"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 transition={{ duration: 0.3 }}

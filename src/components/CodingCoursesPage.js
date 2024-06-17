@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { BsClockFill } from "react-icons/bs";
 import { BsFillPersonFill, BsStarFill } from "react-icons/bs";
-
+import qrCodeImage from "./images/ajinkyaqr.png";
 import "react-tabs/style/react-tabs.css";
 import { motion } from "framer-motion";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
@@ -317,45 +317,131 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
         </TabPanel>
         <TabPanel>
           <motion.div
-            className="flex flex-col items-center justify-center space-y-4"
+            className="max-w-5xl mx-auto py-1 px-2 my-14"
             variants={tabVariants}
             initial="hidden"
             animate="visible"
           >
-            <p className="text-lg text-blue-900 font-semibold">
-              Scan the QR Code to Complete Payment
-            </p>
-            <div className="relative w-full max-w-xs sm:max-w-sm lg:max-w-md overflow-hidden rounded-lg border border-gray-200 shadow-lg">
-              <img
-                src={course.qrCode}
-                alt="QR Code"
-                className="w-full h-auto object-cover rounded-lg"
-                onLoad={(e) => {
-                  const imgWidth = e.target.width;
-                  const imgHeight = e.target.height;
-                  const gradientDiv = e.target.nextElementSibling;
-                  gradientDiv.style.width = `${imgWidth}px`;
-                  gradientDiv.style.height = `${imgHeight}px`;
-                }}
-              />
+            <h2 className="text-3xl font-bold mb-3 text-center">
+              Pricing Details
+            </h2>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between space-y-4 sm:space-y-0">
+              {course.discountPercentage ? (
+                <motion.div
+                  className="w-full sm:w-1/2 lg:w-1/3 bg-blue-50 rounded-lg shadow-md p-4"
+                  variants={tabVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <div className="flex justify-between items-center mb-4">
+                    <p className="text-base text-blue-700">Original Price:</p>
+                    <p className="text-base line-through text-gray-500">
+                      ₹ {course.price}
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center mb-4">
+                    <p className="text-base text-blue-700">Discount:</p>
+                    <div className="flex items-center">
+                      <p className="font-semibold text-green-500 mr-1">
+                        {course.discountPercentage}%
+                      </p>
+                      <BsFillGiftFill className="text-green-500" size={18} />
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p className="text-base text-blue-700">Discounted Price:</p>
+                    <div className="flex items-center">
+                      <p className="font-semibold text-blue-900 mr-1">
+                        ₹{" "}
+                        {calculateDiscountedPrice(
+                          course.price,
+                          course.discountPercentage
+                        )}
+                      </p>
+                      <BsFillTagFill className="text-blue-900" size={18} />
+                    </div>
+                  </div>
+                  {/* Payment Ui Div */}
+                  <div className="pt-4">
+                    <p className="text-lg font-semibold">Pay Using</p>
+                    <div className="flex space-x-1 mt-2">
+                      <img
+                        src="https://i.pinimg.com/originals/60/5a/bd/605abdb7af3405c6b20a426b1e128322.png"
+                        alt="Icon 1"
+                        className="h-10 w-10 object-contain"
+                      />
+                      <img
+                        src="https://m.media-amazon.com/images/G/01/amazonpayments/documentation/AmazonPay_BrandAssets/Logos/amazonpay-secondary-logo-rgb_clr.png"
+                        alt="Icon 2"
+                        className="h-10 w-10 object-contain"
+                      />
+                      <img
+                        src="https://cdn.iconscout.com/icon/free/png-256/free-bhim-3-69845.png"
+                        alt="Icon 3"
+                        className="h-10 w-10 object-contain"
+                      />
+                      <img
+                        src="https://www.logo.wine/a/logo/Paytm/Paytm-Logo.wine.svg"
+                        alt="Icon 4"
+                        className="h-10 w-10 object-contain"
+                      />
+                      <img
+                        src="https://cdn.freelogovectors.net/wp-content/uploads/2023/11/phonepelogo-freelogovectors.net_.png"
+                        alt="Icon 5"
+                        className="h-10 w-10 object-contain"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  className="w-full sm:w-1/2 lg:w-1/3 bg-blue-50 rounded-lg shadow-md p-4"
+                  variants={tabVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <div className="flex justify-between items-center">
+                    <p className="text-base text-blue-700">Price:</p>
+                    <div className="flex items-center">
+                      <p className="font-semibold text-blue-900 mr-1">
+                        ₹ {course.price}
+                      </p>
+                      <BsFillTagFill className="text-blue-900" size={18} />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-transparent to-green-100"
-                animate={{
-                  y: ["-100%", "100%"],
-                  transition: {
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "linear",
-                    delay: 0.5,
-                  },
-                }}
-              />
+                className="w-full sm:w-1/2 lg:w-2/3 bg-blue-50 rounded-lg shadow-md p-4 flex flex-col justify-center items-center"
+                variants={tabVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <p className="text-lg text-blue-900 font-semibold mb-4">
+                  Scan the QR Code to Complete Payment
+                </p>
+                <div className="relative w-full max-w-sm overflow-hidden rounded-lg border border-gray-200 shadow-lg">
+                  <img
+                    src={course.qrCode}
+                    alt="QR Code"
+                    className="w-full h-auto object-cover rounded-lg"
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-b from-transparent to-green-100"
+                    animate={{
+                      y: ["-100%", "100%"],
+                      transition: {
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "linear",
+                        delay: 0.5,
+                      },
+                    }}
+                  />
+                </div>
+              </motion.div>
             </div>
-            <p className="text-sm text-gray-600">
-              Scan the QR code using your device's camera to proceed with the
-              payment.
-            </p>
           </motion.div>
         </TabPanel>
       </Tabs>
@@ -437,7 +523,7 @@ const CodingCoursesPage = () => {
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, coding exercises, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
       image:
         "https://w7.pngwing.com/pngs/290/579/png-transparent-html-html-logo-html-5-html-five-logo-html-5-logo-programming-langugae-3d-icon-thumbnail.png",
-      qrCode: "https://www.qrcode-monkey.com/img/default-preview-qr.svg", // QR code URL for Course 1
+      qrCode: qrCodeImage, // QR code URL for Course 1
     },
     {
       title: "Course 2: Advanced C++ Programming",
@@ -497,8 +583,7 @@ const CodingCoursesPage = () => {
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, coding exercises, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
       image:
         "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg",
-      qrCode:
-        "https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg", // QR code URL for Course 2
+      qrCode: qrCodeImage, // QR code URL for Course 2
     },
     {
       title: "Course 3: Data Structures and Algorithms",
@@ -563,8 +648,7 @@ const CodingCoursesPage = () => {
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, coding exercises, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
       image:
         "https://images.klipfolio.com/website/public/11f3da89-351a-4ca1-a59d-b6806b0fcec1/algorithm.jpg",
-      qrCode:
-        "https://www.investopedia.com/thmb/hJrIBjjMBGfx0oa_bHAgZ9AWyn0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/qr-code-bc94057f452f4806af70fd34540f72ad.png", // QR code URL for Course 3
+      qrCode: qrCodeImage, // QR code URL for Course 3
     },
     {
       title: "Course 4: Frontend Development with React",
@@ -607,8 +691,7 @@ const CodingCoursesPage = () => {
         "Join our React development course to learn modern frontend development with React.js. Build interactive user interfaces and dynamic web applications.",
       image:
         "https://res.cloudinary.com/practicaldev/image/fetch/s--qo_Wp38Z--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/e0nl7ziy1la7bpwj7rsp.png",
-      qrCode:
-        "https://www.investopedia.com/thmb/hJrIBjjMBGfx0oa_bHAgZ9AWyn0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/qr-code-bc94057f452f4806af70fd34540f72ad.png",
+      qrCode: qrCodeImage,
       discountPercentage: 2,
       enrollments: 18,
       reviews: 10,
@@ -707,8 +790,7 @@ const CodingCoursesPage = () => {
         "Enroll in our JavaScript course to gain expertise in web development. Practice coding exercises, work on projects, and enhance your JavaScript skills.",
       image:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png",
-      qrCode:
-        "https://www.investopedia.com/thmb/hJrIBjjMBGfx0oa_bHAgZ9AWyn0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/qr-code-bc94057f452f4806af70fd34540f72ad.png",
+      qrCode: qrCodeImage,
     },
     {
       title: "Full Stack Web Development Bootcamp",
@@ -767,7 +849,7 @@ const CodingCoursesPage = () => {
         "Enroll in our Full Stack Web Development Bootcamp to gain access to live lectures, hands-on projects, and mentorship from experienced instructors. Join our community forums for discussions and collaborate with peers on real-world projects.",
       image:
         "https://t3.ftcdn.net/jpg/03/18/60/62/360_F_318606217_Hk8jo2MVoI33SQOkYrfOF929J7JgIP0P.jpg",
-      qrCode: "https://www.qrcode-monkey.com/img/default-preview-qr.svg",
+      qrCode: qrCodeImage,
     },
   ];
 

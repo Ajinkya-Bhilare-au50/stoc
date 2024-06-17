@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { BiBook, BiCheckCircle, BiCreditCard } from "react-icons/bi";
 import { MdPerson } from "react-icons/md"; // Assuming MdPerson is your instructor icon
-
+import qrCodeImage from "./images/ajinkyaqr.png";
 import "react-tabs/style/react-tabs.css";
 
 import {
@@ -253,8 +253,7 @@ const StockCoursesPage = () => {
       ],
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, reading materials, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
-      QrImage:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Qr-1.svg/220px-Qr-1.svg.png",
+      QrImage: qrCodeImage,
     },
     {
       title: "Course 2: Advanced Stock Market Strategies",
@@ -318,8 +317,7 @@ const StockCoursesPage = () => {
       ],
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, reading materials, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
-      QrImage:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Qr-1.svg/220px-Qr-1.svg.png",
+      QrImage: qrCodeImage,
     },
     {
       title: "Course 3: Advanced Futures and Options Strategies",
@@ -405,8 +403,7 @@ const StockCoursesPage = () => {
       ],
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, reading materials, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
-      QrImage:
-        "https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg",
+      QrImage: qrCodeImage,
     },
   ];
 
@@ -597,7 +594,7 @@ const StockCoursesPage = () => {
 
                       <TabPanel className={"bg-yellow-100"}>
                         <div className="flex flex-col items-center p-4 rounded-lg shadow-md border border-gray-300 ">
-                          <div className="w-48 h-48 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex justify-center items-center mb-4 relative overflow-hidden shadow-lg">
+                          <div className="w-48 h-48 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex justify-center items-center mb-2 relative overflow-hidden shadow-lg">
                             <img
                               src={course.QrImage}
                               alt={`QR for ${course.title}`}
@@ -616,9 +613,39 @@ const StockCoursesPage = () => {
                               }}
                             />
                           </div>
-                          <p className="text-lg text-gray-700 font-semibold mb-2">
+                          <p className="text-lg text-gray-700 font-semibold">
                             Scan this QR Code to Pay Online
                           </p>
+                          <div className="py-2">
+                            
+                            <div className="flex space-x-1">
+                              <img
+                                src="https://i.pinimg.com/originals/60/5a/bd/605abdb7af3405c6b20a426b1e128322.png"
+                                alt="Icon 1"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://m.media-amazon.com/images/G/01/amazonpayments/documentation/AmazonPay_BrandAssets/Logos/amazonpay-secondary-logo-rgb_clr.png"
+                                alt="Icon 2"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://cdn.iconscout.com/icon/free/png-256/free-bhim-3-69845.png"
+                                alt="Icon 3"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://www.logo.wine/a/logo/Paytm/Paytm-Logo.wine.svg"
+                                alt="Icon 4"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://cdn.freelogovectors.net/wp-content/uploads/2023/11/phonepelogo-freelogovectors.net_.png"
+                                alt="Icon 5"
+                                className="h-10 w-10 object-contain"
+                              />
+                            </div>
+                          </div>
                           <p className="text-sm text-gray-500">
                             Use your mobile device's QR scanner to complete the
                             payment process.
