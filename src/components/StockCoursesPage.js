@@ -117,7 +117,7 @@ const Sidebar = ({ courses }) => {
           {/* Add more list items for other benefits */}
         </ul>
       </div>
-
+      {/* investing is crucial */}
       <div className="flex flex-col items-center justify-center mt-2 bg-blue-900 pt-2 rounded-lg shadow-lg">
         <img
           src="https://cdn.corporatefinanceinstitute.com/assets/income-investing-1024x576.jpeg"
@@ -132,12 +132,45 @@ const Sidebar = ({ courses }) => {
           anyone looking to secure their financial well-being.
         </p>
       </div>
+      {/* why Choose us */}
+      <div className="p-4 bg-blue-900 shadow-md rounded-lg mt-2">
+        <h2 className="text-2xl font-bold mb-4">Why Choose Us</h2>
+        <img
+          src="https://www.micronicsindia.com/wp-content/uploads/2021/01/Our-Vision-1.jpg"
+          alt=""
+          className="rounded-lg "
+        />
+        <p className="text-White pt-2">
+          We believe our success is tied to your success, so we never compromise
+          on helping you grow. Our team has the experience, skills, and latest
+          tools to meet your needs effectively and positively.
+        </p>
+      </div>
+      {/* Our Vision */}
+      <div className="p-4 bg-blue-900  shadow-lg rounded-lg  md:flex-row items-center mt-2">
+        <div className="flex justify-center items-center">
+          <img
+            src="https://www.climaxoverseas.com/wp-content/uploads/2023/03/vision.jpg"
+            alt="Our Vision"
+            className="w-64 h-auto  rounded-lg object-cover m-7"
+          />
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
+          <p className="text-white">
+            We aim to be recognized as a leader in guiding our clients to
+            success in the ever-changing financial markets. Our goal is to be
+            valued for client satisfaction, exceptional service, financial
+            strength, and profitability. We continuously strive to enhance our
+            reputation for accessibility, professionalism, in-depth analysis,
+            and the quality of our long-term consultative relationships with our
+            clients.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
-
-
-
 
 const StockCoursesPage = () => {
   const containerVariants = {

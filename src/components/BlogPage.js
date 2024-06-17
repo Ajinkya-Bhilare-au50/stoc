@@ -8,6 +8,7 @@ import Blog3 from "./blogs/Blog3.js";
 import Blog4 from "./blogs/Blog4.js";
 import GrowthMindsetBlog from "./blogs/GrowthMindsetBlog.js";
 import TraderBlog from "./blogs/TraderBlog.js";
+import PortfolioBlog from "./blogs/PortfolioBlog.js";
 
 const BlogPage = () => {
   const [expandedBlogIndex, setExpandedBlogIndex] = useState(null);
@@ -133,7 +134,8 @@ const BlogPage = () => {
           <BlogA />
           <BlogB />
           <GrowthMindsetBlog />
-          <TraderBlog/>
+          <TraderBlog />
+          <PortfolioBlog/>
           <Blog1 />
           <Blog2 />
           <Blog3 />
