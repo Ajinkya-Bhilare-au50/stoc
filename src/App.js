@@ -87,7 +87,7 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-        <OfferPopup />
+        
         <Feedbacksection />
         <TradingStats />
         <StickyFooter />
@@ -121,7 +121,7 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-        <OfferPopup />
+       
 
         <StockCoursesPage />
       </div>
@@ -132,7 +132,7 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-        <OfferPopup />
+        
 
         <CodingCoursesPage />
       </div>

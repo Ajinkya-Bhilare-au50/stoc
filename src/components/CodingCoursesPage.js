@@ -710,6 +710,65 @@ const CodingCoursesPage = () => {
       qrCode:
         "https://www.investopedia.com/thmb/hJrIBjjMBGfx0oa_bHAgZ9AWyn0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/qr-code-bc94057f452f4806af70fd34540f72ad.png",
     },
+    {
+      title: "Full Stack Web Development Bootcamp",
+      description:
+        "Become a full-stack developer with this comprehensive bootcamp.",
+      duration: "12 weeks",
+      price: 59000,
+      discountPercentage: 5,
+      enrollments: 50,
+      reviews: 20,
+      isTopSelling: false,
+      isTopTrending: true,
+      instructorName: "Ajinkya Sir",
+      instructorImage:
+        "https://media.licdn.com/dms/image/D4D03AQH_icmUii_T_A/profile-displayphoto-shrink_200_200/0/1681055382341?e=2147483647&v=beta&t=bxDPZ2zHx-bBke9SlpZkesheb9vvMtDXolKStj8fOnU",
+      syllabus: [
+        {
+          title: "Module 1: Frontend Development",
+          description:
+            "Learn HTML, CSS, and JavaScript for frontend development",
+          topics: ["HTML Basics", "CSS Basics", "JavaScript Fundamentals"],
+        },
+        {
+          title: "Module 2: Backend Development",
+          description:
+            "Explore server-side programming with Node.js and Express",
+          topics: ["Node.js Fundamentals", "Express Framework", "RESTful APIs"],
+        },
+        {
+          title: "Module 3: Database Management",
+          description: "Learn database design and management with MongoDB",
+          topics: ["MongoDB Basics", "CRUD Operations", "Mongoose ORM"],
+        },
+        {
+          title: "Module 4: Full-Stack Integration",
+          description:
+            "Integrate frontend and backend components to build full-stack applications",
+          topics: [
+            "API Integration",
+            "Authentication & Authorization",
+            "Deployment",
+          ],
+        },
+        {
+          title: "Module 5: Advanced Concepts",
+          description:
+            "Explore advanced topics such as microservices and cloud deployment",
+          topics: [
+            "Microservices Architecture",
+            "Docker Containers",
+            "Cloud Platforms",
+          ],
+        },
+      ],
+      howToUse:
+        "Enroll in our Full Stack Web Development Bootcamp to gain access to live lectures, hands-on projects, and mentorship from experienced instructors. Join our community forums for discussions and collaborate with peers on real-world projects.",
+      image:
+        "https://t3.ftcdn.net/jpg/03/18/60/62/360_F_318606217_Hk8jo2MVoI33SQOkYrfOF929J7JgIP0P.jpg",
+      qrCode: "https://www.qrcode-monkey.com/img/default-preview-qr.svg",
+    },
   ];
 
   return (

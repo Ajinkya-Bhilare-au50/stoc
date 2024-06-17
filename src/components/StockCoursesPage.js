@@ -25,15 +25,119 @@ const Sidebar = ({ courses }) => {
       </h2>
       <ul className="space-y-4">
         {courses.map((course, index) => (
-          <li key={index} className="bg-gray-700 p-3 rounded-lg">
-            <h3 className="text-lg text-yellow-300">{course.title}</h3>
-            <p className="text-sm text-gray-400">{course.instructor}</p>
+          <li
+            key={index}
+            className="bg-gray-700 p-3 rounded-lg flex items-center"
+          >
+            <div>
+              <h3 className="text-lg text-yellow-300">{course.title}</h3>
+              <div className="flex gap-2 items-center">
+                <img
+                  className="h-12 w-12 rounded-full mr-3"
+                  src={course.instructorImage}
+                  alt={course.instructor}
+                />
+                <p className="text-sm text-gray-400">{course.instructor}</p>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
+      <div>
+        <div className="mt-2 p-8 bg-blue-900">
+          <img
+            className="rounded-lg "
+            src="https://www.sharegurukul.com/wp-content/uploads/2019/05/Stock-Trading-Courses.jpg "
+            alt=""
+          />
+          <h2 className="block mt-3 text-lg leading-tight font-medium text-white">
+            The Benefits of Stock Trading Courses
+          </h2>
+          <p className="mt-2 text-gray-300">
+            Investing in the stock market is volatile, with many novices facing
+            initial losses. However, stock trading courses for beginners offer
+            structured learning, expert insights, and practical sessions. These
+            courses help you avoid common mistakes, build a strong foundation,
+            and increase your chances of success in the market.
+          </p>
+        </div>
+      </div>
+      {/* benefits Div */}
+      <div className="max-w-lg mx-auto mt-2 p-6 bg-blue-900 rounded-lg shadow-md">
+        <h2 className="text-3xl font-bold text-center text-white mb-6">
+          Benefits for Students
+        </h2>
+        <ul className="space-y-4">
+          <li className="flex items-start">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 mr-4 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            <div>
+              <h3 className="font-semibold text-white">Accessible Trainers:</h3>
+              <p className="text-gray-300">
+                Quick access to trainers for clarifying doubts and understanding
+                complex topics.
+              </p>
+            </div>
+          </li>
+          <li className="flex items-start">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 mr-4 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            <div>
+              <h3 className="font-semibold text-white">Experienced Faculty:</h3>
+              <p className="text-gray-300">
+                Experienced and helpful faculty members dedicated to student
+                success.
+              </p>
+            </div>
+          </li>
+          {/* Add more list items for other benefits */}
+        </ul>
+      </div>
+
+      <div className="flex flex-col items-center justify-center mt-2 bg-blue-900 pt-2 rounded-lg shadow-lg">
+        <img
+          src="https://cdn.corporatefinanceinstitute.com/assets/income-investing-1024x576.jpeg"
+          alt=""
+          className="w-64 h-64 rounded-lg mb-4 object-cover"
+        />
+        <p className="text-sm font-semibold text-white p-4">
+          Investing is crucial for financial growth and stability. It allows one
+          to build wealth, beat inflation, and achieve long-term goals like
+          retirement. By investing wisely, individuals can multiply their
+          savings and create a secure financial future. It's a key strategy for
+          anyone looking to secure their financial well-being.
+        </p>
+      </div>
     </div>
   );
 };
+
+
+
 
 const StockCoursesPage = () => {
   const containerVariants = {
