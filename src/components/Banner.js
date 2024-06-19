@@ -1,6 +1,7 @@
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import bannerimage from "./images/bannerbg.png";
+import AvatarGroupStack from "./AvatarGroupStack";
+const bannerimage = "https://i.ibb.co/gZcRqBn/BannerBG.png";
 
 function Banner() {
   const handleJoinWhatsAppGroup = () => {
@@ -16,12 +17,12 @@ function Banner() {
         className="w-full h-full object-cover object-center md:h-auto" // Set height to auto on medium and larger screens
         style={{ objectPosition: "center bottom" }}
       />
-      <div className="absolute inset-0 flex items-start justify-center pt-28">
+      <div className="absolute inset-0 flex flex-col items-center justify-start pt-28 space-y-6">
         <h1 className="text-white text-4xl sm:text-2xl lg:text-7xl font-bold text-capital">
-          {" "}
           {/* Adjusted text sizes for different screen sizes */}
-          Sniper Coding
+          Sniper Coders
         </h1>
+        <AvatarGroupStack />
       </div>
       <div className="absolute bottom-0 left-0 p-4 flex items-center space-x-2">
         <a
@@ -43,7 +44,7 @@ function Banner() {
         {/* Show button on small screens, center it horizontally */}
         <button
           onClick={handleJoinWhatsAppGroup}
-          className="bg-green-500 text-white px-4 py-1 rounded-lg w-full md:w-auto  hover:bg-green-700" // Make button full width on small screens, auto width on larger screens
+          className="bg-green-500 text-white px-4 py-1 rounded-lg w-full md:w-auto hover:bg-green-700" // Make button full width on small screens, auto width on larger screens
         >
           Join WhatsApp Group
         </button>

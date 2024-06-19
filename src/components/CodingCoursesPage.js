@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { BsClockFill } from "react-icons/bs";
 import { BsFillPersonFill, BsStarFill } from "react-icons/bs";
-import qrCodeImage from "./images/ajinkyaqr.png";
+import { Link } from "react-router-dom";
+
 import "react-tabs/style/react-tabs.css";
 import { motion } from "framer-motion";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { BsFillGiftFill, BsFillTagFill } from "react-icons/bs";
+
+import { BiCheckCircle } from "react-icons/bi";
 import Drawer from "./Drawer";
 import {
   AiOutlineFileText,
@@ -14,7 +17,9 @@ import {
   AiOutlineTool,
   AiOutlineQrcode,
 } from "react-icons/ai";
+import AjinkyaProfile from "./AjinkyaProfile";
 
+const qrCodeImage="https://i.ibb.co/SmYWhFq/20240617-193344-removebg-preview.png";
 // Animation Variants
 const badgeVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -854,27 +859,112 @@ const CodingCoursesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center py-10">
-      <h1 className="text-3xl sm:text-4xl gap-2 font-extrabold text-blue-900 mb-6 flex items-center justify-between">
-        <Drawer courseType="Coding " batchStartInfo={codeBatchStart} />
-        <span>Coding Courses</span>
-      </h1>
+    <div className="grid grid-cols-3 md:grid-cols-5 h-screen">
+      {/* Left Column (Visible for Laptop and Larger Screens) */}
+      <div className="hidden md:block sticky top-0 col-span-1 h-screen p-4 bg-[#f6b4b7]">
+        <AjinkyaProfile />
+        
+      </div>
 
-      <motion.div
-        className="w-full max-w-4xl space-y-6"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {courses.map((course, index) => (
-          <CourseCard
-            key={index}
-            course={course}
-            expandedModules={expandedModules}
-            toggleModule={toggleModule}
-          />
-        ))}
-      </motion.div>
+      {/* Middle Column */}
+      <div className="col-span-3 md:col-span-3 overflow-y-scroll hide-scrollbar p-4 bg-blue-50">
+        <div className="space-y-4">
+          <div className="min-h-screen bg-blue-50 flex flex-col items-center py-10">
+            <h1 className="text-3xl sm:text-4xl gap-2 font-extrabold text-blue-900 mb-6 flex items-center justify-between">
+              <Drawer courseType="Coding " batchStartInfo={codeBatchStart} />
+              <span>Coding Courses</span>
+            </h1>
+
+            <motion.div
+              className="w-full max-w-4xl space-y-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {courses.map((course, index) => (
+                <CourseCard
+                  key={index}
+                  course={course}
+                  expandedModules={expandedModules}
+                  toggleModule={toggleModule}
+                />
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Column (Visible for Laptop and Larger Screens) */}
+      <div className="hidden md:block sticky top-0 col-span-1 h-screen p-4  bg-gradient-to-r from-blue-500 to-purple-500">
+        <div class="hidden md:block sticky top-0 col-span-1 h-auto pt-3 px-4 bg-gray-100">
+          <div class="flex items-center justify-between mb-2 ">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/9186/9186534.png"
+              alt="Logo"
+              class="h-12"
+            />
+            <Link to="/contact" class="px-4 py-2 bg-blue-500 text-white rounded-md">
+              Contact Us
+            </Link>
+          </div>
+          <div class="grid gap-6">
+            <div>
+              <h2 class="text-2xl font-semibold mb-0">
+                More About Web Development
+              </h2>
+              <p class="text-gray-700">
+                Web development trends evolve rapidly, incorporating new
+                technologies and practices such as responsive design,
+                progressive web apps (PWAs), and serverless architectures.
+                Keeping up with these trends is crucial for businesses to stay
+                competitive in the digital landscape.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-0">
+                Benefits of Efficient Digital Solutions
+              </h3>
+              <ul className="list-none text-gray-700">
+                <li className="flex items-center mb-2">
+                  <BiCheckCircle size={36} className="mr-2 text-green-500" />
+                  Save costs through efficient digital solutions
+                </li>
+                <li className="flex items-center mb-2">
+                  <BiCheckCircle size={36} className="mr-2 text-green-500" />
+                  Enhance user experience with responsive design
+                </li>
+                <li className="flex items-center mb-2">
+                  <BiCheckCircle size={36} className="mr-2 text-green-500" />
+                  Improve scalability with serverless architectures
+                </li>
+                <li className="flex items-center">
+                  <BiCheckCircle size={36} className="mr-2 text-green-500" />
+                  Optimize performance with progressive web apps
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-1">Our Approach</h3>
+              <div class="flex items-center mb-2">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/993/993552.png"
+                  alt="Approach Icon"
+                  class="h-6 mr-2"
+                />
+                <span>Strategy Planning</span>
+              </div>
+              <div class="flex items-center mb-1">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/7379/7379445.png"
+                  alt="Approach Icon"
+                  class="h-6 mr-2"
+                />
+                <span>Design & Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

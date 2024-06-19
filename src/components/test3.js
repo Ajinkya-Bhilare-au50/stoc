@@ -10,10 +10,12 @@ import { MdPerson } from "react-icons/md"; // Assuming MdPerson is your instruct
 
 import "react-tabs/style/react-tabs.css";
 
-import { MdDescription, MdInfoOutline } from "react-icons/md";
+import {
+  MdDescription,
+  MdOutlineLibraryBooks,
+  MdInfoOutline,
+} from "react-icons/md";
 import Drawer from "./Drawer";
-import StockSidebar from "./StockSidebar";
-import LearnerReview from "./LearnerReview";
 const qrCodeImage =
   "https://i.ibb.co/SmYWhFq/20240617-193344-removebg-preview.png";
 const Sidebar = ({ courses }) => {
@@ -424,261 +426,242 @@ const StockCoursesPage = () => {
 
   const stockBatchStart = `${month} ${day}, ${year}`;
   return (
-    <>
-      <div className="flex h-screen overflow-hidden">
-        {/* Div 1 visible on desktop, hidden on mobile */}
-        <div className="hidden lg:block w-1/3 h-full overflow-y-scroll bg-gray-200 hide-scrollbar">
-          {/*------Content for the first scrollable div1----------- */}
-          <LearnerReview averageRating={4.5} totalReviews={104} />
-          
+    <div className="min-h-screen bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-bold mb-8 mt-4 text-center text-yellow-300 sm:text-left sm:flex sm:items-center sm:justify-center">
+            <Drawer
+              courseType="Stock Market"
+              batchStartInfo={stockBatchStart}
+            />
+            <span className="sm:ml-4 mt-10 sm:mt-0 ">
+              <div className="pt-5"></div>Stock Market Courses
+            </span>
+          </h1>
         </div>
-        <div className="w-full lg:w-2/3 h-full overflow-y-scroll bg-gray-300 hide-scrollbar">
-          {/*------- Content for the second scrollable div------ courses div---------- */}
-          <div className="min-h-screen bg-gray-900 text-white ">
-            <div className="max-w-7xl mx-auto px-4 py-8">
-              <div className="flex flex-col items-center justify-center">
-                <h1 className="text-4xl font-bold mb-8 mt-4 text-center text-yellow-300 sm:text-left sm:flex sm:items-center sm:justify-center">
-                  <Drawer
-                    courseType="Stock Market"
-                    batchStartInfo={stockBatchStart}
-                  />
-                  <span className="sm:ml-4 mt-10 sm:mt-0 ">
-                    <div className="pt-5"></div>Stock Market Courses
-                  </span>
-                </h1>
-              </div>
 
-              <div className="flex flex-wrap">
-                <div className="w-full sm:w-3/4">
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={containerVariants}
-                  >
-                    {courses.map((course, index) => (
-                      <motion.div
-                        key={index}
-                        className="bg-gray-800 p-6 mb-6 rounded-lg shadow-lg"
-                        variants={itemVariants}
-                      >
-                        <div className="flex flex-col md:flex-row items-center rounded-lg   relative">
-                          <div className="md:w-1/3">
+        <div className="flex flex-wrap">
+          <div className="w-full sm:w-3/4">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+            >
+              {courses.map((course, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gray-800 p-6 mb-6 rounded-lg shadow-lg"
+                  variants={itemVariants}
+                >
+                  <div className="flex flex-col md:flex-row items-center rounded-lg   relative">
+                    <div className="md:w-1/3">
+                      <img
+                        src={course.image}
+                        alt={course.title}
+                        className="rounded-lg w-full h-auto mb-4 md:mb-0"
+                      />
+                    </div>
+                    <div className="md:w-2/3 md:pl-6">
+                      <h2 className="text-2xl font-bold mb-4 text-yellow-300">
+                        {course.title}
+                      </h2>
+                      <p className="text-gray-400 mb-2 flex items-center">
+                        <MdDescription className="inline-block mr-2 text-yellow-300" />
+                        {course.description}
+                      </p>
+                      <p className="text-gray-400 mb-2 flex items-center">
+                        <BsBook className="inline-block mr-2 text-yellow-300" />
+                        Duration: {course.duration}
+                      </p>
+                      <p className="text-gray-400 mb-2 flex items-center">
+                        <FaStar className="inline-block mr-2 text-yellow-300" />
+                        Rating: {course.rating} ({course.reviews} reviews)
+                      </p>
+                      <div className="flex items-center mb-2">
+                        <span className="text-gray-400 mr-2">
+                          <MdPerson className="inline-block mr-1 text-yellow-300" />
+                          Instructor:
+                        </span>
+                        <div className="flex items-center">
+                          <img
+                            src={course.instructorImage}
+                            alt={course.instructor}
+                            className="rounded-full w-8 h-8 mr-2"
+                          />
+                          <span>{course.instructor}</span>
+                        </div>
+                      </div>
+                      <p className="text-gray-400 mb-4 flex items-center">
+                        <MdInfoOutline className="inline-block mr-2 text-yellow-300" />
+                        Price: {course.price}
+                      </p>
+                      <div className="flex justify-start gap-2">
+                        <button className="bg-yellow-300 text-gray-900 px-4 py-2 rounded-md hover:bg-yellow-400 transition-colors duration-300">
+                          Enroll Now
+                        </button>
+                        <button className="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors duration-300">
+                          Add to Cart
+                        </button>
+                      </div>
+                      {course.isTopSelling && (
+                        <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 rounded-tr-lg rounded-bl-lg z-50">
+                          Top Selling
+                        </div>
+                      )}
+                      {course.isTopTrending && (
+                        <div className="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tl-lg rounded-br-lg z-50">
+                          Top Trending
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <Tabs>
+                      <TabList className="flex sm:flex-col gap-4 sm:mb-4 flex-wrap md:flex-row cursor-pointer">
+                        <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                          <BiBook className="text-blue-500 text-lg" />
+                          <span className="ml-4 mr-2">Course Content</span>
+                        </Tab>
+                        <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                          <BiCheckCircle className="text-green-500 text-lg" />
+                          <span className="ml-4 mr-2">How to Use</span>
+                        </Tab>
+                        <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                          <BiCreditCard className="text-yellow-500 text-lg" />
+                          <span className="ml-4 mr-2">Pay Online</span>
+                        </Tab>
+                      </TabList>
+
+                      <TabPanel className={"mt-4"}>
+                        {course.syllabus.map((module, moduleIndex) => (
+                          <motion.div
+                            key={moduleIndex}
+                            className="bg-gray-700 p-4 mb-4 rounded-lg "
+                            variants={tabVariants}
+                          >
+                            <div
+                              className="flex justify-between items-center cursor-pointer"
+                              onClick={() => toggleModule(index, moduleIndex)}
+                            >
+                              <h3 className="text-lg font-bold text-yellow-300">
+                                {module.title}
+                              </h3>
+                              <span className="text-yellow-300">
+                                {expandedModules[index]?.[moduleIndex] ? (
+                                  <BiChevronUp
+                                    className="text-yellow-300"
+                                    size={30}
+                                  />
+                                ) : (
+                                  <BiChevronDown
+                                    className="text-yellow-300"
+                                    size={30}
+                                  />
+                                )}
+                              </span>
+                            </div>
+                            {expandedModules[index]?.[moduleIndex] && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{
+                                  opacity: 1,
+                                  height: "auto",
+                                  transition: { duration: 0.5 },
+                                }}
+                                exit={{
+                                  opacity: 0,
+                                  height: 0,
+                                  transition: { duration: 0.5 },
+                                }}
+                                className="mt-2"
+                              >
+                                <p className="text-gray-400 mb-2">
+                                  {module.description}
+                                </p>
+                                <ul className="list-disc list-inside text-gray-400">
+                                  {module.topics.map((topic, topicIndex) => (
+                                    <li key={topicIndex}>{topic}</li>
+                                  ))}
+                                </ul>
+                              </motion.div>
+                            )}
+                          </motion.div>
+                        ))}
+                      </TabPanel>
+                      <TabPanel>
+                        <p className="text-gray-400">{course.howToUse}</p>
+                      </TabPanel>
+
+                      <TabPanel className={"bg-yellow-100"}>
+                        <div className="flex flex-col items-center p-4 rounded-lg shadow-md border border-gray-300 ">
+                          <div className="w-48 h-48 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex justify-center items-center mb-2 relative overflow-hidden shadow-lg">
                             <img
-                              src={course.image}
-                              alt={course.title}
-                              className="rounded-lg w-full h-auto mb-4 md:mb-0"
+                              src={course.QrImage}
+                              alt={`QR for ${course.title}`}
+                              className="w-40 h-40 object-cover rounded-lg z-10"
+                            />
+                            <motion.div
+                              className="absolute top-0 left-0 w-full h-full bg-white"
+                              animate={{
+                                y: ["-100%", "100%"],
+                                transition: {
+                                  duration: 2.5,
+                                  repeat: Infinity,
+                                  repeatType: "reverse",
+                                  ease: "linear",
+                                },
+                              }}
                             />
                           </div>
-                          <div className="md:w-2/3 md:pl-6">
-                            <h2 className="text-2xl font-bold mb-4 text-yellow-300">
-                              {course.title}
-                            </h2>
-                            <p className="text-gray-400 mb-2 flex items-center">
-                              <MdDescription className="inline-block mr-2 text-yellow-300" />
-                              {course.description}
-                            </p>
-                            <p className="text-gray-400 mb-2 flex items-center">
-                              <BsBook className="inline-block mr-2 text-yellow-300" />
-                              Duration: {course.duration}
-                            </p>
-                            <p className="text-gray-400 mb-2 flex items-center">
-                              <FaStar className="inline-block mr-2 text-yellow-300" />
-                              Rating: {course.rating} ({course.reviews} reviews)
-                            </p>
-                            <div className="flex items-center mb-2">
-                              <span className="text-gray-400 mr-2">
-                                <MdPerson className="inline-block mr-1 text-yellow-300" />
-                                Instructor:
-                              </span>
-                              <div className="flex items-center">
-                                <img
-                                  src={course.instructorImage}
-                                  alt={course.instructor}
-                                  className="rounded-full w-8 h-8 mr-2"
-                                />
-                                <span>{course.instructor}</span>
-                              </div>
+                          <p className="text-lg text-gray-700 font-semibold">
+                            Scan this QR Code to Pay Online
+                          </p>
+                          <div className="py-2">
+                            <div className="flex space-x-1">
+                              <img
+                                src="https://i.pinimg.com/originals/60/5a/bd/605abdb7af3405c6b20a426b1e128322.png"
+                                alt="Icon 1"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://m.media-amazon.com/images/G/01/amazonpayments/documentation/AmazonPay_BrandAssets/Logos/amazonpay-secondary-logo-rgb_clr.png"
+                                alt="Icon 2"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://cdn.iconscout.com/icon/free/png-256/free-bhim-3-69845.png"
+                                alt="Icon 3"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://www.logo.wine/a/logo/Paytm/Paytm-Logo.wine.svg"
+                                alt="Icon 4"
+                                className="h-10 w-10 object-contain"
+                              />
+                              <img
+                                src="https://cdn.freelogovectors.net/wp-content/uploads/2023/11/phonepelogo-freelogovectors.net_.png"
+                                alt="Icon 5"
+                                className="h-10 w-10 object-contain"
+                              />
                             </div>
-                            <p className="text-gray-400 mb-4 flex items-center">
-                              <MdInfoOutline className="inline-block mr-2 text-yellow-300" />
-                              Price: {course.price}
-                            </p>
-                            <div className="flex justify-start gap-2">
-                              <button className="bg-yellow-300 text-gray-900 px-4 py-2 rounded-md hover:bg-yellow-400 transition-colors duration-300">
-                                Enroll Now
-                              </button>
-                              <button className="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors duration-300">
-                                Add to Cart
-                              </button>
-                            </div>
-                            {course.isTopSelling && (
-                              <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 rounded-tr-lg rounded-bl-lg z-50">
-                                Top Selling
-                              </div>
-                            )}
-                            {course.isTopTrending && (
-                              <div className="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tl-lg rounded-br-lg z-50">
-                                Top Trending
-                              </div>
-                            )}
                           </div>
+                          <p className="text-sm text-gray-500">
+                            Use your mobile device's QR scanner to complete the
+                            payment process.
+                          </p>
                         </div>
-
-                        <div className="mt-4">
-                          <Tabs>
-                            <TabList className="flex sm:flex-col gap-4 sm:mb-4 flex-wrap md:flex-row cursor-pointer">
-                              <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
-                                <BiBook className="text-blue-500 text-lg" />
-                                <span className="ml-4 mr-2">
-                                  Course Content
-                                </span>
-                              </Tab>
-                              <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
-                                <BiCheckCircle className="text-green-500 text-lg" />
-                                <span className="ml-4 mr-2">How to Use</span>
-                              </Tab>
-                              <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
-                                <BiCreditCard className="text-yellow-500 text-lg" />
-                                <span className="ml-4 mr-2">Pay Online</span>
-                              </Tab>
-                            </TabList>
-
-                            <TabPanel className={"mt-4"}>
-                              {course.syllabus.map((module, moduleIndex) => (
-                                <motion.div
-                                  key={moduleIndex}
-                                  className="bg-gray-700 p-4 mb-4 rounded-lg "
-                                  variants={tabVariants}
-                                >
-                                  <div
-                                    className="flex justify-between items-center cursor-pointer"
-                                    onClick={() =>
-                                      toggleModule(index, moduleIndex)
-                                    }
-                                  >
-                                    <h3 className="text-lg font-bold text-yellow-300">
-                                      {module.title}
-                                    </h3>
-                                    <span className="text-yellow-300">
-                                      {expandedModules[index]?.[moduleIndex] ? (
-                                        <BiChevronUp
-                                          className="text-yellow-300"
-                                          size={30}
-                                        />
-                                      ) : (
-                                        <BiChevronDown
-                                          className="text-yellow-300"
-                                          size={30}
-                                        />
-                                      )}
-                                    </span>
-                                  </div>
-                                  {expandedModules[index]?.[moduleIndex] && (
-                                    <motion.div
-                                      initial={{ opacity: 0, height: 0 }}
-                                      animate={{
-                                        opacity: 1,
-                                        height: "auto",
-                                        transition: { duration: 0.5 },
-                                      }}
-                                      exit={{
-                                        opacity: 0,
-                                        height: 0,
-                                        transition: { duration: 0.5 },
-                                      }}
-                                      className="mt-2"
-                                    >
-                                      <p className="text-gray-400 mb-2">
-                                        {module.description}
-                                      </p>
-                                      <ul className="list-disc list-inside text-gray-400">
-                                        {module.topics.map(
-                                          (topic, topicIndex) => (
-                                            <li key={topicIndex}>{topic}</li>
-                                          )
-                                        )}
-                                      </ul>
-                                    </motion.div>
-                                  )}
-                                </motion.div>
-                              ))}
-                            </TabPanel>
-                            <TabPanel>
-                              <p className="text-gray-400">{course.howToUse}</p>
-                            </TabPanel>
-
-                            <TabPanel className={"bg-yellow-100"}>
-                              <div className="flex flex-col items-center p-4 rounded-lg shadow-md border border-gray-300 ">
-                                <div className="w-48 h-48 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex justify-center items-center mb-2 relative overflow-hidden shadow-lg">
-                                  <img
-                                    src={course.QrImage}
-                                    alt={`QR for ${course.title}`}
-                                    className="w-40 h-40 object-cover rounded-lg z-10"
-                                  />
-                                  <motion.div
-                                    className="absolute top-0 left-0 w-full h-full bg-white"
-                                    animate={{
-                                      y: ["-100%", "100%"],
-                                      transition: {
-                                        duration: 2.5,
-                                        repeat: Infinity,
-                                        repeatType: "reverse",
-                                        ease: "linear",
-                                      },
-                                    }}
-                                  />
-                                </div>
-                                <p className="text-lg text-gray-700 font-semibold">
-                                  Scan this QR Code to Pay Online
-                                </p>
-                                <div className="py-2">
-                                  <div className="flex space-x-1">
-                                    <img
-                                      src="https://i.pinimg.com/originals/60/5a/bd/605abdb7af3405c6b20a426b1e128322.png"
-                                      alt="Icon 1"
-                                      className="h-10 w-10 object-contain"
-                                    />
-                                    <img
-                                      src="https://m.media-amazon.com/images/G/01/amazonpayments/documentation/AmazonPay_BrandAssets/Logos/amazonpay-secondary-logo-rgb_clr.png"
-                                      alt="Icon 2"
-                                      className="h-10 w-10 object-contain"
-                                    />
-                                    <img
-                                      src="https://cdn.iconscout.com/icon/free/png-256/free-bhim-3-69845.png"
-                                      alt="Icon 3"
-                                      className="h-10 w-10 object-contain"
-                                    />
-                                    <img
-                                      src="https://www.logo.wine/a/logo/Paytm/Paytm-Logo.wine.svg"
-                                      alt="Icon 4"
-                                      className="h-10 w-10 object-contain"
-                                    />
-                                    <img
-                                      src="https://cdn.freelogovectors.net/wp-content/uploads/2023/11/phonepelogo-freelogovectors.net_.png"
-                                      alt="Icon 5"
-                                      className="h-10 w-10 object-contain"
-                                    />
-                                  </div>
-                                </div>
-                                <p className="text-sm text-gray-500">
-                                  Use your mobile device's QR scanner to
-                                  complete the payment process.
-                                </p>
-                              </div>
-                            </TabPanel>
-                          </Tabs>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </div>
-                <Sidebar courses={courses} />
-              </div>
-            </div>
+                      </TabPanel>
+                    </Tabs>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
+          <Sidebar courses={courses} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
