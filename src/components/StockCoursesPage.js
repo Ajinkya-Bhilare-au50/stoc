@@ -14,6 +14,11 @@ import { MdDescription, MdInfoOutline } from "react-icons/md";
 import Drawer from "./Drawer";
 import StockSidebar from "./StockSidebar";
 import LearnerReview from "./LearnerReview";
+import CoursePrice from "./CoursePrice";
+import WhatLearn from "./WhatLearn";
+import WhyTakeThisCourse from "./WhyTakeThisCourse";
+import WhoThisCourseIsFor from "./WhoThisCourseIsFor";
+import ReviewsComponent from "./ReviewsComponent";
 const qrCodeImage =
   "https://i.ibb.co/SmYWhFq/20240617-193344-removebg-preview.png";
 const Sidebar = ({ courses }) => {
@@ -43,13 +48,13 @@ const Sidebar = ({ courses }) => {
         ))}
       </ul>
       <div>
-        <div className="mt-2 p-8 bg-blue-900">
+        <div className="mt-2 p-5 bg-blue-900">
           <img
             className="rounded-lg "
             src="https://www.sharegurukul.com/wp-content/uploads/2019/05/Stock-Trading-Courses.jpg "
             alt=""
           />
-          <h2 className="block mt-3   text-white">
+          <h2 className="block mt-3  text-lg font-bold text-white">
             The Benefits of Stock Trading Courses
           </h2>
           <p className="mt-2 text-gray-300">
@@ -63,17 +68,18 @@ const Sidebar = ({ courses }) => {
       </div>
       {/* benefits Div */}
       <div className="max-w-lg mx-auto mt-2 p-6 bg-blue-900 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-center text-white mb-6">
+        <h2 className="text-xl font-bold text-center text-white mb-6">
           Benefits for Students
         </h2>
-        <ul className="space-y-4">
+        <ul className="space-y-1">
           <li className="flex items-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-4 text-green-500"
+              className="h-20 w-20 mr-1 text-green-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+             
             >
               <path
                 strokeLinecap="round"
@@ -93,10 +99,11 @@ const Sidebar = ({ courses }) => {
           <li className="flex items-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-4 text-green-500"
+              className="h-20 w-20 mr-1 text-green-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              
             >
               <path
                 strokeLinecap="round"
@@ -183,7 +190,16 @@ const StockCoursesPage = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 500,
+        damping: 20,
+        duration: 0.5,
+      },
+    },
   };
 
   const tabVariants = {
@@ -197,7 +213,9 @@ const StockCoursesPage = () => {
       description: "Learn the basics of Stock Market investing.",
       duration: "6 weeks",
       price: "₹ 3999",
+      discountPercentage: 5,
       instructor: "Ajinkya Sir",
+
       instructorImage:
         "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
       isTopSelling: true,
@@ -259,6 +277,7 @@ const StockCoursesPage = () => {
       description: "Master advanced strategies in stock market trading.",
       duration: "8 weeks",
       price: "₹ 4999",
+      discountPercentage: 5,
       instructor: "Ajinkya Sir",
       instructorImage:
         "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
@@ -323,6 +342,7 @@ const StockCoursesPage = () => {
       description: "Master advanced strategies in futures and options trading.",
       duration: "10 weeks",
       price: "₹ 5999",
+      discountPercentage: 5,
       instructor: "Ajinkya Sir",
       instructorImage:
         "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
@@ -430,7 +450,6 @@ const StockCoursesPage = () => {
         <div className="hidden lg:block w-1/3 h-full overflow-y-scroll bg-gray-200 hide-scrollbar">
           {/*------Content for the first scrollable div1----------- */}
           <LearnerReview averageRating={4.5} totalReviews={104} />
-          
         </div>
         <div className="w-full lg:w-2/3 h-full overflow-y-scroll bg-gray-300 hide-scrollbar">
           {/*------- Content for the second scrollable div------ courses div---------- */}
@@ -500,8 +519,12 @@ const StockCoursesPage = () => {
                               </div>
                             </div>
                             <p className="text-gray-400 mb-4 flex items-center">
-                              <MdInfoOutline className="inline-block mr-2 text-yellow-300" />
-                              Price: {course.price}
+                              
+                              
+                              <CoursePrice
+                                price={course.price}
+                                discountPercentage={course.discountPercentage}
+                              />
                             </p>
                             <div className="flex justify-start gap-2">
                               <button className="bg-yellow-300 text-gray-900 px-4 py-2 rounded-md hover:bg-yellow-400 transition-colors duration-300">
@@ -676,6 +699,19 @@ const StockCoursesPage = () => {
               </div>
             </div>
           </div>
+          <div>
+            <WhatLearn/>
+          </div>
+          <div>
+            <WhyTakeThisCourse/>
+          </div>
+          <div>
+            <WhoThisCourseIsFor/>
+          </div>
+          <div>
+            <ReviewsComponent/>
+          </div>
+
         </div>
       </div>
     </>
