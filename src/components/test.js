@@ -7,7 +7,7 @@ const FAQSection = () => {
 
   const faqData = [
     {
-      question: "What is stock trading?",
+      question: "What is stdock trading?",
       answer:
         "Stock trading involves buying and selling shares of publicly traded companies.",
     },

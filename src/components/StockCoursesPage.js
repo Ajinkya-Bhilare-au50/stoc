@@ -49,7 +49,7 @@ const Sidebar = ({ courses }) => {
             src="https://www.sharegurukul.com/wp-content/uploads/2019/05/Stock-Trading-Courses.jpg "
             alt=""
           />
-          <h2 className="block mt-3 text-lg leading-tight font-medium text-white">
+          <h2 className="block mt-3   text-white">
             The Benefits of Stock Trading Courses
           </h2>
           <p className="mt-2 text-gray-300">
@@ -117,13 +117,13 @@ const Sidebar = ({ courses }) => {
         </ul>
       </div>
       {/* investing is crucial */}
-      <div className="flex flex-col items-center justify-center mt-2 bg-blue-900 pt-2 rounded-lg shadow-lg">
+      <div className="flex flex-col items-center justify-center mt-2 bg-blue-900  rounded-lg shadow-lg">
         <img
           src="https://cdn.corporatefinanceinstitute.com/assets/income-investing-1024x576.jpeg"
           alt=""
-          className="w-64 h-64 rounded-lg mb-4 object-cover"
+          className="w-64 h-64 p-2 object-contain"
         />
-        <p className="text-sm font-semibold text-white p-4">
+        <p className=" text-white p-4">
           Investing is crucial for financial growth and stability. It allows one
           to build wealth, beat inflation, and achieve long-term goals like
           retirement. By investing wisely, individuals can multiply their
