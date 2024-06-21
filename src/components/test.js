@@ -1,68 +1,59 @@
 import React, { useState } from "react";
-import { FaPlus, FaMinus } from "react-icons/fa";
-import Collapse from "react-collapse";
+import { motion } from "framer-motion";
 
-const FAQSection = () => {
-  const [expandedIndex, setExpandedIndex] = useState(-1);
-
-  const faqData = [
+const TooltipWithZoomImage = () => {
+  const imageArray = [
     {
-      question: "What is stdock trading?",
-      answer:
-        "Stock trading involves buying and selling shares of publicly traded companies.",
+      id: 1,
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEGki1jL7eP5SU3DPOwY-BVfk9DMKxOn-yGdpvRBpqVvyZozTB61xVsEkVNTo1SNMeUGk&usqp=CAU",
+      name: "Name 1",
     },
     {
-      question: "How do I get started with stock trading?",
-      answer:
-        "You can start by opening a brokerage account and learning about market basics.",
+      id: 2,
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEGki1jL7eP5SU3DPOwY-BVfk9DMKxOn-yGdpvRBpqVvyZozTB61xVsEkVNTo1SNMeUGk&usqp=CAU",
+      name: "Name 2",
     },
     {
-      question: "Is stock trading risky?",
-      answer:
-        "Yes, stock trading carries risks, and its important to educate yourself before investing.",
+      id: 3,
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEGki1jL7eP5SU3DPOwY-BVfk9DMKxOn-yGdpvRBpqVvyZozTB61xVsEkVNTo1SNMeUGk&usqp=CAU",
+      name: "Name 1",
     },
     {
-      question: "Can I trade stocks without a broker?",
-      answer:
-        "No, you need a brokerage account to trade stocks on stock exchanges.",
+      id: 4,
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEGki1jL7eP5SU3DPOwY-BVfk9DMKxOn-yGdpvRBpqVvyZozTB61xVsEkVNTo1SNMeUGk&usqp=CAU",
+      name: "Name 2",
     },
+    // Add more image objects as needed
   ];
 
-  const handleToggle = (index) => {
-    if (expandedIndex === index) {
-      setExpandedIndex(-1);
-    } else {
-      setExpandedIndex(index);
-    }
-  };
+  const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-      <div className="space-y-4">
-        {faqData.map((item, index) => (
-          <div key={index} className="border rounded-lg overflow-hidden">
-            <button
-              className="flex items-center justify-between p-4 bg-gray-200 hover:bg-gray-300 focus:outline-none"
-              onClick={() => handleToggle(index)}
-            >
-              <h3 className="text-lg font-semibold">{item.question}</h3>
-              {expandedIndex === index ? (
-                <FaMinus className="text-gray-600" />
-              ) : (
-                <FaPlus className="text-gray-600" />
-              )}
-            </button>
-            <Collapse isOpened={expandedIndex === index}>
-              <div className="p-4 bg-gray-100">
-                <p className="text-gray-700">{item.answer}</p>
-              </div>
-            </Collapse>
-          </div>
-        ))}
-      </div>
+    <div className="flex -space-x-2 p-2">
+      {imageArray.map((image) => (
+        <div className="hs-tooltip inline-block cursor-pointer" key={image.id}>
+          <motion.img
+            className="hs-tooltip-toggle relative inline-block size-[46px] rounded-full ring-2 ring-white hover:z-10 dark:ring-neutral-900"
+            src={image.url}
+            alt="Image Description"
+            whileHover={{ scale: 1.1 }}
+            onMouseEnter={() => setHoveredId(image.id)}
+            onMouseLeave={() => setHoveredId(null)}
+          />
+          <span
+            className={`hs-tooltip-content ${
+              hoveredId === image.id
+                ? "opacity-100 visible"
+                : "opacity-0 invisible"
+            } inline-block absolute z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg dark:bg-neutral-700`}
+            role="tooltip"
+          >
+            {image.name}
+          </span>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default FAQSection;
+export default TooltipWithZoomImage;

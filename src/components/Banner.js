@@ -1,8 +1,42 @@
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import AvatarGroupStack from "./AvatarGroupStack";
-const bannerimage = "https://i.ibb.co/gZcRqBn/BannerBG.png";
+import TooltipWithZoomImage from "./TooltipWithZoomImage";
+import sujal from "./images/sujal.jpg";
+import sanjana from "./images/sanjana.jpg";
+import mahesh from "./images/mahesh.jpg";
+import varun from "./images/varun.jpg";
 
+const bannerimage = "https://i.ibb.co/gZcRqBn/BannerBG.png";
+const imageArray = [
+  {
+    id: 1,
+    url: sujal,
+    name: "Sujal",
+  },
+  {
+    id: 2,
+    url: varun,
+    name: "Varun",
+  },
+  {
+    id: 3,
+    url: sanjana,
+    name: "Sanjana",
+  },
+  {
+    id: 4,
+    url: mahesh,
+    name: "Mahesh",
+  },
+
+  {
+    id: 5,
+    url: "https://i.ibb.co/D80qdsp/an-image-with-a-single-color-background-and-15-written-in-the-center-covering-70-percent-o.png",
+    name: "15+ Already Enrolled",
+  },
+  // Add more image objects as needed
+];
 function Banner() {
   const handleJoinWhatsAppGroup = () => {
     // Add your logic to join the WhatsApp group
@@ -22,7 +56,8 @@ function Banner() {
           {/* Adjusted text sizes for different screen sizes */}
           Sniper Coders
         </h1>
-        <AvatarGroupStack />
+        {/* <AvatarGroupStack /> */}
+        <TooltipWithZoomImage imageArray={imageArray} />
       </div>
       <div className="absolute bottom-0 left-0 p-4 flex items-center space-x-2">
         <a

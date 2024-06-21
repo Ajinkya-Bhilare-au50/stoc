@@ -111,6 +111,11 @@ const FAQSection = () => {
       answer:
         "No, you need a brokerage account to trade stocks on stock exchanges.",
     },
+    {
+      question: "What is the difference between a bear market and a bull market",
+      answer:
+        "A simple definition is that a bull market is when prices are on the rise, and a bear market is when market prices are declining. It is believed the terms originated based on how these animals attack their opponents; the bull thrusts its horns up in the air and the bear swipes its paw downwards. For example, if the market rises 20%, this is considered a bull market. If the market declines 20%, this is considered a bear market. A bull market is usually accompanied by a rise in GDP, consumer confidence, and low employment rates. There can be many reasons for a decline in the GDP, but it generally leads to lower consumer confidence and decreased spending. This will affect company performance and stock price. When companies are forced to layoff employees due to a struggling economy, it can make recovery out of the bear market difficult.",
+    },
   ];
 
   const handleToggle = (index) => {

@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { BsBook } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { BiBook, BiCheckCircle, BiCreditCard } from "react-icons/bi";
 import { MdPerson } from "react-icons/md"; // Assuming MdPerson is your instructor icon
-
+import { MdOndemandVideo } from "react-icons/md";
+import { HiUsers } from "react-icons/hi2";
 import "react-tabs/style/react-tabs.css";
-
+import { FaThumbsUp, FaShareAlt, FaComment } from "react-icons/fa";
+import { AiFillStar } from "react-icons/ai";
 import { MdDescription, MdInfoOutline } from "react-icons/md";
 import Drawer from "./Drawer";
+import { TbLocationShare } from "react-icons/tb";
+import { FcLike } from "react-icons/fc";
 import StockSidebar from "./StockSidebar";
 import LearnerReview from "./LearnerReview";
 import CoursePrice from "./CoursePrice";
@@ -19,6 +24,43 @@ import WhatLearn from "./WhatLearn";
 import WhyTakeThisCourse from "./WhyTakeThisCourse";
 import WhoThisCourseIsFor from "./WhoThisCourseIsFor";
 import ReviewsComponent from "./ReviewsComponent";
+import { GoComment } from "react-icons/go";
+import TooltipWithZoomImage from "./TooltipWithZoomImage";
+import sujal from "./images/sujal.jpg";
+import sanjana from "./images/sanjana.jpg";
+import mahesh from "./images/mahesh.jpg";
+import varun from "./images/varun.jpg";
+
+
+const imageArray = [
+  {
+    id: 1,
+    url: sujal,
+    name: "Sujal",
+  },
+  {
+    id: 2,
+    url: varun,
+    name: "Varun",
+  },
+  {
+    id: 3,
+    url: sanjana,
+    name: "Sanjana",
+  },
+  {
+    id: 4,
+    url: mahesh,
+    name: "Mahesh",
+  },
+
+  {
+    id: 5,
+    url: "https://i.ibb.co/D80qdsp/an-image-with-a-single-color-background-and-15-written-in-the-center-covering-70-percent-o.png",
+    name: "15+ Already Enrolled",
+  },
+  // Add more image objects as needed
+];
 const qrCodeImage =
   "https://i.ibb.co/SmYWhFq/20240617-193344-removebg-preview.png";
 const Sidebar = ({ courses }) => {
@@ -67,54 +109,31 @@ const Sidebar = ({ courses }) => {
         </div>
       </div>
       {/* benefits Div */}
-      <div className="max-w-lg mx-auto mt-2 p-6 bg-blue-900 rounded-lg shadow-md">
-        <h2 className="text-xl font-bold text-center text-white mb-6">
+
+      <div className="max-w-lg mx-auto mt-4 p-2 bg-blue-900 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center text-white mb-6">
           Benefits for Students
         </h2>
-        <ul className="space-y-1">
-          <li className="flex items-start">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-20 w-20 mr-1 text-green-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-             
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
+        <ul className="space-y-4">
+          <li className="flex">
             <div>
-              <h3 className="font-semibold text-white">Accessible Trainers:</h3>
-              <p className="text-gray-300">
+              <h3 className="font-semibold text-white flex items-center">
+                <FaCheckCircle className="h-6 w-6 mr-2 text-green-500" />
+                Accessible Trainers:
+              </h3>
+              <p className="text-gray-300 ml-8">
                 Quick access to trainers for clarifying doubts and understanding
                 complex topics.
               </p>
             </div>
           </li>
-          <li className="flex items-start">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-20 w-20 mr-1 text-green-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
+          <li className="flex">
             <div>
-              <h3 className="font-semibold text-white">Experienced Faculty:</h3>
-              <p className="text-gray-300">
+              <h3 className="font-semibold text-white flex items-center">
+                <FaCheckCircle className="h-6 w-6 mr-2 text-green-500" />
+                Experienced Faculty:
+              </h3>
+              <p className="text-gray-300 ml-8">
                 Experienced and helpful faculty members dedicated to student
                 success.
               </p>
@@ -123,6 +142,7 @@ const Sidebar = ({ courses }) => {
           {/* Add more list items for other benefits */}
         </ul>
       </div>
+
       {/* investing is crucial */}
       <div className="flex flex-col items-center justify-center mt-2 bg-blue-900  rounded-lg shadow-lg">
         <img
@@ -206,6 +226,10 @@ const StockCoursesPage = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
+  const gradientBackground = {
+    background:
+      "linear-gradient(90deg, rgba(28,28,135,1) 0%, rgba(20,20,46,1) 35%)",
+  };
 
   const courses = [
     {
@@ -215,6 +239,7 @@ const StockCoursesPage = () => {
       price: "₹ 3999",
       discountPercentage: 5,
       instructor: "Ajinkya Sir",
+      enrollments: "12+",
 
       instructorImage:
         "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
@@ -278,6 +303,7 @@ const StockCoursesPage = () => {
       duration: "8 weeks",
       price: "₹ 4999",
       discountPercentage: 5,
+      enrollments: "20+",
       instructor: "Ajinkya Sir",
       instructorImage:
         "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
@@ -343,6 +369,7 @@ const StockCoursesPage = () => {
       duration: "10 weeks",
       price: "₹ 5999",
       discountPercentage: 5,
+      enrollments: "30+",
       instructor: "Ajinkya Sir",
       instructorImage:
         "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
@@ -453,7 +480,10 @@ const StockCoursesPage = () => {
         </div>
         <div className="w-full lg:w-2/3 h-full overflow-y-scroll bg-gray-300 hide-scrollbar">
           {/*------- Content for the second scrollable div------ courses div---------- */}
-          <div className="min-h-screen bg-gray-900 text-white ">
+          <div
+            className="min-h-screen bg-gray-900 text-white "
+            style={gradientBackground}
+          >
             <div className="max-w-7xl mx-auto px-4 py-8">
               <div className="flex flex-col items-center justify-center">
                 <h1 className="text-4xl font-bold mb-8 mt-4 text-center text-yellow-300 sm:text-left sm:flex sm:items-center sm:justify-center">
@@ -468,7 +498,7 @@ const StockCoursesPage = () => {
               </div>
 
               <div className="flex flex-wrap">
-                <div className="w-full sm:w-3/4">
+                <div className="w-full sm:w-3/4 ">
                   <motion.div
                     initial="hidden"
                     animate="visible"
@@ -480,13 +510,49 @@ const StockCoursesPage = () => {
                         className="bg-gray-800 p-6 mb-6 rounded-lg shadow-lg"
                         variants={itemVariants}
                       >
-                        <div className="flex flex-col md:flex-row items-center rounded-lg   relative">
-                          <div className="md:w-1/3">
-                            <img
-                              src={course.image}
-                              alt={course.title}
-                              className="rounded-lg w-full h-auto mb-4 md:mb-0"
-                            />
+                        <div className="flex flex-col md:flex-row items-start rounded-lg  relative">
+                          <div className="md:w-1/3 p-4">
+                            <div>
+                              <img
+                                src={course.image}
+                                alt={course.title}
+                                className="rounded-lg w-full h-auto mb-4 md:mb-0"
+                              />
+                            </div>
+                            <div className="flex justify-center">
+                              <p className="text-sm    mt-2 flex gap-2 items-center">
+                                <p>
+                                  <HiUsers />
+                                </p>
+                                <i>{course.enrollments} already enrolled</i>
+                              </p>
+                            </div>
+                            <div className="mt-2 flex justify-center">
+                              <TooltipWithZoomImage imageArray={imageArray} />
+                            </div>
+                            <div className="flex items-center mt-2">
+                              <span>Ratings &nbsp;</span>
+                              <AiFillStar className="text-yellow-500" />
+                              <AiFillStar className="text-yellow-500" />
+                              <AiFillStar className="text-yellow-500" />
+                              <AiFillStar className="text-yellow-500" />
+                              <AiFillStar className="text-gray-300" />
+                              <span className="ml-2 text-gray-600">
+                                {course.rating}
+                              </span>
+                            </div>
+                            <div className="flex mt-2 space-x-4">
+                              <button className="flex items-center text-blue-500 hover:text-blue-700">
+                                <FcLike />
+                              </button>
+                              <button className="flex items-center text-blue-500 hover:text-blue-700">
+                                <GoComment />
+                              </button>
+
+                              <button className="flex items-center text-blue-500 hover:text-blue-700">
+                                <TbLocationShare />
+                              </button>
+                            </div>
                           </div>
                           <div className="md:w-2/3 md:pl-6">
                             <h2 className="text-2xl font-bold mb-4 text-yellow-300">
@@ -519,8 +585,6 @@ const StockCoursesPage = () => {
                               </div>
                             </div>
                             <p className="text-gray-400 mb-4 flex items-center">
-                              
-                              
                               <CoursePrice
                                 price={course.price}
                                 discountPercentage={course.discountPercentage}
@@ -614,10 +678,16 @@ const StockCoursesPage = () => {
                                       <p className="text-gray-400 mb-2">
                                         {module.description}
                                       </p>
-                                      <ul className="list-disc list-inside text-gray-400">
+                                      <ul className="list-inside text-gray-400">
                                         {module.topics.map(
                                           (topic, topicIndex) => (
-                                            <li key={topicIndex}>{topic}</li>
+                                            <li
+                                              key={topicIndex}
+                                              className="flex items-center"
+                                            >
+                                              <MdOndemandVideo className="mr-2" />
+                                              {topic}
+                                            </li>
                                           )
                                         )}
                                       </ul>
@@ -700,18 +770,17 @@ const StockCoursesPage = () => {
             </div>
           </div>
           <div>
-            <WhatLearn/>
+            <WhatLearn />
           </div>
           <div>
-            <WhyTakeThisCourse/>
+            <WhyTakeThisCourse />
           </div>
           <div>
-            <WhoThisCourseIsFor/>
+            <WhoThisCourseIsFor />
           </div>
           <div>
-            <ReviewsComponent/>
+            <ReviewsComponent />
           </div>
-
         </div>
       </div>
     </>

@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { BsClockFill } from "react-icons/bs";
 import { BsFillPersonFill, BsStarFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
+import { MdOndemandVideo } from "react-icons/md";
 import "react-tabs/style/react-tabs.css";
 import { motion } from "framer-motion";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
@@ -19,7 +19,8 @@ import {
 } from "react-icons/ai";
 import AjinkyaProfile from "./AjinkyaProfile";
 
-const qrCodeImage="https://i.ibb.co/SmYWhFq/20240617-193344-removebg-preview.png";
+const qrCodeImage =
+  "https://i.ibb.co/SmYWhFq/20240617-193344-removebg-preview.png";
 // Animation Variants
 const badgeVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -73,7 +74,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
         {/* Add top selling or top trending badge */}
         {course.isTopSelling && (
           <motion.span
-            className="absolute top-0 sm:right-0 bg-red-600 text-white py-1 px-2 rounded-br-lg text-xs font-semibold z-20"
+            className="absolute top-0 right-0 sm:left-auto bg-red-600 text-white py-1 px-2 rounded-br-lg text-xs font-semibold z-20 inline-block sm:absolute sm:top-0 sm:right-0"
             style={{ zIndex: 40 }} // Ensure higher z-index
             initial="hidden"
             animate="visible"
@@ -84,7 +85,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
         )}
         {course.isTopTrending && (
           <motion.span
-            className="absolute top-0  sm:right-0 bg-orange-800 text-white py-1 px-2 rounded-bl-lg text-xs font-semibold z-20"
+            className="absolute top-0 right-0 sm:left-auto bg-orange-800 text-white py-1 px-2 rounded-bl-lg text-xs font-semibold z-20 inline-block sm:absolute sm:top-0 sm:right-0"
             style={{ zIndex: 40 }} // Ensure higher z-index
             initial="hidden"
             animate="visible"
@@ -93,7 +94,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
             Top Trending
           </motion.span>
         )}
-        <div className="sm:w-1/4 flex flex-col items-center justify-center mb-4 sm:mb-0 relative w-full sm:w-auto">
+        <div className=" flex flex-col items-center justify-center mb-4 sm:mb-0 relative w-full sm:w-auto">
           <div className="">
             <img
               src={course.image}
@@ -261,7 +262,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
           <h3 className="text-lg sm:text-xl font-semibold mb-2 text-blue-900">
             Syllabus:
           </h3>
-          <ul className="list-disc space-y-1 text-blue-800">
+          <ul className="space-y-1 text-blue-800">
             {course.syllabus.map((item, index) => (
               <motion.div
                 key={index}
@@ -299,9 +300,12 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
                     className="mt-2 pl-4 text-blue-700"
                   >
                     <p>{item.description}</p>
-                    <ul className="list-disc ml-4">
+                    <ul className="ml-4 list-none">
                       {item.topics.map((topic, topicIndex) => (
-                        <li key={topicIndex}>{topic}</li>
+                        <li key={topicIndex} className="flex items-center">
+                          <MdOndemandVideo className="mr-2" />
+                          {topic}
+                        </li>
                       ))}
                     </ul>
                   </motion.div>
@@ -859,11 +863,10 @@ const CodingCoursesPage = () => {
   ];
 
   return (
-    <div className="grid grid-cols-3 md:grid-cols-5 h-screen">
+    <div className="grid grid-cols-3 md:grid-cols-5 h-auto">
       {/* Left Column (Visible for Laptop and Larger Screens) */}
-      <div className="hidden md:block sticky top-0 col-span-1 h-screen p-4 bg-[#f6b4b7]">
+      <div className="hidden md:block sticky top-0 col-span-1 h-screen p-4 bg-blue-100">
         <AjinkyaProfile />
-        
       </div>
 
       {/* Middle Column */}
@@ -874,6 +877,7 @@ const CodingCoursesPage = () => {
               <Drawer courseType="Coding " batchStartInfo={codeBatchStart} />
               <span>Coding Courses</span>
             </h1>
+            
 
             <motion.div
               className="w-full max-w-4xl space-y-6"
@@ -896,14 +900,17 @@ const CodingCoursesPage = () => {
 
       {/* Right Column (Visible for Laptop and Larger Screens) */}
       <div className="hidden md:block sticky top-0 col-span-1 h-screen p-4  bg-gradient-to-r from-blue-500 to-purple-500">
-        <div class="hidden md:block sticky top-0 col-span-1 h-auto pt-3 px-4 bg-gray-100">
+        <div class="hidden md:block sticky top-0 col-span-1 h-auto p-3 px-4 bg-blue-100">
           <div class="flex items-center justify-between mb-2 ">
             <img
               src="https://cdn-icons-png.flaticon.com/512/9186/9186534.png"
               alt="Logo"
               class="h-12"
             />
-            <Link to="/contact" class="px-4 py-2 bg-blue-500 text-white rounded-md">
+            <Link
+              to="/contact"
+              class="px-4 py-2 bg-blue-500 text-white rounded-md"
+            >
               Contact Us
             </Link>
           </div>
@@ -942,25 +949,6 @@ const CodingCoursesPage = () => {
                   Optimize performance with progressive web apps
                 </li>
               </ul>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold mb-1">Our Approach</h3>
-              <div class="flex items-center mb-2">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/993/993552.png"
-                  alt="Approach Icon"
-                  class="h-6 mr-2"
-                />
-                <span>Strategy Planning</span>
-              </div>
-              <div class="flex items-center mb-1">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/7379/7379445.png"
-                  alt="Approach Icon"
-                  class="h-6 mr-2"
-                />
-                <span>Design & Development</span>
-              </div>
             </div>
           </div>
         </div>

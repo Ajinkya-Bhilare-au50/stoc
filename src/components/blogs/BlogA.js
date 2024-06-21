@@ -1,36 +1,18 @@
 import React from "react";
-
+import Test from "../Test.js"
 const BlogA = () => {
   return (
     <div className="w-full min-h-screen p-6  bg-white rounded-lg shadow-md mt-5 ">
       <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center pt-6">
         Rakesh Jhunjhunwala: The Success Story
       </h1>
-      <div className="flex flex-col lg:flex-row gap-4 justify-between">
+      
+      <div>
         <img
-          className="w-full lg:w-1/3 h-64 object-cover mb-6 rounded"
-          src="https://www.telugubulletin.com/wp-content/uploads/2022/08/Rakesh-Jhunjhunwala-696x434.jpg"
-          alt="Rakesh Jhunjhunwala"
+          src="https://marksmendaily.com/wp-content/uploads/2023/08/Rakesh-Jhunjhunwala-banner.jpg"
+          alt="Description of the"
+          className="py-2 mt-2 my-2"
         />
-        <div className="w-full lg:w-2/3">
-          <p className="text-gray-700 mb-6 leading-relaxed">
-            Rakesh Jhunjhunwala, often referred to as the 'Warren Buffett of
-            India,' is one of the most successful and well-known investors in
-            the Indian stock market. His journey from a young man with a passion
-            for stocks to becoming a billionaire investor is truly
-            inspirational.
-          </p>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            Early Life and Education
-          </h2>
-          <p className="text-gray-700 mb-6 leading-relaxed">
-            Rakesh Jhunjhunwala was born on July 5, 1960, in Mumbai, India. He
-            developed an interest in the stock market while listening to his
-            father discuss the topic with his friends. Jhunjhunwala went on to
-            graduate from Sydenham College and later enrolled at the Institute
-            of Chartered Accountants of India.
-          </p>
-        </div>
       </div>
 
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
