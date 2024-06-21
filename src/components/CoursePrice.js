@@ -22,8 +22,8 @@ const CoursePrice = ({ price, discountPercentage }) => {
   );
 
   return (
-    <div>
-      <div className="flex flex-col items-center p-4 bg-[#`212121] shadow-lg rounded-lg text-gray-200 border ">
+    <div className="w-full">
+      <div className="flex flex-col justify-center items-center p-4 bg-[#`212121] shadow-lg rounded-lg text-blue-200 border ">
         <button
           onClick={handleToggle}
           className="flex items-center px-6 py-2 mb-4 font-semibold text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300 ease-in-out"
@@ -37,7 +37,7 @@ const CoursePrice = ({ price, discountPercentage }) => {
             </>
           )}
         </button>
-        <p className="flex flex-col items-center">
+        <p className="flex flex-col items-center ">
           {showPrice ? (
             <>
               <span className="text-lg font-semibold mb-2">Course Pricing</span>
@@ -49,14 +49,19 @@ const CoursePrice = ({ price, discountPercentage }) => {
                 </span>
               </div>
               <div className="flex items-center">
-                <MdLocalOffer className="inline-block mr-2 text-green-500" />
+                <MdLocalOffer className=" mr-2 text-green-500 hidden" />
                 <span className="text-gray-400">Discounted Price:&nbsp;</span>
-                <span className="text-sm md:text-lg font-bold text-white">
+                <span className="text-sm md:text-lg font-bold text-white ">
                   ₹ {discountedPrice}
                 </span>
-                <span className="ml-2 font-bold text-green-500">
-                  ({discountPercentage}% off)
-                </span>
+                <div className="relative inline-block px-2 ">
+                  <div className="bg-red-400 w-auto border border-s-white rounded-full px-4 py-2 text-white flex flex-col items-center justify-center">
+                    <span className="font-bold text-white text-lg">
+                      -{discountPercentage}%
+                    </span>
+                    <div className="text-white font-bold text-sm">OFF</div>
+                  </div>
+                </div>
               </div>
               <div className="flex items-center space-x-1 text-red-200">
                 <TfiAlarmClock className="font-bold" />

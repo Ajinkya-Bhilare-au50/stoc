@@ -1,5 +1,5 @@
 import React from "react";
-import Test from "../Test.js"
+
 const BlogA = () => {
   return (
     <div className="w-full min-h-screen p-6  bg-white rounded-lg shadow-md mt-5 ">
