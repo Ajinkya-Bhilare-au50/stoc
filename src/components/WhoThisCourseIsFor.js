@@ -21,7 +21,7 @@ const WhoThisCourseIsFor = () => {
     >
       <div className="container mx-auto p-6 sm:p-8 lg:p-10 m-1">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold">Who This Course Is For</h2>
+          <h2 className="text-3xl font-bold">Who This Course Is For ?</h2>
           <button
             className="p-2 rounded-full focus:outline-none"
             onClick={toggleDarkMode}

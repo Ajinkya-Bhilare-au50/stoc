@@ -8,7 +8,8 @@ import "react-tabs/style/react-tabs.css";
 import { motion } from "framer-motion";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { BsFillGiftFill, BsFillTagFill } from "react-icons/bs";
-
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 import { BiCheckCircle } from "react-icons/bi";
 import Drawer from "./Drawer";
 import {
@@ -96,11 +97,13 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
         )}
         <div className=" flex flex-col items-center justify-center mb-4 sm:mb-0 relative w-full sm:w-auto">
           <div className="">
-            <img
-              src={course.image}
-              alt={course.title}
-              className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-full"
-            />
+            <div className="relative group w-20 h-20 sm:w-24 sm:h-24">
+              <img
+                src={course.image}
+                alt=""
+                className="w-full h-full object-cover rounded-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+              />
+            </div>
           </div>
         </div>
 
@@ -116,24 +119,24 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
       </div>
       {/* Tabs */}
       <Tabs>
-        <TabList className="flex flex-wrap gap-2 mb-4">
+        <TabList className="flex w-full mb-4 flex-wrap gap-2">
           {/* Tab 1 */}
-          <Tab className="px-4 py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center space-x-2">
+          <Tab className="w-full sm:w-auto sm:flex-1 px-2 py-2 sm:px-4 sm:py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center justify-center space-x-2">
             <AiOutlineFileText />
             <span>Description</span>
           </Tab>
           {/* Tab 2 */}
-          <Tab className="px-4 py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center space-x-2">
+          <Tab className="w-full sm:w-auto sm:flex-1 px-2 py-2 sm:px-4 sm:py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center justify-center space-x-2">
             <AiOutlineBook />
             <span>Course Content</span>
           </Tab>
           {/* Tab 3 */}
-          <Tab className="px-4 py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center space-x-2">
+          <Tab className="w-full sm:w-auto sm:flex-1 px-2 py-2 sm:px-4 sm:py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center justify-center space-x-2">
             <AiOutlineTool />
-            <span>How to Use</span>
+            <span>How to Join</span>
           </Tab>
           {/* Tab 4 */}
-          <Tab className="px-4 py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center space-x-2">
+          <Tab className="w-full sm:w-auto sm:flex-1 px-2 py-2 sm:px-4 sm:py-2 rounded-lg cursor-pointer bg-blue-200 text-blue-900 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-300 flex items-center justify-center space-x-2">
             <AiOutlineQrcode />
             <span>Pay Online</span>
           </Tab>
@@ -877,7 +880,6 @@ const CodingCoursesPage = () => {
               <Drawer courseType="Coding " batchStartInfo={codeBatchStart} />
               <span>Coding Courses</span>
             </h1>
-            
 
             <motion.div
               className="w-full max-w-4xl space-y-6"

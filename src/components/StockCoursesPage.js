@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { FaMedal } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { BsBook } from "react-icons/bs";
@@ -69,7 +70,7 @@ const Sidebar = ({ courses }) => {
       <h2 className="text-xl p-2 bg-blue-900 font-bold text-center text-yellow-300 mb-4">
         Other Courses
       </h2>
-      <ul className="space-y-4">
+      <ul className="space-y-2">
         {courses.map((course, index) => (
           <li
             key={index}
@@ -118,7 +119,7 @@ const Sidebar = ({ courses }) => {
           <li className="flex">
             <div>
               <h3 className="font-semibold text-white flex items-center">
-                <FaCheckCircle className="h-6 w-6 mr-2 text-green-500" />
+                <FaCheckCircle className="h-4 w-3 mr-2 text-blue-200" />
                 Accessible Trainers:
               </h3>
               <p className="text-gray-300 ml-8">
@@ -130,7 +131,7 @@ const Sidebar = ({ courses }) => {
           <li className="flex">
             <div>
               <h3 className="font-semibold text-white flex items-center">
-                <FaCheckCircle className="h-6 w-6 mr-2 text-green-500" />
+                <FaCheckCircle className="h-4 w-3 mr-2 text-blue-200" />
                 Experienced Faculty:
               </h3>
               <p className="text-gray-300 ml-8">
@@ -484,9 +485,9 @@ const StockCoursesPage = () => {
             className="min-h-screen bg-gray-900 text-white "
             style={gradientBackground}
           >
-            <div className="max-w-7xl mx-auto px-4 py-8">
+            <div className="max-w-7xl mx-auto px-2 py-4">
               <div className="flex flex-col items-center justify-center">
-                <h1 className="text-4xl font-bold mb-8 mt-4 text-center text-yellow-300 sm:text-left sm:flex sm:items-center sm:justify-center">
+                <h1 className="text-3xl font-bold mb-8 mt-4 text-center text-yellow-300 sm:text-left sm:flex sm:items-center sm:justify-center">
                   <Drawer
                     courseType="Stock Market"
                     batchStartInfo={stockBatchStart}
@@ -511,12 +512,12 @@ const StockCoursesPage = () => {
                         variants={itemVariants}
                       >
                         <div className="flex flex-col md:flex-row items-start rounded-lg  relative">
-                          <div className="md:w-1/3 p-4">
+                          <div className="md:w-1/3 p-2">
                             <div>
                               <img
                                 src={course.image}
                                 alt={course.title}
-                                className="rounded-lg w-full h-auto mb-4 md:mb-0"
+                                className="rounded-lg w-full h-auto mb-4 md:mb-0 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
                               />
                             </div>
                             <div className="flex justify-center">
@@ -553,9 +554,19 @@ const StockCoursesPage = () => {
                                 <TbLocationShare />
                               </button>
                             </div>
+                            <div className="flex flex-row  sm:flex-row justify-center items-center m-4  gap-2 sm:gap-4">
+                              <div>
+                                <FaMedal className="text-[#FFC144]" size={40} />
+                              </div>
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/256/7251/7251267.png" // replace with the path to your image
+                                alt="Best Seller"
+                                className="w-auto h-16  md:h-20 sm:h-12 object-contain"
+                              />
+                            </div>
                           </div>
                           <div className="md:w-2/3 md:pl-6">
-                            <h2 className="text-2xl font-bold mb-4 text-yellow-300">
+                            <h2 className="text-2xl font-bold  mb-4 text-yellow-300">
                               {course.title}
                             </h2>
                             <p className="text-gray-400 mb-2 flex items-center">
@@ -572,7 +583,7 @@ const StockCoursesPage = () => {
                             </p>
                             <div className="flex items-center mb-2">
                               <span className="text-gray-400 mr-2">
-                                <MdPerson className="inline-block mr-1 text-yellow-300" />
+                                <MdPerson className="inline-block mr-2 text-yellow-300" />
                                 Instructor:
                               </span>
                               <div className="flex items-center">
@@ -590,14 +601,7 @@ const StockCoursesPage = () => {
                                 discountPercentage={course.discountPercentage}
                               />
                             </p>
-                            <div className="flex justify-start gap-2">
-                              <button className="bg-yellow-300 text-gray-900 px-4 py-2 rounded-md hover:bg-yellow-400 transition-colors duration-300">
-                                Enroll Now
-                              </button>
-                              <button className="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors duration-300">
-                                Add to Cart
-                              </button>
-                            </div>
+                            <div className="flex justify-center md:justify-start gap-2"></div>
                             {course.isTopSelling && (
                               <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 rounded-tr-lg rounded-bl-lg z-50">
                                 Top Selling
@@ -613,20 +617,24 @@ const StockCoursesPage = () => {
 
                         <div className="mt-4">
                           <Tabs>
-                            <TabList className="flex sm:flex-col gap-4 sm:mb-4 flex-wrap md:flex-row cursor-pointer">
-                              <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                            <TabList className="flex flex-wrap gap-1 sm:gap-4 sm:mb-4 cursor-pointer">
+                              <Tab className="flex-1 min-w-0 bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center p-1 sm:p-2 transition-colors duration-300 ease-in-out hover:text-blue-500">
                                 <BiBook className="text-blue-500 text-lg" />
-                                <span className="ml-4 mr-2">
-                                  Course Content
+                                <span className="ml-1 sm:ml-4 sm:mr-2">
+                                  Syllabus
                                 </span>
                               </Tab>
-                              <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
+                              <Tab className="flex-1 min-w-0 bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center p-1 sm:p-2 transition-colors duration-300 ease-in-out hover:text-blue-500">
                                 <BiCheckCircle className="text-green-500 text-lg" />
-                                <span className="ml-4 mr-2">How to Use</span>
+                                <span className="ml-1 sm:ml-4 sm:mr-2">
+                                  Join
+                                </span>
                               </Tab>
-                              <Tab className="focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900">
-                                <BiCreditCard className="text-yellow-500 text-lg" />
-                                <span className="ml-4 mr-2">Pay Online</span>
+                              <Tab className="flex-1 min-w-0 bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center p-1 sm:p-2 transition-colors duration-300 ease-in-out hover:text-blue-500">
+                                <BiCreditCard className="text-blue-500 text-lg" />
+                                <span className="ml-1 sm:ml-4 sm:mr-2">
+                                  Pay
+                                </span>
                               </Tab>
                             </TabList>
 

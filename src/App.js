@@ -23,6 +23,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+
 import StockCoursesPage from "./components/StockCoursesPage";
 import CodingCoursesPage from "./components/CodingCoursesPage";
 import BlogPage from "./components/BlogPage";
