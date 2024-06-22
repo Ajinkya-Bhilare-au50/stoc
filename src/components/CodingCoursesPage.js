@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { FaMedal } from "react-icons/fa";
 import { BsClockFill } from "react-icons/bs";
 import { BsFillPersonFill, BsStarFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -8,10 +9,12 @@ import "react-tabs/style/react-tabs.css";
 import { motion } from "framer-motion";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { BsFillGiftFill, BsFillTagFill } from "react-icons/bs";
-import Zoom from "react-medium-image-zoom";
+// import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { BiCheckCircle } from "react-icons/bi";
 import Drawer from "./Drawer";
+import { FaCalendarAlt, FaStar, FaCommentAlt, FaSyncAlt } from "react-icons/fa";
+import Rating from "@mui/material/Rating";
 import {
   AiOutlineFileText,
   AiOutlineBook,
@@ -19,7 +22,14 @@ import {
   AiOutlineQrcode,
 } from "react-icons/ai";
 import AjinkyaProfile from "./AjinkyaProfile";
-
+import CodingReviews from "./CodingReviews";
+const formattedDate = new Date(
+  Date.now() + 7 * 24 * 60 * 60 * 1000
+).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 const qrCodeImage =
   "https://i.ibb.co/SmYWhFq/20240617-193344-removebg-preview.png";
 // Animation Variants
@@ -71,12 +81,11 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
     >
       {/* Image and Description */}
 
-      <div className="flex relative flex-col sm:flex-row items-center mb-6 space-y-6 sm:space-y-0 sm:space-x-6">
-        {/* Add top selling or top trending badge */}
+      <div className="flex relative flex-col sm:flex-row items-center mb-6 space-y-6 sm:space-y-0 sm:space-x-6 p-4 bg-blue-50 rounded-lg shadow-lg">
+        {/* Top Selling or Top Trending Badge */}
         {course.isTopSelling && (
           <motion.span
-            className="absolute top-0 right-0 sm:left-auto bg-red-600 text-white py-1 px-2 rounded-br-lg text-xs font-semibold z-20 inline-block sm:absolute sm:top-0 sm:right-0"
-            style={{ zIndex: 40 }} // Ensure higher z-index
+            className="absolute top-0 right-0 bg-red-600 text-white py-1 px-2 rounded-br-lg text-xs font-semibold z-40"
             initial="hidden"
             animate="visible"
             variants={badgeVariants}
@@ -86,8 +95,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
         )}
         {course.isTopTrending && (
           <motion.span
-            className="absolute top-0 right-0 sm:left-auto bg-orange-800 text-white py-1 px-2 rounded-bl-lg text-xs font-semibold z-20 inline-block sm:absolute sm:top-0 sm:right-0"
-            style={{ zIndex: 40 }} // Ensure higher z-index
+            className="absolute top-0 right-0 bg-orange-800 text-white py-1 px-2 rounded-bl-lg text-xs font-semibold z-40"
             initial="hidden"
             animate="visible"
             variants={badgeVariants}
@@ -95,28 +103,63 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
             Top Trending
           </motion.span>
         )}
-        <div className=" flex flex-col items-center justify-center mb-4 sm:mb-0 relative w-full sm:w-auto">
-          <div className="">
-            <div className="relative group w-20 h-20 sm:w-24 sm:h-24">
-              <img
-                src={course.image}
-                alt=""
-                className="w-full h-full object-cover rounded-full transition-transform duration-300 ease-in-out group-hover:scale-110"
-              />
-            </div>
-          </div>
+        {/* Course Image */}
+        <div className="relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24">
+          <img
+            src={course.image}
+            alt={course.title}
+            className="w-full h-full object-cover rounded-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+          />
         </div>
-
+        {/* Course Details */}
         <div className="flex-1 text-center sm:text-left">
           <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-blue-900">
             {course.title}
           </h2>
-          {/* Course Description */}
           <p className="text-base sm:text-lg mb-2 text-blue-800">
             {course.description}
           </p>
+          <div className="md:flex  md:justify-between ">
+            {/* Additional Information */}
+            <div className="mt-4 space-y-2 ">
+              <div className="flex items-center text-sm sm:text-base text-blue-800">
+                <FaCalendarAlt className="mr-2 text-blue-600" />
+                <strong>Starts on:&nbsp;</strong> {formattedDate}
+              </div>
+              <div className="flex items-center text-sm sm:text-base text-blue-800">
+                <FaStar className="mr-2 text-yellow-800" />
+                <strong>Ratings:&nbsp;</strong>
+                <Rating
+                  name="course-rating"
+                  value={course.ratings}
+                  precision={0.5}
+                  readOnly
+                  className="ml-2"
+                />
+                &nbsp;{course.ratings}
+              </div>
+              <div className="flex items-center text-sm sm:text-base text-blue-800">
+                <FaCommentAlt className="mr-2 text-green-600" />
+                <strong>Reviews:&nbsp;</strong> {course.reviews}
+              </div>
+              <div className="flex items-center text-sm sm:text-base text-blue-800">
+                <FaSyncAlt className="mr-2 text-purple-600" />
+                <strong>Last Updated:&nbsp; </strong>{" "}
+                {course.lastUpdated || "2 days ago"}
+              </div>
+            </div>
+            <div className="flex flex-col justify-center sm:justify-start md:justify-end items-center gap-2 sm:gap-4 mt-4">
+              <img
+                src="https://cdn-icons-png.flaticon.com/256/7251/7251267.png"
+                alt="Best Seller"
+                className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+              />
+              <FaMedal className="text-yellow-[#FFC144]" size={40} />
+            </div>
+          </div>
         </div>
       </div>
+
       {/* Tabs */}
       <Tabs>
         <TabList className="flex w-full mb-4 flex-wrap gap-2">
@@ -329,7 +372,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
         </TabPanel>
         <TabPanel>
           <motion.div
-            className="max-w-5xl mx-auto py-1 px-2 my-14"
+            className="max-w-5xl mx-auto py-1 px-2 my-1"
             variants={tabVariants}
             initial="hidden"
             animate="visible"
@@ -485,6 +528,7 @@ const CodingCoursesPage = () => {
       description: "Learn the basics of programming with HTML & CSS.",
       duration: "6 weeks",
       price: 3999,
+      ratings: 4.5,
       discountPercentage: 3,
       enrollments: 25,
       reviews: 10,
@@ -543,6 +587,7 @@ const CodingCoursesPage = () => {
         "Deep dive into advanced topics in C++ programming and improve your coding skills.",
       duration: "8 weeks",
       price: 4999,
+      ratings: 4.6,
       discountPercentage: 3,
       enrollments: 45,
       reviews: 10,
@@ -603,6 +648,7 @@ const CodingCoursesPage = () => {
         "Master data structures and algorithms for efficient problem-solving.",
       duration: "12 weeks",
       price: 7999,
+      ratings: 4.8,
       discountPercentage: 2,
       enrollments: 32,
       reviews: 10,
@@ -667,6 +713,7 @@ const CodingCoursesPage = () => {
       description: "Become proficient in frontend development using React.js.",
       duration: "12 weeks",
       price: 7999,
+      ratings: 4.9,
       syllabus: [
         {
           title: "Module 1: Introduction to React",
@@ -719,6 +766,7 @@ const CodingCoursesPage = () => {
         "Master JavaScript programming language from basics to advanced.",
       duration: "8 weeks",
       price: 4999,
+      ratings: 4.4,
       discountPercentage: 2,
       enrollments: 16,
       reviews: 10,
@@ -810,6 +858,7 @@ const CodingCoursesPage = () => {
         "Become a full-stack developer with this comprehensive bootcamp.",
       duration: "12 weeks",
       price: 59000,
+      ratings: 4.9,
       discountPercentage: 5,
       enrollments: 50,
       reviews: 20,
@@ -897,6 +946,9 @@ const CodingCoursesPage = () => {
               ))}
             </motion.div>
           </div>
+        </div>
+        <div>
+          <CodingReviews />
         </div>
       </div>
 

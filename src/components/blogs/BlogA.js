@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const BlogA = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoaded = () => {
+    setImageLoaded(true);
+  };
+
   return (
-    <div className="w-full min-h-screen p-6  bg-white rounded-lg shadow-md mt-5 ">
+    <div className="w-full min-h-screen p-6 bg-white rounded-lg shadow-md mt-5">
       <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center pt-6">
         Rakesh Jhunjhunwala: The Success Story
       </h1>
-      
-      <div>
-        <img
-          src="https://marksmendaily.com/wp-content/uploads/2023/08/Rakesh-Jhunjhunwala-banner.jpg"
-          alt="Description of the"
-          className="py-2 mt-2 my-2"
-        />
-      </div>
+
+      {!imageLoaded && <Skeleton height={500} width="100%" />}
+
+      <img
+        src="https://marksmendaily.com/wp-content/uploads/2023/08/Rakesh-Jhunjhunwala-banner.jpg"
+        alt="Rakesh Jhunjhunwala"
+        className={`w-full ${!imageLoaded ? "hidden" : "block"} py-2 mt-2 my-2`}
+        onLoad={handleImageLoaded}
+      />
 
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         The Beginning of an Investment Journey
@@ -26,6 +35,7 @@ const BlogA = () => {
         over the years, he built a diverse portfolio that includes companies
         like Titan, CRISIL, and Sesa Goa.
       </p>
+
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         Investment Philosophy
       </h2>
@@ -36,6 +46,7 @@ const BlogA = () => {
         investing. His patience and ability to stay invested during market
         fluctuations have been key to his success.
       </p>
+
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         Achievements and Recognition
       </h2>
