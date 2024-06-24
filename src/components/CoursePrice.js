@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MdInfoOutline, MdLocalOffer } from "react-icons/md";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { TfiAlarmClock } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 
 const calculateDiscountedPrice = (price, discountPercentage) => {
   const discountedPrice = price - (price * discountPercentage) / 100;
@@ -74,9 +75,9 @@ const CoursePrice = ({ price, discountPercentage }) => {
             </span>
           )}
         </p>
-        <button className="bg-yellow-300 text-gray-900 px-6 py-2 mt-4 rounded-lg hover:bg-yellow-400 transition-colors duration-300">
+        <Link to={"/enquiry"} className="bg-yellow-300 text-gray-900 px-6 py-2 mt-4 rounded-lg hover:bg-yellow-400 transition-colors duration-300">
           Enroll Now
-        </button>
+        </Link>
       </div>
     </div>
   );

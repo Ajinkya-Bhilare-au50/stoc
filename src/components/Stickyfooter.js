@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Developer from "./Developer.js";
 import Banner from "./Banner.js";
+import { Link } from "react-router-dom";
 const StickyFooter = () => {
   const [showFooter, setShowFooter] = useState(false);
   const [timer, setTimer] = useState(7200); // Timer in seconds (2 hours)
@@ -63,12 +64,12 @@ const StickyFooter = () => {
           </div>
           <div>
             <div className="flex justify-center">
-              <button
+              <Link to={"/enquiry"}
                 onClick={handleEnrollNow}
-                className="bg-yellow-800 hover:bg-yellow-900 px-6 py-2 rounded-md"
+                className="bg-yellow-800 hover:bg-yellow-900 px-6 py-2 rounded-md text-black"
               >
-                Subscribe 
-              </button>
+                Enroll Now
+              </Link>
             </div>
           </div>
         </div>
