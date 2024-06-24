@@ -68,7 +68,7 @@ const StickyFooter = () => {
                 onClick={handleEnrollNow}
                 className="bg-yellow-800 hover:bg-yellow-900 px-6 py-2 rounded-md text-black"
               >
-                Enroll Now
+                Enquire Now
               </Link>
             </div>
           </div>

@@ -1,5 +1,5 @@
 // src/components/AdmissionForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -14,12 +14,45 @@ const AdmissionForm = () => {
   const [fathersName, setFathersName] = useState("");
   const [occupation, setOccupation] = useState("");
   const [declaration, setDeclaration] = useState(false);
+  const [dob, setDob] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    const isFormValid =
+      name &&
+      email &&
+      phone &&
+      course &&
+      gender &&
+      address &&
+      mothersName &&
+      fathersName &&
+      occupation &&
+      dob &&
+      declaration &&
+      /^\d{10}$/.test(phone);
+    setIsSubmitEnabled(isFormValid);
+  }, [
+    name,
+    email,
+    phone,
+    course,
+    gender,
+    address,
+    mothersName,
+    fathersName,
+    occupation,
+    dob,
+    declaration,
+  ]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!declaration) {
-      alert("You must declare that all details are correct before submitting.");
+    if (!/^\d{10}$/.test(phone)) {
+      setPhoneError("Phone number must be 10 digits.");
       return;
     }
 
@@ -33,6 +66,7 @@ const AdmissionForm = () => {
       mothersName,
       fathersName,
       occupation,
+      dob,
     });
 
     try {
@@ -46,8 +80,11 @@ const AdmissionForm = () => {
         mothersName,
         fathersName,
         occupation,
+        dob,
       });
       console.log("Document written with ID: ", docRef.id);
+
+      setIsSubmitted(true);
 
       // Clear form inputs
       setName("");
@@ -59,17 +96,45 @@ const AdmissionForm = () => {
       setMothersName("");
       setFathersName("");
       setOccupation("");
+      setDob("");
       setDeclaration(false);
+      setPhoneError("");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   };
 
+  if (isSubmitted) {
+    return (
+      <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-2 text-center">
+        <h2 className="text-2xl font-bold mb-4">Thank You!</h2>
+        <div className="mb-4">
+          <svg
+            className="w-16 h-16 text-green-500 mx-auto"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m0 0l-4 4m0 0L9 12m0 0L4 9m6 3l2 2 4-4M7 7l3 3-3 3 3 3-3 3M6 6l3 3-3 3 3 3-3 3M6 6l3 3-3 3 3 3-3 3M6 6l3 3-3 3 3 3-3 3"
+            />
+          </svg>
+        </div>
+        <p className="text-lg">
+          We have received your enquiry. Our team will shortly get in touch with
+          you.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-2">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        Enquiry Form
-      </h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Enquiry Form</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -102,22 +167,43 @@ const AdmissionForm = () => {
           <input
             type="tel"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              setPhoneError("");
+            }}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+          {phoneError && (
+            <p className="text-red-500 text-sm mt-1">{phoneError}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Date of Birth
+          </label>
+          <input
+            type="date"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Course interest
+            Course Interest
           </label>
-          <input
-            type="text"
+          <select
             value={course}
             onChange={(e) => setCourse(e.target.value)}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
+          >
+            <option value="">Select Course</option>
+            <option value="Stock Courses">Stock Courses</option>
+            <option value="Coding Courses">Coding Courses</option>
+          </select>
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -183,23 +269,26 @@ const AdmissionForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Declaration
-          </label>
-          <div className="flex items-center">
+          <label className="inline-flex items-center">
             <input
               type="checkbox"
               checked={declaration}
               onChange={(e) => setDeclaration(e.target.checked)}
               required
-              className="mr-2"
+              className="form-checkbox"
             />
-            <span>I hereby declare that all my details are correct.</span>
-          </div>
+            <span className="ml-2">
+              I declare that the information provided is true and correct to the
+              best of my knowledge.
+            </span>
+          </label>
         </div>
         <button
           type="submit"
-          className="w-full px-4 py-2 bg-indigo-500 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          disabled={!isSubmitEnabled}
+          className={`w-full py-2 px-4 ${
+            isSubmitEnabled ? "bg-blue-500" : "bg-gray-400 cursor-not-allowed"
+          } text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
         >
           Submit
         </button>
