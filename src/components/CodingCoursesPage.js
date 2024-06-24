@@ -962,10 +962,10 @@ const CodingCoursesPage = () => {
               class="h-12"
             />
             <Link
-              to="/contact"
+              to="/enquiry"
               class="px-4 py-2 bg-blue-500 text-white rounded-md"
             >
-              Contact Us
+              Enquiry
             </Link>
           </div>
           <div class="grid gap-6">

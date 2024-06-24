@@ -70,10 +70,10 @@ const navListMenuItems = [
     redirect: "/FAQ",
   },
   {
-    title: "News",
+    title: "Admission Enquiry",
     description: "Read insightful articles, tips, and expert opinions.",
     icon: NewspaperIcon,
-    redirect: "/",
+    redirect: "/enquiry",
   },
   {
     title: "Testimonial",

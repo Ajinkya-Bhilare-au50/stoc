@@ -23,12 +23,14 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-
+import AdmissionForm from "./components/AdmissionForm";
 import StockCoursesPage from "./components/StockCoursesPage";
 import CodingCoursesPage from "./components/CodingCoursesPage";
 import BlogPage from "./components/BlogPage";
 import SpecialOffer from "./components/SpecialOffer";
 import Banner from "./components/Banner";
+import CalendarSpreadGenerator from "./components/CalenderSpreadGenerator";
+import AdmissionList from "./components/AdmissionList";
 
 //routing implementation inside function named createBrowserRouter Pass object
 const router = createBrowserRouter([
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
 
         <OfferPopup />
         <HeroPage />
-        <Banner/>
+        <Banner />
         <TradingStats />
         <StickyFooter />
         <ScrollUpButton />
@@ -88,7 +90,7 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-        
+
         <Feedbacksection />
         <TradingStats />
         <StickyFooter />
@@ -122,7 +124,6 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-       
 
         <StockCoursesPage />
       </div>
@@ -133,7 +134,6 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-        
 
         <CodingCoursesPage />
       </div>
@@ -147,6 +147,18 @@ const router = createBrowserRouter([
         <OfferPopup />
 
         <BlogPage />
+      </div>
+    ),
+  },
+  {
+    path: "/enquiry",
+    element: (
+      <div>
+        <NavbarWithMegaMenu />
+        
+
+        {/* <AdmissionList /> */}
+        <AdmissionForm/>
       </div>
     ),
   },
