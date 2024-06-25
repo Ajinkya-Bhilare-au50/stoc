@@ -19,13 +19,27 @@ const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
         <h1 className="text-3xl font-bold text-white p-2 text-center">
           {name}
         </h1>
-        <div className="flex justify-center">
-          <div className="flex items-center ">
-            <FaStar className="text-yellow-500 mr-1" />
-            <FaStar className="text-yellow-500 mr-1" />
-            <FaStar className="text-yellow-500 mr-1" />
-            <FaStar className="text-yellow-500 mr-1" />
-            <span className="text-lg text-white font-semibold p-1">
+        <div className="flex justify-center items-center  ">
+          <div className="flex justify-center items-center">
+            <img
+              className="h-10 m-3 "
+              src="https://cdn.iconscout.com/icon/free/png-256/free-google-160-189824.png"
+              alt=""
+            />
+          </div>
+          <div className="flex items-center">
+            <div className="flex flex-col justify-center">
+              <div className="flex">
+                <FaStar className="text-yellow-500  " />
+                <FaStar className="text-yellow-500" />
+                <FaStar className="text-yellow-500" />
+                <FaStar className="text-yellow-500" />
+                <FaStar className="text-gray-500" />
+              </div>
+              <p className="text-yellow-500 text-center">ratings</p>
+            </div>
+
+            <span className="text-lg text-yellow-500 font-semibold p-2">
               {rating}k
             </span>
           </div>
