@@ -56,6 +56,9 @@ const AdmissionList = () => {
               <p className="mb-2">
                 <strong>Occupation:</strong> {admission.occupation}
               </p>
+              <p className="mb-2">
+                <strong>Enquirydate:</strong> {admission.enquiryDate}
+              </p>
             </div>
           ))}
         </div>
