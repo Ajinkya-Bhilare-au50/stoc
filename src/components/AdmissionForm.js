@@ -1,7 +1,7 @@
-// src/components/AdmissionForm.js
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { FaCheckCircle } from "react-icons/fa";
 
 const AdmissionForm = () => {
   const [name, setName] = useState("");
@@ -56,6 +56,14 @@ const AdmissionForm = () => {
       return;
     }
 
+    const currentDate = new Date();
+    const formattedDate = `${currentDate
+      .getDate()
+      .toString()
+      .padStart(2, "0")}/${(currentDate.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}/${currentDate.getFullYear()}`;
+
     console.log("Form data:", {
       name,
       email,
@@ -67,6 +75,8 @@ const AdmissionForm = () => {
       fathersName,
       occupation,
       dob,
+      enquiryDate: formattedDate,
+      timestamp: currentDate,
     });
 
     try {
@@ -81,6 +91,8 @@ const AdmissionForm = () => {
         fathersName,
         occupation,
         dob,
+        enquiryDate: formattedDate,
+        timestamp: currentDate,
       });
       console.log("Document written with ID: ", docRef.id);
 
@@ -106,34 +118,23 @@ const AdmissionForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-2 text-center">
-        <h2 className="text-2xl font-bold mb-4">Thank You!</h2>
-        <div className="mb-4">
-          <svg
-            className="w-16 h-16 text-green-500 mx-auto"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 12l2 2 4-4m0 0l-4 4m0 0L9 12m0 0L4 9m6 3l2 2 4-4M7 7l3 3-3 3 3 3-3 3M6 6l3 3-3 3 3 3-3 3M6 6l3 3-3 3 3 3-3 3M6 6l3 3-3 3 3 3-3 3"
-            />
-          </svg>
+      <div className="pt-6 flex justify-center items-center">
+        <div className="max-w-lg  mx-auto p-6 bg-gray-200 rounded-lg shadow-md mt-2 text-center">
+          <h2 className="text-3xl font-bold mb-4">Thank You!</h2>
+          <div className="mb-4">
+            <FaCheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+          </div>
+          <p className="text-lg">
+            We have received your enquiry. Our team will shortly get in touch
+            with you.
+          </p>
         </div>
-        <p className="text-lg">
-          We have received your enquiry. Our team will shortly get in touch with
-          you.
-        </p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-2">
+    <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-2">
       <h2 className="text-2xl font-bold mb-4 text-center">Enquiry Form</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -205,7 +206,7 @@ const AdmissionForm = () => {
             <option value="Coding Courses">Coding Courses</option>
           </select>
         </div>
-        <div className="mb-4">
+        <div className="mb-4 cursor-pointer">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Gender
           </label>
@@ -218,7 +219,6 @@ const AdmissionForm = () => {
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-            <option value="Other">Other</option>
           </select>
         </div>
         <div className="mb-4">
@@ -258,7 +258,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Occupation
+            Father's Occupation
           </label>
           <input
             type="text"
@@ -269,29 +269,33 @@ const AdmissionForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="inline-flex items-center">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Declaration
+          </label>
+          <div className="flex items-center">
             <input
               type="checkbox"
               checked={declaration}
               onChange={(e) => setDeclaration(e.target.checked)}
               required
-              className="form-checkbox"
+              className="mr-2"
             />
-            <span className="ml-2">
-              I declare that the information provided is true and correct to the
-              best of my knowledge.
-            </span>
-          </label>
+            <span>I declare that the above information is true.</span>
+          </div>
         </div>
-        <button
-          type="submit"
-          disabled={!isSubmitEnabled}
-          className={`w-full py-2 px-4 ${
-            isSubmitEnabled ? "bg-blue-500" : "bg-gray-400 cursor-not-allowed"
-          } text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
-        >
-          Submit
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            disabled={!isSubmitEnabled}
+            className={`${
+              isSubmitEnabled
+                ? "bg-blue-500 hover:bg-blue-700 text-white"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            } font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
