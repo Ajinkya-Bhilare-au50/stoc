@@ -6,6 +6,7 @@ import { BsFillPersonFill, BsStarFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { MdOndemandVideo } from "react-icons/md";
 import "react-tabs/style/react-tabs.css";
+import { FaChalkboardTeacher } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { BsFillGiftFill, BsFillTagFill } from "react-icons/bs";
@@ -146,6 +147,20 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
                 <FaSyncAlt className="mr-2 text-purple-600" />
                 <strong>Last Updated:&nbsp; </strong>{" "}
                 {course.lastUpdated || "2 days ago"}
+              </div>
+              <div className="flex items-center text-sm sm:text-base text-blue-800">
+                <FaChalkboardTeacher className="mr-2 text-pink-600" />
+                <strong>Instructor:&nbsp; &nbsp;</strong>{" "}
+                <div className="flex items-center justify-start space-x-2 text-blue-800">
+                  <img
+                    alt="Instructor"
+                    src={course.instructorImage}
+                    className="rounded-full w-10 h-10"
+                  />
+                  <span className="text-sm sm:text-base font-semibold">
+                    {course.instructorName}
+                  </span>
+                </div>
               </div>
             </div>
             <div className="flex flex-col justify-center sm:justify-start md:justify-end items-center gap-2 sm:gap-4 mt-4">

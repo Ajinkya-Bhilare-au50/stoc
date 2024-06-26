@@ -4,6 +4,7 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import Collapse from "react-collapse";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaStar } from "react-icons/fa"; // Import the star icon from react-icons
+import AjinkyaProfile from "./AjinkyaProfile.js";
 import {
   FaBook,
   FaChartLine,
@@ -163,8 +164,13 @@ const FAQSection = () => {
 const LearnerReview = ({ inputPercentages = [80, 70, 60, 50, 10] }) => {
   const labels = ["Excellent", "Very Good", "Good", "Average", "Poor"];
   return (
-    <div>
-      <CourseStructure />
+    <div className="">
+      <div>
+        <CourseStructure />
+      </div>
+      <div className="flex justify-center items-center m-4">
+        <AjinkyaProfile />
+      </div>
       <div className="flex justify-center items-center m-4 p-6">
         <div className="w-full max-w-2xl px-8 py-6 bg-white rounded-lg shadow-lg">
           <div className="flex items-center mb-6">
