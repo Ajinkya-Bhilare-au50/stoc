@@ -1,11 +1,14 @@
 import React from "react";
 import { FaStar } from "react-icons/fa"; // Import the star icon from react-icons library
-
+import MySVGComponent from "./MySvgComponent.js"
 const profileImage = "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg";
 
 const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
   <div className="bg-[#231E39] rounded-lg shadow-md p-6 relative">
-    <div className=" items-center">
+    <div className="absolute bottom-2 right-2">
+      <MySVGComponent />
+    </div>
+    <div className="items-center">
       <div className="flex justify-center items-center relative">
         <img
           src={profileImage}
@@ -19,10 +22,10 @@ const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
         <h1 className="text-3xl font-bold text-white p-2 text-center">
           {name}
         </h1>
-        <div className="flex justify-center items-center  ">
+        <div className="flex justify-center items-center">
           <div className="flex justify-center items-center">
             <img
-              className="h-10 m-3 "
+              className="h-10 m-3"
               src="https://cdn.iconscout.com/icon/free/png-256/free-google-160-189824.png"
               alt=""
             />
@@ -30,7 +33,7 @@ const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
           <div className="flex items-center">
             <div className="flex flex-col justify-center">
               <div className="flex">
-                <FaStar className="text-yellow-500  " />
+                <FaStar className="text-yellow-500" />
                 <FaStar className="text-yellow-500" />
                 <FaStar className="text-yellow-500" />
                 <FaStar className="text-yellow-500" />
@@ -38,7 +41,6 @@ const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
               </div>
               <p className="text-yellow-500 text-center">ratings</p>
             </div>
-
             <span className="text-lg text-yellow-500 font-semibold p-2">
               {rating}k
             </span>

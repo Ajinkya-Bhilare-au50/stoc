@@ -134,3 +134,5 @@ passing router object array in app.js as mentioned below
         <Route />
       </RouterProvider>
     </div>
+    ----------------------------------------------------------------------
+    https://tailwindflex.com/@anonymous/slider
