@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { FaCalendarAlt } from "react-icons/fa";
 import "react-tabs/style/react-tabs.css";
 import { FaMedal } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
@@ -32,7 +33,13 @@ import sanjana from "./images/sanjana.jpg";
 import mahesh from "./images/mahesh.jpg";
 import varun from "./images/varun.jpg";
 
-
+const formattedDate = new Date(
+  Date.now() + 7 * 24 * 60 * 60 * 1000
+).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 const imageArray = [
   {
     id: 1,
@@ -576,6 +583,10 @@ const StockCoursesPage = () => {
                             <p className="text-gray-400 mb-2 flex items-center">
                               <BsBook className="inline-block mr-2 text-yellow-300" />
                               Duration: {course.duration}
+                            </p>
+                            <p className="text-gray-400 mb-2 flex items-center">
+                              <FaCalendarAlt className="inline-block mr-2 text-yellow-300" />
+                              Starts on: {formattedDate}
                             </p>
                             <p className="text-gray-400 mb-2 flex items-center">
                               <FaStar className="inline-block mr-2 text-yellow-300" />

@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./images/logo.png";
 import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
 import {
   Navbar,
   Collapse,
@@ -222,8 +223,15 @@ export function NavbarWithMegaMenu() {
             variant="h6"
             className="mr-4 cursor-pointer py-1.5 lg:ml-2"
           >
-            <img src={logo} alt="Logo" className="h-8 w-auto inline-flex m-2" />
-            SNIPER CODING
+            <div className="flex items-center md:gap-1 ">
+              <img
+                src={logo}
+                alt="Logo"
+                className="h-8 w-auto md:inline-flex rounded-full  hidden "
+              />
+              <FaHome size={18} />
+              <p className="pl-1">SNIPER CODING</p>
+            </div>
           </Typography>
         </Link>
         <div className="hidden lg:block">

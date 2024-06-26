@@ -593,7 +593,7 @@ const CodingCoursesPage = () => {
       howToUse:
         "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, coding exercises, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
       image:
-        "https://w7.pngwing.com/pngs/290/579/png-transparent-html-html-logo-html-5-html-five-logo-html-5-logo-programming-langugae-3d-icon-thumbnail.png",
+        "https://static-00.iconduck.com/assets.00/html5-icon-253x256-0bznuxdp.png",
       qrCode: qrCodeImage, // QR code URL for Course 1
     },
     {
