@@ -24,6 +24,7 @@ import {
 } from "react-icons/ai";
 import AjinkyaProfile from "./AjinkyaProfile";
 import CodingReviews from "./CodingReviews";
+import SimpleSlider from "./SimpleSlider";
 const formattedDate = new Date(
   Date.now() + 7 * 24 * 60 * 60 * 1000
 ).toLocaleDateString("en-US", {
@@ -964,6 +965,7 @@ const CodingCoursesPage = () => {
         </div>
         <div>
           <CodingReviews />
+          <SimpleSlider/>
         </div>
       </div>
 
