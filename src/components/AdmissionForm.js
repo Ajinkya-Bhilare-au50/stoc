@@ -123,7 +123,7 @@ const AdmissionForm = () => {
         } else if (course === "Coding Courses") {
           navigate("/codingcoursespage");
         }
-      }, 4000);
+      }, 3000);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -145,7 +145,14 @@ const AdmissionForm = () => {
             <div>
               <CircularProgress />
             </div>
-            <Link to={"/"} className="hover:text-blue-500 ">
+            <Link
+              to={`/${
+                course === "Stock Courses"
+                  ? "stockcoursepage"
+                  : "codingcoursespage"
+              }`}
+              className="hover:text-blue-500 "
+            >
               Explore
             </Link>
           </div>
@@ -289,32 +296,30 @@ const AdmissionForm = () => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
-        <div className="mb-4 flex items-start">
-          <input
-            type="checkbox"
-            checked={declaration}
-            onChange={(e) => setDeclaration(e.target.checked)}
-            required
-            className="pt-2 cursor-pointer h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-          />
-          <label className="ml-2 block text-sm text-gray-900">
-            I declare that the above information is accurate to the best of my
+        <div className="mb-4">
+          <label className="flex items-center text-sm font-medium text-gray-700">
+            <input
+              type="checkbox"
+              checked={declaration}
+              onChange={(e) => setDeclaration(e.target.checked)}
+              required
+              className="mr-2"
+            />
+            I declare that the above information is correct to the best of my
             knowledge.
           </label>
         </div>
-        <div className="text-center">
-          <button
-            type="submit"
-            disabled={!isSubmitEnabled}
-            className={`w-full px-6 py-2 mt-4 text-white ${
-              isSubmitEnabled
-                ? "bg-green-500 hover:bg-green-700"
-                : "bg-gray-400 cursor-not-allowed"
-            } rounded-md`}
-          >
-            Submit
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={!isSubmitEnabled}
+          className={`w-full py-2 px-4 bg-indigo-600 text-white rounded-md shadow-sm ${
+            isSubmitEnabled
+              ? "hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              : "opacity-50 cursor-not-allowed"
+          }`}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
