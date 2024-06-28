@@ -26,6 +26,13 @@ const CoursePrice = ({ price, discountPercentage }) => {
   return (
     <div className="w-full flex justify-center">
       <div className="relative flex flex-col justify-center items-center p-6 bg-[#212121] shadow-lg rounded-lg text-blue-200 border-2 w-full">
+        <div className="absolute top-3 left-3 md:top-4 md:left-4">
+          <img
+            className="h-16 md:h-24"
+            src="https://seeklogo.com/images/1/100-money-back-guarantee-logo-971235BA19-seeklogo.com.png"
+            alt=""
+          />
+        </div>
         <button
           onClick={handleToggle}
           className="flex items-center px-4 py-2 mb-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out"
@@ -37,7 +44,7 @@ const CoursePrice = ({ price, discountPercentage }) => {
             </>
           ) : (
             <>
-              Show Discounted Price
+              Discounted Price
               <RiDiscountPercentFill className="ml-2 text-white" />
             </>
           )}

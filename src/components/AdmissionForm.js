@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate, Link } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const AdmissionForm = () => {
   const [name, setName] = useState("");
@@ -18,6 +20,8 @@ const AdmissionForm = () => {
   const [phoneError, setPhoneError] = useState("");
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const isFormValid =
@@ -111,6 +115,15 @@ const AdmissionForm = () => {
       setDob("");
       setDeclaration(false);
       setPhoneError("");
+
+      // Show thank you message for 4 seconds before redirecting
+      setTimeout(() => {
+        if (course === "Stock Courses") {
+          navigate("/stockcoursepage");
+        } else if (course === "Coding Courses") {
+          navigate("/codingcoursespage");
+        }
+      }, 4000);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -118,16 +131,24 @@ const AdmissionForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="pt-6 flex justify-center items-center">
-        <div className="max-w-lg  mx-auto p-6 bg-gray-200 rounded-lg shadow-md mt-2 text-center">
-          <h2 className="text-3xl font-bold mb-4">Thank You!</h2>
+      <div className="pt-6 flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-2 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-gray-800">Thank You!</h2>
           <div className="mb-4">
             <FaCheckCircle className="w-16 h-16 text-green-500 mx-auto" />
           </div>
-          <p className="text-lg">
+          <p className="text-lg text-gray-700 mb-6">
             We have received your enquiry. Our team will shortly get in touch
             with you.
           </p>
+          <div className="flex flex-col gap-2 justify-center items-center">
+            <div>
+              <CircularProgress />
+            </div>
+            <Link to={"/"} className="hover:text-blue-500 ">
+              Explore
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -258,7 +279,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Father's Occupation
+            Occupation
           </label>
           <input
             type="text"
@@ -268,30 +289,28 @@ const AdmissionForm = () => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Declaration
+        <div className="mb-4 flex items-start">
+          <input
+            type="checkbox"
+            checked={declaration}
+            onChange={(e) => setDeclaration(e.target.checked)}
+            required
+            className="pt-2 cursor-pointer h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+          />
+          <label className="ml-2 block text-sm text-gray-900">
+            I declare that the above information is accurate to the best of my
+            knowledge.
           </label>
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              checked={declaration}
-              onChange={(e) => setDeclaration(e.target.checked)}
-              required
-              className="mr-2"
-            />
-            <span>I declare that the above information is true.</span>
-          </div>
         </div>
-        <div className="flex justify-center">
+        <div className="text-center">
           <button
             type="submit"
             disabled={!isSubmitEnabled}
-            className={`${
+            className={`w-full px-6 py-2 mt-4 text-white ${
               isSubmitEnabled
-                ? "bg-blue-500 hover:bg-blue-700 text-white"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            } font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                ? "bg-green-500 hover:bg-green-700"
+                : "bg-gray-400 cursor-not-allowed"
+            } rounded-md`}
           >
             Submit
           </button>

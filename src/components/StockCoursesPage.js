@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { FaCalendarAlt } from "react-icons/fa";
 import "react-tabs/style/react-tabs.css";
 import { FaMedal } from "react-icons/fa6";
+import { RiPresentationLine } from "react-icons/ri";
 import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { BsBook } from "react-icons/bs";
@@ -12,6 +13,7 @@ import { BiBook, BiCheckCircle, BiCreditCard } from "react-icons/bi";
 import { MdPerson } from "react-icons/md"; // Assuming MdPerson is your instructor icon
 import { MdOndemandVideo } from "react-icons/md";
 import { HiUsers } from "react-icons/hi2";
+import { MdOnlinePrediction } from "react-icons/md";
 import "react-tabs/style/react-tabs.css";
 import { FaThumbsUp, FaShareAlt, FaComment } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
@@ -19,7 +21,7 @@ import { MdDescription, MdInfoOutline } from "react-icons/md";
 import Drawer from "./Drawer";
 import { TbLocationShare } from "react-icons/tb";
 import { FcLike } from "react-icons/fc";
-import StockSidebar from "./StockSidebar";
+import StockSidebar from "./StockSlider";
 import LearnerReview from "./LearnerReview";
 import CoursePrice from "./CoursePrice";
 import WhatLearn from "./WhatLearn";
@@ -32,6 +34,7 @@ import sujal from "./images/sujal.jpg";
 import sanjana from "./images/sanjana.jpg";
 import mahesh from "./images/mahesh.jpg";
 import varun from "./images/varun.jpg";
+import StockInfo from "./StockInfo";
 
 const formattedDate = new Date(
   Date.now() + 7 * 24 * 60 * 60 * 1000
@@ -589,6 +592,19 @@ const StockCoursesPage = () => {
                               Starts on: {formattedDate}
                             </p>
                             <p className="text-gray-400 mb-2 flex items-center">
+                              <RiPresentationLine className="inline-block mr-2 text-yellow-300" />
+                              Mode Of Learning : Offline & Online
+                            </p>
+                            <p className="text-gray-400 mb-2 flex items-center">
+                              <MdOnlinePrediction className="inline-block mr-2 text-yellow-300" />
+                              Offline Batch Time : 3:00pm - 4:00pm 
+                  
+                            </p>
+                            <p className="text-gray-400 mb-2 flex items-center">
+                              <MdOnlinePrediction className="inline-block mr-2 text-yellow-300" />
+                              Online Batch Time : 9:30pm - 10:30pm
+                            </p>
+                            <p className="text-gray-400 mb-2 flex items-center">
                               <FaStar className="inline-block mr-2 text-yellow-300" />
                               Rating: {course.rating} ({course.reviews} reviews)
                             </p>
@@ -799,6 +815,9 @@ const StockCoursesPage = () => {
           </div>
           <div>
             <ReviewsComponent />
+          </div>
+          <div>
+            <StockInfo />
           </div>
         </div>
       </div>

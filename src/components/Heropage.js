@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineStock, AiOutlineCode } from "react-icons/ai";
 
 
+
 const candlestickImage="https://i.ibb.co/VBQc69b/candlestick-pattern-7680x4320-19473.jpg";
 const containerVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -68,6 +69,7 @@ const HeroPage = () => {
           </div>
         </div>
       </motion.div>
+     
       
     </>
   );

@@ -157,7 +157,7 @@ const router = createBrowserRouter([
         <NavbarWithMegaMenu />
         
 
-        {/* <AdmissionList />  */}
+        <AdmissionList /> 
         <AdmissionForm/>
       </div>
     ),
