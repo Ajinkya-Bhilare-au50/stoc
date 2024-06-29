@@ -246,7 +246,7 @@ const StockCoursesPage = () => {
     {
       title: "Course 1: Introduction to Stock Market",
       description: "Learn the basics of Stock Market investing.",
-      duration: "6 weeks",
+      duration: "3 weeks",
       price: "₹ 3999",
       discountPercentage: 5,
       instructor: "Ajinkya Sir",
@@ -311,7 +311,7 @@ const StockCoursesPage = () => {
     {
       title: "Course 2: Advanced Stock Market Strategies",
       description: "Master advanced strategies in stock market trading.",
-      duration: "8 weeks",
+      duration: "4 weeks",
       price: "₹ 4999",
       discountPercentage: 5,
       enrollments: "20+",
@@ -377,7 +377,7 @@ const StockCoursesPage = () => {
     {
       title: "Course 3: Advanced Futures and Options Strategies",
       description: "Master advanced strategies in futures and options trading.",
-      duration: "10 weeks",
+      duration: "6 weeks",
       price: "₹ 5999",
       discountPercentage: 5,
       enrollments: "30+",
@@ -597,12 +597,15 @@ const StockCoursesPage = () => {
                             </p>
                             <p className="text-gray-400 mb-2 flex items-center">
                               <MdOnlinePrediction className="inline-block mr-2 text-yellow-300" />
-                              Offline Batch Time : 3:00pm - 4:00pm 
-                  
+                              Offline Batch Time : 3:00pm - 4:00pm
                             </p>
                             <p className="text-gray-400 mb-2 flex items-center">
                               <MdOnlinePrediction className="inline-block mr-2 text-yellow-300" />
                               Online Batch Time : 9:30pm - 10:30pm
+                            </p>
+                            <p className="text-gray-400 mb-2 flex items-center">
+                              <MdOnlinePrediction className="inline-block mr-2 text-yellow-300" />
+                              Last Updated : 2-days ago
                             </p>
                             <p className="text-gray-400 mb-2 flex items-center">
                               <FaStar className="inline-block mr-2 text-yellow-300" />

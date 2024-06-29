@@ -33,7 +33,7 @@ const StickyFooter = () => {
   };
 
   const handleEnrollNow = () => {
-    // Add your enrollment logic here
+    // Add your enrollment/Enquiry logic here
     console.log("Enroll Now button clicked!");
   };
 
@@ -44,33 +44,43 @@ const StickyFooter = () => {
           {/* Your main content */}
           <Developer />
 
-          <p className="text-center">
-           
-          </p>
+          <p className="text-center"></p>
         </div>
 
         {/* Sticky Footer */}
         <div
-          className={`fixed z-10 bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex flex-col md:flex-row justify-center items-center ${
+          className={`fixed z-10 bottom-0 left-0 right-0 bg-black text-white pyF-3 flex flex-col md:flex-row justify-center items-center ${
             showFooter ? "block" : "hidden"
           }`}
         >
-          <div className="mb-4 md:mb-0 md:mr-4 text-center md:text-left">
-            {timer > 0 ? (
-              <p>Offer Ends in {formatTime(timer)}</p>
-            ) : (
-              <p>Time's up! Enroll now!</p>
-            )}
-          </div>
           <div>
-            <div className="flex justify-center">
-              <Link to={"/enquiry"}
+            <div className="flex justify-center md:justify-between m-2">
+              <Link
+                to={"/enquiry"}
                 onClick={handleEnrollNow}
-                className="bg-yellow-800 hover:bg-yellow-900 px-6 py-2 rounded-md text-black"
+                className="bg-yellow-800 hover:bg-yellow-900 px-2 rounded-md text-black"
               >
                 Enquire Now
               </Link>
             </div>
+          </div>
+          <div className="p-1 md:mb-0 md:mr-4 text-center md:text-left">
+            {timer > 0 ? (
+              <p className="flex gap-1">
+                <div className="bg-green-900 text-center px-6 rounded-md">
+                  Limited Time Offer
+                </div>
+                <div className="bg-red-800 text-white px-3 rounded-lg text-1xl shadow-md text-center">
+                  {formatTime(timer)}
+                </div>
+              </p>
+            ) : (
+              <div className="flex items-center justify-center">
+                <p className="px-2 text-lg  text-yellow-400 font-semibold">
+                  Time's up! Enroll now!
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

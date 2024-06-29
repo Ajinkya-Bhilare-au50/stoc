@@ -44,7 +44,7 @@ function Banner() {
   };
 
   return (
-    <div className="relative w-full overflow-hidden h-screen pt-2">
+    <div className="relative w-full overflow-hidden h-screen ">
       <img
         src={bannerimage}
         alt="Banner Background"

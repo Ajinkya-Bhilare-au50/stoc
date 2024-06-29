@@ -8,6 +8,7 @@ import {
   FaGithub,
   FaCheckCircle,
 } from "react-icons/fa";
+import CSVTable from "./CSVTable";
 
 
 const ContactUs = () => {
@@ -51,6 +52,7 @@ const ContactUs = () => {
 
   return (
     <div id="Contactus" className="bg-gray-100 py-16">
+      <CSVTable />
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -129,7 +131,7 @@ const ContactUs = () => {
             <p className="mb-2 text-gray-800">
               <span className="font-semibold">Address:</span> F-203, Mega Street
               building Nerul, Navi Mumbai, India
-            </p> 
+            </p>
             <p className="mb-2 text-gray-800">
               <span className="font-semibold">Phone:</span> 8104986663
             </p>
@@ -138,19 +140,19 @@ const ContactUs = () => {
             </p>
             <div className="flex justify-center md:justify-start py-2">
               <a
-                href="#"
+                href="1"
                 className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-3 rounded-md mr-2 transition duration-300 ease-in-out"
               >
                 <FaFacebook />
               </a>
               <a
-                href="#"
+                href="v"
                 className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-3 rounded-md mr-2 transition duration-300 ease-in-out"
               >
                 <FaTwitter />
               </a>
               <a
-                href="#"
+                href="2"
                 className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-3 rounded-md mr-2 transition duration-300 ease-in-out"
               >
                 <FaInstagram />
@@ -162,7 +164,7 @@ const ContactUs = () => {
                 <FaLinkedin />
               </a>
               <a
-                href="#"
+                href="2"
                 className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-3 rounded-md transition duration-300 ease-in-out"
               >
                 <FaGithub />

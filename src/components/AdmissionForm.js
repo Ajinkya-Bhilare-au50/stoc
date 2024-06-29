@@ -167,7 +167,7 @@ const AdmissionForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Full Name
+            Full Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -179,7 +179,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Email
+            Email <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
@@ -191,7 +191,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Phone
+            Phone <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
@@ -209,11 +209,12 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Date of Birth
+            Date of Birth <span className="text-red-500">*</span>
           </label>
           <input
             type="date"
             value={dob}
+            placeholder="DD/MM/YYYY"
             onChange={(e) => setDob(e.target.value)}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -221,7 +222,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Course Interest
+            Course Interest <span className="text-red-500">*</span>
           </label>
           <select
             value={course}
@@ -236,7 +237,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4 cursor-pointer">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Gender
+            Gender <span className="text-red-500">*</span>
           </label>
           <select
             value={gender}
@@ -251,7 +252,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Residential Address
+            Residential Address <span className="text-red-500">*</span>
           </label>
           <textarea
             value={address}
@@ -262,7 +263,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Mother's Name
+            Mother's Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -274,7 +275,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Father's Name
+            Father's Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -286,7 +287,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Occupation
+            Occupation <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
