@@ -52,7 +52,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "contact",
+    path: "nse-stocks",
     element: (
       <div>
         <NavbarWithMegaMenu />

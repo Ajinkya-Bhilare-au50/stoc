@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { motion } from "framer-motion";
 import Developer from "./Developer.js";
 import Banner from "./Banner.js";
 import { Link } from "react-router-dom";
@@ -55,13 +55,25 @@ const StickyFooter = () => {
         >
           <div>
             <div className="flex justify-center md:justify-between m-2">
-              <Link
-                to={"/enquiry"}
-                onClick={handleEnrollNow}
-                className="bg-yellow-800 hover:bg-yellow-900 px-2 rounded-md text-black"
+              <motion.div
+                animate={{
+                  x: [-5, 5, 0],
+                }}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
               >
-                Enquire Now
-              </Link>
+                <Link
+                  to={"/enquiry"}
+                  onClick={handleEnrollNow}
+                  className="bg-yellow-800 hover:bg-yellow-900 px-2 py-1 rounded-md text-black"
+                >
+                  Enquire Now
+                </Link>
+              </motion.div>
             </div>
           </div>
           <div className="p-1 md:mb-0 md:mr-4 text-center md:text-left">
