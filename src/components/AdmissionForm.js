@@ -20,6 +20,8 @@ const AdmissionForm = () => {
   const [phoneError, setPhoneError] = useState("");
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [dematAccount, setDematAccount] = useState("");
+  const [educationStatus, setEducationStatus] = useState("");
 
   const navigate = useNavigate();
 
@@ -36,7 +38,9 @@ const AdmissionForm = () => {
       occupation &&
       dob &&
       declaration &&
-      /^\d{10}$/.test(phone);
+      /^\d{10}$/.test(phone) &&
+      dematAccount &&
+      educationStatus;
     setIsSubmitEnabled(isFormValid);
   }, [
     name,
@@ -50,6 +54,8 @@ const AdmissionForm = () => {
     occupation,
     dob,
     declaration,
+    dematAccount,
+    educationStatus,
   ]);
 
   const handleSubmit = async (e) => {
@@ -81,6 +87,8 @@ const AdmissionForm = () => {
       dob,
       enquiryDate: formattedDate,
       timestamp: currentDate,
+      dematAccount,
+      educationStatus,
     });
 
     try {
@@ -97,6 +105,8 @@ const AdmissionForm = () => {
         dob,
         enquiryDate: formattedDate,
         timestamp: currentDate,
+        dematAccount,
+        educationStatus,
       });
       console.log("Document written with ID: ", docRef.id);
 
@@ -115,6 +125,8 @@ const AdmissionForm = () => {
       setDob("");
       setDeclaration(false);
       setPhoneError("");
+      setDematAccount("");
+      setEducationStatus("");
 
       // Show thank you message for 4 seconds before redirecting
       setTimeout(() => {
@@ -214,7 +226,6 @@ const AdmissionForm = () => {
           <input
             type="date"
             value={dob}
-            placeholderText="DD/MM/YYYY"
             onChange={(e) => setDob(e.target.value)}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -248,11 +259,12 @@ const AdmissionForm = () => {
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Residential Address <span className="text-red-500">*</span>
+            Address <span className="text-red-500">*</span>
           </label>
           <textarea
             value={address}
@@ -287,7 +299,7 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Occupation <span className="text-red-500">*</span>
+            Father's Occupation <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -298,29 +310,66 @@ const AdmissionForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="flex items-center text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Do you have a demat account? <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={dematAccount}
+            onChange={(e) => setDematAccount(e.target.value)}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="">Select an option</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Are you a college student, working professional or graduated but
+            not working? <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={educationStatus}
+            onChange={(e) => setEducationStatus(e.target.value)}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="">Select an option</option>
+            <option value="College Student">College Student</option>
+            <option value="Working Professional">Working Professional</option>
+            <option value="Graduated but Not Working">
+              Graduated but Not Working
+            </option>
+          </select>
+        </div>
+        <div className="mb-4">
+          <label className="inline-flex items-center">
             <input
               type="checkbox"
               checked={declaration}
               onChange={(e) => setDeclaration(e.target.checked)}
-              required
-              className="mr-2"
+              className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
             />
-            I declare that the above information is correct to the best of my
-            knowledge.
+            <span className="ml-2">
+              I hereby declare that the information provided is true to the best
+              of my knowledge. <span className="text-red-500">*</span>
+            </span>
           </label>
         </div>
-        <button
-          type="submit"
-          disabled={!isSubmitEnabled}
-          className={`w-full py-2 px-4 bg-indigo-600 text-white rounded-md shadow-sm ${
-            isSubmitEnabled
-              ? "hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              : "opacity-50 cursor-not-allowed"
-          }`}
-        >
-          Submit
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            disabled={!isSubmitEnabled}
+            className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+              isSubmitEnabled
+                ? "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
