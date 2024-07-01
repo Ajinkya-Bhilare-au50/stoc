@@ -3,7 +3,8 @@ import { MdInfoOutline, MdLocalOffer } from "react-icons/md";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { TfiAlarmClock } from "react-icons/tfi";
 import { Link } from "react-router-dom";
-import {RiEyeOffFill } from "react-icons/ri";
+import { RiEyeOffFill } from "react-icons/ri";
+
 
 const calculateDiscountedPrice = (price, discountPercentage) => {
   const discountedPrice = price - (price * discountPercentage) / 100;
@@ -87,12 +88,20 @@ const CoursePrice = ({ price, discountPercentage }) => {
             </span>
           )}
         </p>
-        <Link
-          to={"/enquiry"}
-          className="bg-yellow-300 text-gray-900 px-6 py-2 mt-4 rounded-lg hover:bg-yellow-400 transition-colors duration-300"
-        >
-          Enquire Now
-        </Link>
+        <div className="flex gap-2">
+          <Link
+            to={"/enquiry"}
+            className="bg-yellow-300 text-gray-900 px-6 py-2 mt-4 rounded-lg hover:bg-yellow-400 transition-colors duration-300"
+          >
+            Enquire Now
+          </Link>
+          <Link
+            to="https://rzp.io/i/TY3pcckq2"
+            className="inline-block border-2 border-yellow-300 text-yellow-300 px-6 py-2 mt-4 rounded-lg hover:bg-yellow-300 hover:text-gray-900 transition-colors duration-300"
+          >
+            Enroll
+          </Link>
+        </div>
       </div>
     </div>
   );

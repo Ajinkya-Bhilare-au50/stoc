@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { FaCalendarAlt } from "react-icons/fa";
 import "react-tabs/style/react-tabs.css";
 import { FaMedal } from "react-icons/fa6";
+import { FaArrowTurnUp } from "react-icons/fa6";
 import { RiPresentationLine } from "react-icons/ri";
 import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -35,6 +36,7 @@ import sanjana from "./images/sanjana.jpg";
 import mahesh from "./images/mahesh.jpg";
 import varun from "./images/varun.jpg";
 import StockInfo from "./StockInfo";
+import CoursePaymentButton from "./CoursePaymentButton";
 
 const formattedDate = new Date(
   Date.now() + 7 * 24 * 60 * 60 * 1000
@@ -761,7 +763,14 @@ const StockCoursesPage = () => {
                                 </div>
                                 <p className="text-lg text-gray-700 font-semibold">
                                   Scan this QR Code to Pay Online
-                                </p>
+                                </p>{" "}
+                                <CoursePaymentButton />
+                                <div className="flex gap-2">
+                                  <p className="text-[#082654] font-bold">
+                                    Combo Offer here
+                                  </p>
+                                  <FaArrowTurnUp color="#082654" />
+                                </div>
                                 <div className="py-2">
                                   <div className="flex space-x-1">
                                     <img

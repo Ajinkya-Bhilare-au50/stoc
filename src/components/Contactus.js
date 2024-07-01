@@ -9,6 +9,7 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import CSVTable from "./CSVTable";
+import CoursePaymentButton from "./CoursePaymentButton.js";
 
 
 const ContactUs = () => {
@@ -53,6 +54,7 @@ const ContactUs = () => {
   return (
     <div id="Contactus" className="bg-gray-100 py-16">
       <CSVTable />
+      {/* <CoursePaymentButton/> */}
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
