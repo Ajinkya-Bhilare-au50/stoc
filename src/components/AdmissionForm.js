@@ -326,8 +326,8 @@ const AdmissionForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Are you a college student, working professional or graduated but
-            not working? <span className="text-red-500">*</span>
+            Are you a college student, working professional or graduated but not
+            working? <span className="text-red-500">*</span>
           </label>
           <select
             value={educationStatus}
@@ -352,8 +352,8 @@ const AdmissionForm = () => {
               className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
             />
             <span className="ml-2">
-              I hereby declare that the information provided is true to the best
-              of my knowledge. <span className="text-red-500">*</span>
+              I confirm the information is true.
+              <span className="text-red-500">*</span>
             </span>
           </label>
         </div>
