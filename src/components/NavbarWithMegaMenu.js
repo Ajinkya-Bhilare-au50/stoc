@@ -214,7 +214,7 @@ export function NavbarWithMegaMenu() {
   }, []);
 
   return (
-    <Navbar className="mx-auto max-w-full bg-indigo-50 py-2">
+    <Navbar className="mx-auto max-w-full bg-indigo-50 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Link to="/">
           <Typography

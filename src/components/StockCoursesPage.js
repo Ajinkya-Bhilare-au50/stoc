@@ -548,8 +548,8 @@ const StockCoursesPage = () => {
                               <AiFillStar className="text-yellow-500" />
                               <AiFillStar className="text-yellow-500" />
                               <AiFillStar className="text-gray-300" />
-                              <span className="ml-2 text-gray-600">
-                                {course.rating}
+                              <span className="ml-2 text-yellow-500">
+                                {course.rating}K
                               </span>
                             </div>
                             <div className="flex mt-2 space-x-4">
