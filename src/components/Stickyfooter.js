@@ -55,25 +55,14 @@ const StickyFooter = () => {
         >
           <div>
             <div className="flex justify-center md:justify-between m-2">
-              <motion.div
-                animate={{
-                  x: [-5, 5, 0],
-                }}
-                transition={{
-                  duration: 0.6,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                  repeatType: "loop",
-                }}
+              
+              <Link
+                to={"/enquiry"}
+                onClick={handleEnrollNow}
+                className="bg-yellow-800 hover:bg-yellow-900 px-2 py-1 rounded-md text-black"
               >
-                <Link
-                  to={"/enquiry"}
-                  onClick={handleEnrollNow}
-                  className="bg-yellow-800 hover:bg-yellow-900 px-2 py-1 rounded-md text-black"
-                >
-                  Enquire Now
-                </Link>
-              </motion.div>
+                Enquire Now
+              </Link>
             </div>
           </div>
           <div className="p-1 md:mb-0 md:mr-4 text-center md:text-left">

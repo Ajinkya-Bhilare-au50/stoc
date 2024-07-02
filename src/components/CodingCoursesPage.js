@@ -26,6 +26,7 @@ import {
 import AjinkyaProfile from "./AjinkyaProfile";
 import CodingReviews from "./CodingReviews";
 import SimpleSlider from "./SimpleSlider";
+import Stepper from "./Stepper";
 const formattedDate = new Date(
   Date.now() + 7 * 24 * 60 * 60 * 1000
 ).toLocaleDateString("en-US", {
@@ -317,6 +318,20 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
                   {course.instructorName}
                 </span>
               </div>
+              <div className="flex gap-2">
+                <Link
+                  to={"/enquiry"}
+                  className="bg-blue-500 text-white px-6 py-2 mt-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+                >
+                  Enquire Now
+                </Link>
+                <Link
+                  to="https://rzp.io/i/TY3pcckq2"
+                  className="inline-block border-2 border-blue-500 text-blue-500 px-6 py-2 mt-4 rounded-lg hover:bg-blue-500 hover:text-white transition-colors duration-300"
+                >
+                  Enroll
+                </Link>
+              </div>
             </motion.div>
           </motion.div>
         </TabPanel>
@@ -385,6 +400,7 @@ const CourseCard = ({ course, expandedModules, toggleModule }) => {
             animate="visible"
           >
             {course.howToUse}
+            <Stepper/>
           </motion.p>
         </TabPanel>
         <TabPanel>
