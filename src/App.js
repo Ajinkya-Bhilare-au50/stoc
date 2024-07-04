@@ -1,39 +1,30 @@
-import "./App.css";
-import Accordian from "./components/Accordian";
-import ContactUs from "./components/Contactus";
-import CourseList from "./components/Courselist";
-import Scrollindicator from "./components/ScrollIndicator";
-import DropdownMenu from "./components/Dropdownmenu";
-import Login from "./components/Login";
-import FAQSection from "./components/Faqsection";
-import Feedback from "./components/Feedback";
-import Feedbacksection from "./components/Feedbacksection";
-import HeroPage from "./components/Heropage";
-import IndicesData from "./components/Indicesdata";
-import Signup from "./components/Signup";
-import { NavbarWithMegaMenu } from "./components/NavbarWithMegaMenu";
-import OfferPopup from "./components/Offerpopup";
-import ScrollUpButton from "./components/Scrollupbutton";
-import StickyFooter from "./components/Stickyfooter";
-import TradingStats from "./components/TradingStats";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
+import NavbarWithMegaMenu from "./components/NavbarWithMegaMenu.js";
 import TradingViewTickerTape from "./components/TradingViewTickerTape";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-import AdmissionForm from "./components/AdmissionForm";
+import OfferPopup from "./components/Offerpopup";
+import HeroPage from "./components/Heropage.js";
+import Banner from "./components/Banner";
+import TradingStats from "./components/TradingStats";
+import StickyFooter from "./components/Stickyfooter";
+import ScrollUpButton from "./components/Scrollupbutton";
+import Scrollindicator from "./components/ScrollIndicator";
+import ContactUs from "./components/Contactus";
+import FAQSection from "./components/Faqsection";
+import Feedbacksection from "./components/Feedbacksection";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 import StockCoursesPage from "./components/StockCoursesPage";
 import CodingCoursesPage from "./components/CodingCoursesPage";
 import BlogPage from "./components/BlogPage";
 import SpecialOffer from "./components/SpecialOffer";
-import Banner from "./components/Banner";
-import CalendarSpreadGenerator from "./components/CalenderSpreadGenerator";
-import { Auth0Provider } from "@auth0/auth0-react";
+import AdmissionForm from "./components/AdmissionForm";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 const domain = "dev-wvhg0vqfxgkv3uhg.us.auth0.com"; // Replace with your Auth0 domain
 const clientId = "lh9hoOQ21ZmhRZyuGHnpGMLPM14vv9ss"; // Replace with your Auth0 client ID
-//routing implementation inside function named createBrowserRouter Pass object
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,7 +32,6 @@ const router = createBrowserRouter([
       <div>
         <NavbarWithMegaMenu />
         <TradingViewTickerTape />
-
         <OfferPopup />
         <HeroPage />
         <Banner />
@@ -81,7 +71,6 @@ const router = createBrowserRouter([
       <div>
         <NavbarWithMegaMenu />
         <SpecialOffer />
-
         <TradingStats />
       </div>
     ),
@@ -91,7 +80,6 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-
         <Feedbacksection />
         <TradingStats />
         <StickyFooter />
@@ -123,43 +111,38 @@ const router = createBrowserRouter([
   {
     path: "stockcoursepage",
     element: (
-      <div>
+      <ProtectedRoute>
         <NavbarWithMegaMenu />
-
         <StockCoursesPage />
-      </div>
+      </ProtectedRoute>
     ),
   },
   {
     path: "codingcoursespage",
     element: (
-      <div>
+      <ProtectedRoute>
         <NavbarWithMegaMenu />
-
         <CodingCoursesPage />
-      </div>
+      </ProtectedRoute>
     ),
   },
   {
     path: "blogpage",
     element: (
-      <div>
+      <ProtectedRoute>
         <NavbarWithMegaMenu />
         <OfferPopup />
-
         <BlogPage />
-      </div>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/enquiry",
     element: (
-      <div>
+      <ProtectedRoute>
         <NavbarWithMegaMenu />
-
-        {/* <AdmissionList />  */}
         <AdmissionForm />
-      </div>
+      </ProtectedRoute>
     ),
   },
 ]);
@@ -171,17 +154,14 @@ function App() {
         event.preventDefault();
       }}
     >
-      {/* wrapping inside Auth Provider */}
       <Auth0Provider
         domain={domain}
         clientId={clientId}
         authorizationParams={{
-          redirect_uri: "https://sniperscope.netlify.app",
+          redirect_uri: "https://sniperscope.netlify.app/",
         }}
       >
-        <RouterProvider router={router}>
-          <Route />
-        </RouterProvider>
+        <RouterProvider router={router} />
       </Auth0Provider>
     </div>
   );

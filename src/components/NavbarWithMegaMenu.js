@@ -207,7 +207,7 @@ function NavList() {
   );
 }
 
-export function NavbarWithMegaMenu() {
+function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -279,3 +279,4 @@ export function NavbarWithMegaMenu() {
     </Navbar>
   );
 }
+export default NavbarWithMegaMenu;
