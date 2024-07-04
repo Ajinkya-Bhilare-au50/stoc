@@ -46,7 +46,7 @@ const Stepper = () => {
 
   return (
     <div className="p-4">
-      <ul className="relative flex flex-row gap-x-2 mb-4">
+      <ul className="relative flex flex-col sm:flex-row gap-y-2 sm:gap-x-2 mb-4">
         {steps.map((step, index) => (
           <li
             key={index}
@@ -88,12 +88,11 @@ const Stepper = () => {
             <h3 className="text-gray-500 dark:text-neutral-500 mb-2">
               {step.heading}
             </h3>
-            {/* <img
+            <img
               src={step.image}
               alt={step.heading}
               className="w-32 h-32 mb-2"
-            /> */}
-            <p className="text-gray-500 dark:text-neutral-500">{``}</p>
+            />
           </div>
         ))}
 
