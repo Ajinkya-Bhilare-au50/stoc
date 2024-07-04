@@ -265,12 +265,16 @@ export function NavbarWithMegaMenu() {
       <Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
-            Log In
-          </Button>
-          <Button variant="gradient" size="sm" fullWidth>
-            Sign In
-          </Button>
+          <Link to="/login">
+            <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
+              Log In
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button variant="gradient" size="sm" fullWidth>
+              Sign Up
+            </Button>
+          </Link>
         </div>
       </Collapse>
     </Navbar>
