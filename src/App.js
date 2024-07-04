@@ -30,8 +30,9 @@ import BlogPage from "./components/BlogPage";
 import SpecialOffer from "./components/SpecialOffer";
 import Banner from "./components/Banner";
 import CalendarSpreadGenerator from "./components/CalenderSpreadGenerator";
-import AdmissionList from "./components/AdmissionList";
-
+import { Auth0Provider } from "@auth0/auth0-react";
+const domain = "dev-wvhg0vqfxgkv3uhg.us.auth0.com"; // Replace with your Auth0 domain
+const clientId = "lh9hoOQ21ZmhRZyuGHnpGMLPM14vv9ss"; // Replace with your Auth0 client ID
 //routing implementation inside function named createBrowserRouter Pass object
 const router = createBrowserRouter([
   {
@@ -155,10 +156,9 @@ const router = createBrowserRouter([
     element: (
       <div>
         <NavbarWithMegaMenu />
-        
 
         {/* <AdmissionList />  */}
-        <AdmissionForm/>
+        <AdmissionForm />
       </div>
     ),
   },
@@ -171,9 +171,18 @@ function App() {
         event.preventDefault();
       }}
     >
-      <RouterProvider router={router}>
-        <Route />
-      </RouterProvider>
+      {/* wrapping inside Auth Provider */}
+      <Auth0Provider
+        domain={domain}
+        clientId={clientId}
+        authorizationParams={{
+          redirect_uri: "https://sniperscope.netlify.app",
+        }}
+      >
+        <RouterProvider router={router}>
+          <Route />
+        </RouterProvider>
+      </Auth0Provider>
     </div>
   );
 }

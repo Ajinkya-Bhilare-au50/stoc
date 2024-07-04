@@ -32,6 +32,10 @@ import {
   TagIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import Profile from "./Profile";
+import AuthButtons from "./AuthButtons";
 
 const navListMenuItems = [
   {
@@ -237,17 +241,11 @@ export function NavbarWithMegaMenu() {
         <div className="hidden lg:block">
           <NavList />
         </div>
-        <div className="hidden gap-2 lg:flex">
-          <Link to="/Login">
-            <Button variant="text" size="sm" color="blue-gray">
-              Log In
-            </Button>
-          </Link>
-          <Link to="/signup">
-            <Button variant="gradient" size="sm">
-              Sign Up
-            </Button>
-          </Link>
+        <div className="hidden gap-2 lg:flex ">
+          {/* <LoginButton />
+          <Profile/>
+          <LogoutButton/> */}
+          <AuthButtons />
         </div>
         <IconButton
           variant="text"
@@ -265,7 +263,7 @@ export function NavbarWithMegaMenu() {
       <Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Link to="/login">
+          {/* <Link to="/login">
             <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
               Log In
             </Button>
@@ -274,7 +272,8 @@ export function NavbarWithMegaMenu() {
             <Button variant="gradient" size="sm" fullWidth>
               Sign Up
             </Button>
-          </Link>
+          </Link> */}
+          <AuthButtons />
         </div>
       </Collapse>
     </Navbar>
