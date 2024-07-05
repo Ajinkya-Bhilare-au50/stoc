@@ -139,10 +139,10 @@ const router = createBrowserRouter([
   {
     path: "/enquiry",
     element: (
-      <ProtectedRoute>
+      <>
         <NavbarWithMegaMenu />
         <AdmissionForm />
-      </ProtectedRoute>
+      </>
     ),
   },
 ]);
