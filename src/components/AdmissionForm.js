@@ -128,7 +128,7 @@ const AdmissionForm = () => {
       setDematAccount("");
       setEducationStatus("");
 
-      // Show thank you message for 4 seconds before redirecting
+      // Show thank you message for 3 seconds before redirecting
       setTimeout(() => {
         if (course === "Stock Courses") {
           navigate("/stockcoursepage");

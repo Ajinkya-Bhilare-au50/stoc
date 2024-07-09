@@ -1,169 +1,132 @@
-import React, { useEffect, useState } from "react";
-import Papa from "papaparse";
+import React, { useState } from "react";
+import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+import { MdOndemandVideo } from "react-icons/md";
+import { motion } from "framer-motion";
 
-const CSVTable = () => {
-  const [stockDetails, setStockDetails] = useState([]);
-  const [loading, setLoading] = useState(true);
+const tabVariants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: { opacity: 1, y: 0 },
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("./MW-NIFTY-50-29-Jun-2024.csv");
-        const reader = response.body.getReader();
-        const result = await reader.read();
-        const decoder = new TextDecoder("utf-8");
-        const csvData = decoder.decode(result.value);
+const CourseDetails = ({ course }) => {
+  const [expandedModules, setExpandedModules] = useState({});
 
-        // Parse CSV data using PapaParse
-        const parsedData = Papa.parse(csvData, { header: true }).data;
-
-        // Transform data into stockDetails array
-        const stockDetailsArray = parsedData.map((row) => ({
-          SYMBOL: row["SYMBOL"],
-          LTP: parseFloat(row["LTP"].replace(",", "")), // Assuming LTP is a numeric value
-          PercentageChange: parseFloat(
-            row["%CHNG"].replace(",", "").replace("%", "")
-          ),
-        }));
-
-        setStockDetails(stockDetailsArray);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching or parsing CSV data:", error);
-        setLoading(false); // Ensure loading state is set to false on error
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  // Function to determine brightness of the background color
-  const getBrightness = (hexColor) => {
-    const rgb = parseInt(hexColor.slice(1), 16); // Convert hex to RGB
-    const r = (rgb >> 16) & 0xff;
-    const g = (rgb >> 8) & 0xff;
-    const b = (rgb >> 0) & 0xff;
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b; // Calculate brightness
+  const toggleModule = (moduleIndex) => {
+    setExpandedModules((prev) => ({
+      ...prev,
+      [moduleIndex]: !prev[moduleIndex],
+    }));
   };
-
-  // Function to determine appropriate font color
-  const getFontColor = (backgroundColor) => {
-    return getBrightness(backgroundColor) > 128 ? "black" : "white";
-  };
-
-  const getColorForPercentageChange = (change) => {
-    const green = [
-      "#8fff8f",
-      "#85ff85",
-      "#7aff7a",
-      "#70ff70",
-      "#66ff66",
-      "#52ff52",
-      "#3dff3d",
-      "#33ff33",
-      "#00eb00",
-      "#009900",
-      "#008f00",
-      "#008500",
-      "#006600",
-      "#005c00",
-      "#005200",
-      "#003d00",
-      "#002900",
-      "#001f00",
-      "#001400",
-    ];
-
-    const red = [
-      "#ff8f8f",
-      "#ff8585",
-      "#ff7a7a",
-      "#ff7070",
-      "#ff6666",
-      "#ff5252",
-      "#ff3d3d",
-      "#ff3333",
-      "#eb0000",
-      "#990000",
-      "#8f0000",
-      "#850000",
-      "#660000",
-      "#5c0000",
-      "#520000",
-      "#3d0000",
-      "#290000",
-      "#1f0000",
-      "#140000",
-    ];
-
-    const numericChange = parseFloat(change);
-
-    if (numericChange === 0) {
-      return { backgroundColor: "white", color: "black" }; // No change, white background with black text
-    } else if (numericChange > 0) {
-      // Positive change, select from green array
-      let index = Math.min(Math.floor(numericChange * 10), green.length - 1);
-      const bgColor = green[index];
-      return { backgroundColor: bgColor, color: getFontColor(bgColor) };
-    } else {
-      // Negative change, select from red array
-      let absChange = Math.abs(numericChange);
-      let index = Math.min(Math.floor(absChange * 10), red.length - 1);
-      const bgColor = red[index];
-      return { backgroundColor: bgColor, color: getFontColor(bgColor) };
-    }
-  };
-
-  if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="container mx-auto my-1 p-2">
-      <div className="flex justify-center mb-8">
-        <img
-          src="https://nsearchives.nseindia.com/web/sites/default/files/2019-07/NSE_reverse%404x-100.jpg"
-          alt="Logo"
-          className="h-16 w-auto rounded-lg"
-        />
-      </div>
-      <h2 className="text-2xl font-bold mb-4 text-center">Live Data NSE</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {stockDetails.map((stock, index) => (
+    <div className="mt-4">
+      {course.syllabus.map((module, moduleIndex) => (
+        <motion.div
+          key={moduleIndex}
+          className="bg-gray-700 p-4 mb-4 rounded-lg"
+          initial="hidden"
+          animate="visible"
+          variants={tabVariants}
+        >
           <div
-            key={index}
-            style={getColorForPercentageChange(stock.PercentageChange)}
-            className={`rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-200 p-4`}
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => toggleModule(moduleIndex)}
           >
-            <div className="mb-2">
-              <div className="flex items-center">
-                <span className="font-semibold bg-gray-900 text-gray-100 px-3 py-1 rounded-lg mr-2">
-                  SYMBOL
-                </span>
-                <div className="flex items-center">{stock.SYMBOL}</div>
-              </div>
-            </div>
-            <div className="mb-2">
-              <div className="flex items-center">
-                <span className="font-semibold bg-gray-900 text-gray-100 px-3 py-1 rounded-lg mr-2">
-                  LTP
-                </span>
-                <div className="flex items-center">{stock.LTP}</div>
-              </div>
-            </div>
-            <div className="mb-2">
-              <div className="flex items-center">
-                <span className="font-semibold bg-gray-900 text-gray-100 px-3 py-1 rounded-lg mr-2">
-                  % Change
-                </span>
-                <div className="flex items-center">
-                  {stock.PercentageChange}%
-                </div>
-              </div>
-            </div>
+            <h3 className="text-lg font-bold text-yellow-300">
+              {module.title}
+            </h3>
+            <span className="text-yellow-300">
+              {expandedModules[moduleIndex] ? (
+                <BiChevronUp className="text-yellow-300" size={30} />
+              ) : (
+                <BiChevronDown className="text-yellow-300" size={30} />
+              )}
+            </span>
           </div>
-        ))}
-      </div>
+          {expandedModules[moduleIndex] && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: 1,
+                height: "auto",
+                transition: { duration: 0.5 },
+              }}
+              exit={{
+                opacity: 0,
+                height: 0,
+                transition: { duration: 0.5 },
+              }}
+              className="mt-2"
+            >
+              <p className="text-gray-400 mb-2">{module.description}</p>
+              <ul className="list-inside text-gray-400">
+                {module.topics.map((topic, topicIndex) => (
+                  <li key={topicIndex} className="flex flex-col mb-2">
+                    <div className="flex items-center">
+                      <MdOndemandVideo className="mr-2" />
+                      {topic.title}
+                    </div>
+                    {topic.subtopics && (
+                      <ul className="ml-6 list-disc">
+                        {topic.subtopics.map((subtopic, subtopicIndex) => (
+                          <li key={subtopicIndex}>{subtopic}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </motion.div>
+      ))}
     </div>
   );
 };
 
-export default CSVTable;
+// Example usage with course data
+const course = {
+  title: "Course 1: Introduction to Stock Market",
+  description: "Learn the basics of Stock Market investing.",
+  duration: "3 weeks",
+  price: "₹ 3999",
+  discountPercentage: 5,
+  instructor: "Ajinkya Sir",
+  enrollments: "12+",
+  instructorImage: "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg",
+  isTopSelling: true,
+  isTopTrending: false,
+  image:
+    "https://cdn.pixabay.com/photo/2024/01/06/02/44/ai-generated-8490532_640.png",
+  rating: "4.5",
+  reviews: 120,
+  syllabus: [
+    {
+      title: "Module 1: Overview of the Stock Market",
+      description:
+        "Introduction to the stock market, its functions, and key players.",
+      topics: [
+        {
+          title: "Stock exchanges",
+          subtopics: ["NYSE", "NASDAQ", "Tokyo Stock Exchange"],
+        },
+        {
+          title: "Market participants",
+          subtopics: ["Retail investors", "Institutional investors"],
+        },
+        {
+          title: "Types of stocks",
+          subtopics: ["Common stocks", "Preferred stocks"],
+        },
+      ],
+    },
+    // More modules here...
+  ],
+  howToUse:
+    "This course can be accessed through our online learning platform. Once enrolled, you will receive access to video lectures, reading materials, and assignments. Engage with fellow learners through discussion forums and track your progress via our interactive dashboard.",
+  QrImage: "qrCodeImage", // Placeholder for actual QR image data
+};
+
+export default function Test() {
+  return <CourseDetails course={course} />;
+}
