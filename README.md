@@ -1,138 +1,55 @@
-# Getting Started with Create React App
+# Sniper Coding & Trading — portal
 
-Atlassian design system
+React 19 + React Router 8 + Vite + Tailwind CSS. Authentication is handled by Auth0.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Run locally
 
-## Available Scripts
+Requires Node 22.22+ (see `.nvmrc`).
 
-In the project directory, you can run:
+```bash
+npm install
+npm run dev        # http://localhost:3001
+npm run build      # production build → ./build (Netlify publish dir)
+npm run preview    # serve the production build locally
+```
 
-### `npm start`
-Aanimate.CSS
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Auth0 setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Auth0 sends users back to whatever origin the app runs on, so **each origin
+must be allowed** in the Auth0 dashboard → Applications → this SPA → Settings.
+Add every origin (comma-separated) to all three fields:
 
-### `npm test`
+| Field                 | Values                                                        |
+| --------------------- | ------------------------------------------------------------- |
+| Allowed Callback URLs | `http://localhost:3001, https://sniperscope.netlify.app`      |
+| Allowed Logout URLs   | `http://localhost:3001, https://sniperscope.netlify.app`      |
+| Allowed Web Origins   | `http://localhost:3001, https://sniperscope.netlify.app`      |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Recommended: enable **Refresh Token Rotation** for the application so sessions
+survive reloads in browsers that block third-party cookies.
 
-### `npm run build`
+To point at a different tenant, copy `.env.example` to `.env.local` and edit it.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+src/
+  main.jsx              entry: mounts <RouterProvider>
+  router.jsx            all routes (lazy-loaded pages, auth guard, 404)
+  config/routes.js      URL constants — use these instead of string paths
+  config/auth.js        Auth0 domain / client id
+  auth/                 AuthProvider, useAuth hook, RequireAuth guard,
+                        /login & /signup redirect page, navbar auth controls
+  layouts/              RootLayout (auth + scroll restore), SiteLayout (navbar,
+                        optional popup/footer chosen per route via `handle.chrome`)
+  pages/                route-level compositions, 404 and error pages
+  components/ui/        shared primitives (Dropdown, Collapse, Spinner, …)
+  components/           page sections
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Adding a page
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
------------Inside App.JS--------------------------------------------------------
-<div>
-      <NavbarWithMegaMenu />
-      <OfferPopup />
-      <TradingViewTickerTape />
-      <HeroPage />
-
-      <ContactUs />
-
-      <FAQSection />
-      <Accordian />
-      <Feedbacksection />
-
-      <TradingStats />
-      <CourseList />
-
-      <StickyFooter />
-      <ScrollUpButton />
-    </div>
------------------------------------------------------------------------------------------------------------
-
-react Router Documentation
-
-import * as React from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <div>
-        <h1>Hello World</h1>
-        <Link to="about">About Us</Link>
-      </div>
-    ),
-  },
-  {
-    path: "about",
-    element: <div>About</div>,
-  },
-]);
-
-const App = () => (
-  <RouterProvider router={router}>
-    <Route />
-  </RouterProvider>
-);
-
-export default App;
-----------------------------------------------------------------------------------------------------------------
-Learning React Router Dom
-
-passing router object array in app.js as mentioned below
-    <div>
-      <RouterProvider router={router}>
-        <Route />
-      </RouterProvider>
-    </div>
-    ----------------------------------------------------------------------
-    https://tailwindflex.com/@anonymous/slider
+1. Add the path to `config/routes.js`.
+2. Add a route in `router.jsx` with `lazy: page(() => import("./pages/MyPage"))`.
+   Put it under the `RequireAuth` block if it needs a signed-in user.
+3. Opt into extra chrome with `handle: { chrome: { stickyFooter: true, offerPopup: true } }`.

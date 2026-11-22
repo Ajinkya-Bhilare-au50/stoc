@@ -1,7 +1,8 @@
+import withMT from "@material-tailwind/react/utils/withMT";
+
 /** @type {import('tailwindcss').Config} */
-const withMT = require("@material-tailwind/react/utils/withMT");
-module.exports = withMT({
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+export default withMT({
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
@@ -15,12 +16,8 @@ module.exports = withMT({
     function ({ addUtilities }) {
       addUtilities({
         ".hide-scrollbar": {
-          /* Firefox */
           "scrollbar-width": "none",
-          /* Safari and Chrome */
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
+          "&::-webkit-scrollbar": { display: "none" },
         },
       });
     },

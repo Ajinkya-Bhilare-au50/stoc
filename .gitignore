@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# vite
+/dist
+.env
+
+# personal notes (contains secrets) - never commit
+src/readme.md
