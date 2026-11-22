@@ -42,6 +42,11 @@ export const router = createBrowserRouter([
           },
           {
             path: ROUTES.nseStocks,
+            lazy: page(() => import("./features/market/NseMarketPage")),
+            handle: { chrome: { stickyFooter: true } },
+          },
+          {
+            path: ROUTES.contact,
             lazy: page(() => import("./components/Contactus")),
             handle: withFooter,
           },

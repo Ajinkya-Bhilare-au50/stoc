@@ -54,7 +54,7 @@ const menuItems = [
     title: "Support",
     description: "Reach out to us for assistance or inquiries",
     icon: GlobeAmericasIcon,
-    to: ROUTES.nseStocks,
+    to: ROUTES.contact,
   },
   {
     title: "FAQ",

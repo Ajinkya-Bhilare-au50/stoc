@@ -3,6 +3,7 @@
 export const ROUTES = {
   home: "/",
   nseStocks: "/nse-stocks",
+  contact: "/contact",
   faq: "/faq",
   specialOffer: "/specialoffer",
   testimonials: "/testimonial",

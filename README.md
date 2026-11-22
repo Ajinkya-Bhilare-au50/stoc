@@ -30,6 +30,19 @@ survive reloads in browsers that block third-party cookies.
 
 To point at a different tenant, copy `.env.example` to `.env.local` and edit it.
 
+## NSE market page (TejHQ)
+
+`/nse-stocks` shows end-of-day NSE data from [TejHQ](https://tejhq.dev): breadth, top
+gainers/losers, most active, stock search, price chart, 52-week range, corporate
+actions, and (with a key) delivery % and split-adjusted prices.
+
+- The browser only calls `/api/market/*`, served by `netlify/functions/market.mjs`
+  (and by the Vite dev server locally). The function holds the API key, trims the
+  ~650 KB daily snapshot to a small summary, and is cached at the Netlify CDN.
+- **API key:** set `TEJ_API_KEY` in Netlify → Project configuration → Environment
+  variables (and in `.env.local` for local dev). Never use a `VITE_` prefix for it.
+- Data is end of day (refreshed ~18:30 IST). TejHQ has no live quotes or index levels.
+
 ## Structure
 
 ```
