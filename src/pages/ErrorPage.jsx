@@ -20,7 +20,9 @@ export default function ErrorPage() {
       description={
         staleChunk
           ? "Reload the page to get the latest version of the site."
-          : "An unexpected error occurred. Please try again."
+          : import.meta.env.DEV
+            ? `[dev] ${error?.message ?? String(error)}`
+            : "An unexpected error occurred. Please try again."
       }
       action={{ label: "Reload page", onClick: () => window.location.reload() }}
     />

@@ -1,8 +1,11 @@
 import React from "react";
-import Slider from "react-slick";
+import SlickSlider from "react-slick";
+import { interopDefault } from "../lib/interopDefault";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+
+const Slider = interopDefault(SlickSlider);
 
 // Custom Next Arrow
 const NextArrow = (props) => {

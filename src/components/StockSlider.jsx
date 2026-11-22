@@ -1,8 +1,11 @@
 import React from "react";
-import Slider from "react-slick";
+import SlickSlider from "react-slick";
+import { interopDefault } from "../lib/interopDefault";
 import { TiArrowUpOutline, TiArrowDownOutline } from "react-icons/ti";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+const Slider = interopDefault(SlickSlider);
 
 const stocks = [
   {

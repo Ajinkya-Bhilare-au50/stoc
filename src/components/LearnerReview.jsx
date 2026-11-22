@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Rating from "@mui/material/Rating"; // Import Rating component from Material-UI
 import { FaPlus, FaMinus } from "react-icons/fa";
 import Collapse from "react-collapse";
-import ProgressBar from "@ramonak/react-progress-bar";
+import ProgressBarModule from "@ramonak/react-progress-bar";
+import { interopDefault } from "../lib/interopDefault";
 import { FaStar } from "react-icons/fa"; // Import the star icon from react-icons
 import AjinkyaProfile from "./AjinkyaProfile";
 import {
@@ -11,6 +12,7 @@ import {
   FaBalanceScale,
   FaLightbulb,
 } from "react-icons/fa";
+const ProgressBar = interopDefault(ProgressBarModule);
 const CourseStructure = () => {
   return (
     <div className="container mx-auto p-6">
