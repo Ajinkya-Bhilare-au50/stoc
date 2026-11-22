@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  # React Router 8 requires Node >= 22.22
+  NODE_VERSION = "24"
+
+# Single-page app: let the client-side router handle every path.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
