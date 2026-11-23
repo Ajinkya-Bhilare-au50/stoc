@@ -10,7 +10,7 @@ const BlogA = () => {
   };
 
   return (
-    <div className="w-full min-h-screen p-6 bg-white rounded-lg shadow-md mt-5">
+    <div className="w-full min-h-screen p-6 bg-card rounded-lg shadow-card mt-5">
       <h1 className="text-3xl font-bold text-ink mb-4 text-center pt-6">
         Rakesh Jhunjhunwala: The Success Story
       </h1>

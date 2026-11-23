@@ -10,7 +10,7 @@ const Blog2 = () => {
         </h1>
 
         {/* Introduction Section */}
-        <section className="bg-white shadow-md rounded-md p-6 mb-8">
+        <section className="bg-card shadow-card rounded-md p-6 mb-8">
           <img
             src="https://media4.manhattan-institute.org/sites/cj/files/economic-growth-is-still-our-best-hope.jpg"
             alt="Banner"
@@ -24,7 +24,7 @@ const Blog2 = () => {
         </section>
 
         {/* Wealth Creation Goals Section */}
-        <section className="bg-white shadow-md rounded-md p-6 mb-8">
+        <section className="bg-card shadow-card rounded-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Wealth Creation Goals</h2>
           <img
             src="https://ichef.bbci.co.uk/images/ic/1200xn/p0dx4pp0.jpg"
@@ -44,7 +44,7 @@ const Blog2 = () => {
         </section>
 
         {/* Retirement Planning Goals Section */}
-        <section className="bg-white shadow-md rounded-md p-6 mb-8">
+        <section className="bg-card shadow-card rounded-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Retirement Planning Goals</h2>
           <img
             src="https://parade.com/.image/t_share/MTkwNTgwOTM3NjIzMzQ5MTE2/retirement-wishes-feat.jpg"
@@ -64,7 +64,7 @@ const Blog2 = () => {
         </section>
 
         {/* Diversification Goals Section */}
-        <section className="bg-white shadow-md rounded-md p-6 mb-8">
+        <section className="bg-card shadow-card rounded-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Diversification Goals</h2>
           <img
             src="https://paytmblogcdn.paytm.com/wp-content/uploads/2023/09/Blog_Paytm_Portfolio-Diversification.jpg"
@@ -84,7 +84,7 @@ const Blog2 = () => {
         </section>
 
         {/* Conclusion Section */}
-        <section className="bg-white shadow-md rounded-md p-6 mb-8">
+        <section className="bg-card shadow-card rounded-md p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Conclusion</h2>
           <p className="text-lg leading-relaxed">
             Setting clear investing goals for 2024 is crucial for financial growth and stability. Whether

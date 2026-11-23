@@ -2,7 +2,7 @@ import React from "react";
 
 const Blog4 = () => {
   return (
-    <div className="w-full mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="w-full mx-auto p-6 bg-card rounded-lg shadow-card">
       <h1 className="text-3xl font-bold text-ink mb-4">
         The Billionaire Mindset: Unlocking the Secrets to Success
       </h1>

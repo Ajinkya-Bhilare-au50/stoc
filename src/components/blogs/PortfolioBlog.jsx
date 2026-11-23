@@ -3,7 +3,7 @@ import React from "react";
 function PortfolioBlog() {
   return (
     <div className="bg-surface min-h-screen flex items-center justify-center py-8">
-      <div className="container mx-auto px-4 py-8 bg-white shadow-lg rounded-lg">
+      <div className="container mx-auto px-4 py-8 bg-card shadow-card rounded-lg">
         <h1 className="text-3xl font-bold mb-4 text-center text-accent">
           Conquering the Market: Your Guide to Portfolio Management
         </h1>

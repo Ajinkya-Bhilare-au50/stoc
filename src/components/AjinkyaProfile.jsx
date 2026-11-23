@@ -1,87 +1,7 @@
-import React from "react";
-import { FaStar } from "react-icons/fa"; // Import the star icon from react-icons library
-import MySVGComponent from "./MySvgComponent";
+import { StarIcon } from "@heroicons/react/24/solid";
 const profileImage = "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg";
 
-const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
-  <div className="bg-[#231E39] rounded-lg shadow-md p-6 relative">
-    <div className="absolute bottom-2 right-2">
-      <MySVGComponent />
-    </div>
-    <div className="items-center">
-      <div className="flex justify-center items-center relative">
-        <img src={profileImage} alt={name} className="w-20 h-20 rounded-full mr-4" />
-        {/* Online status dot */}
-        {/* <div className="absolute top-0 right-0 -mt-1 -mr-1 w-4 h-4 bg-up rounded-full border-2 border-white"></div> */}
-      </div>
-      <div>
-        <h1 className="text-3xl font-bold text-white p-2 text-center">{name}</h1>
-        <div className="flex justify-center items-center">
-          <div className="flex justify-center items-center">
-            <img
-              className="h-10 m-3"
-              src="https://cdn.iconscout.com/icon/free/png-256/free-google-160-189824.png"
-              alt=""
-            />
-          </div>
-          <div className="flex items-center">
-            <div className="flex flex-col justify-center">
-              <div className="flex">
-                <FaStar className="text-warn" />
-                <FaStar className="text-warn" />
-                <FaStar className="text-warn" />
-                <FaStar className="text-warn" />
-                <FaStar className="text-ink-subtle" />
-              </div>
-              <p className="text-warn text-center">ratings</p>
-            </div>
-            <span className="text-lg text-warn font-semibold p-2">{rating}k</span>
-          </div>
-        </div>
-        <div className="bg-white rounded-lg shadow-md p-2">
-          <p className="text-2xl text-center font-semibold text-ink mb-1">Course Stats</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <div className="flex flex-col items-center justify-center bg-[#231E39] p-4 rounded-md shadow-sm">
-              <span className="text-2xl text-accent font-bold">{reviews}</span>
-              <p className="text-sm text-white">Reviews</p>
-            </div>
-            <div className="flex flex-col items-center justify-center bg-[#231E39] p-4 rounded-md shadow-sm">
-              <span className="text-2xl text-up font-bold">{students}</span>
-              <p className="text-sm text-white">Students</p>
-            </div>
-            <div className="flex flex-col items-center justify-center bg-[#231E39] p-4 rounded-md shadow-sm">
-              <span className="text-2xl text-warn font-bold">{courses}</span>
-              <p className="text-sm text-white">Courses</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-const Sidebara = ({ bio }) => (
-  <div className="mt-4">
-    <h2 className="text-lg font-semibold mb-2 text-black">About Instructor</h2>
-    <p className="text-ink">{bio}</p>
-    {/* Add more Sidebara content as needed */}
-  </div>
-);
-
-const MainContent = ({ accomplishments }) => (
-  <div className="mt-4">
-    <h2 className="text-lg font-semibold mb-2">Accomplishments</h2>
-    <ul className="list-disc pl-4">
-      {accomplishments.map((item, index) => (
-        <li key={index} className="text-ink">
-          {item}
-        </li>
-      ))}
-    </ul>
-    {/* Add more main content sections */}
-  </div>
-);
-
+/** Instructor card: identity, rating, stats, bio and accomplishments. */
 const AjinkyaProfile = () => {
   const profileData = {
     name: "Ajinkya Bhilare",
@@ -97,19 +17,50 @@ const AjinkyaProfile = () => {
     ],
   };
 
+  const stats = [
+    { label: "Reviews", value: profileData.reviews },
+    { label: "Students", value: profileData.students.toLocaleString("en-IN") },
+    { label: "Courses", value: profileData.courses },
+  ];
+
   return (
-    <div className="mx-auto max-w-lg">
-      <ProfileHeader
-        name={profileData.name}
-        rating={profileData.rating}
-        reviews={profileData.reviews}
-        students={profileData.students}
-        courses={profileData.courses}
-      />
-      <div className="mt-6">
-        <Sidebara bio={profileData.bio} />
-        <MainContent accomplishments={profileData.accomplishments} />
+    <div className="card">
+      <div className="flex items-center gap-4">
+        <img
+          src={profileImage}
+          alt=""
+          className="h-16 w-16 rounded-full object-cover ring-2 ring-accent/50"
+        />
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wider text-ink-subtle">Your instructor</p>
+          <h2 className="text-xl font-bold text-ink">{profileData.name}</h2>
+          <p className="mt-0.5 flex items-center gap-1 text-sm text-ink-muted">
+            <StarIcon className="h-4 w-4 text-warn" aria-hidden />
+            <span className="font-semibold text-ink">{profileData.rating}</span> instructor rating
+          </p>
+        </div>
       </div>
+
+      <dl className="mt-5 grid grid-cols-3 gap-2">
+        {stats.map(({ label, value }) => (
+          <div key={label} className="tile px-2 text-center">
+            <dd className="text-lg font-bold tabular-nums text-ink">{value}</dd>
+            <dt className="text-xs text-ink-subtle">{label}</dt>
+          </div>
+        ))}
+      </dl>
+
+      <p className="mt-5 text-sm leading-6 text-ink-muted">{profileData.bio}</p>
+
+      <h3 className="mt-5 text-sm font-semibold text-ink">Accomplishments</h3>
+      <ul className="mt-2 space-y-1.5">
+        {profileData.accomplishments.map((item) => (
+          <li key={item} className="flex gap-2 text-sm text-ink-muted">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

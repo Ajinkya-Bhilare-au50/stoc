@@ -60,13 +60,13 @@ function StockSlider() {
             } p-4 rounded-lg `}
           >
             <div className="flex justify-center items-center md:flex-none md:justify-start ">
-              <img src={stock.image} alt={stock.name} className="w-20 h-20 rounded-xl m-2 shadow-md" />
+              <img src={stock.image} alt={stock.name} className="w-20 h-20 rounded-xl m-2 shadow-card" />
             </div>
-            <h2 className="text-xl text-black font-body text-center md:text-left">{stock.name}</h2>
+            <h2 className="text-xl text-ink font-body text-center md:text-left">{stock.name}</h2>
             <div className="flex justify-center items-center gap-2 font-bold md:flex-none md:items-center md:gap-2 md:font-bold md:justify-start">
               <p className="text-lg text-ink-muted text-center md:text-start">{stock.price}</p>
               <div className="gap-2 justify-center items-center ">
-                <p className={`text-sm  flex items-center ${stock.change > 0 ? "text-up" : "text-down"}`}>
+                <p className={`text-sm flex items-center ${stock.change > 0 ? "text-up" : "text-down"}`}>
                   {stock.change > 0 ? `+${stock.change}%` : `${stock.change}%`}
                   {stock.change > 0 ? (
                     <TiArrowUpOutline className="ml-1 text-up" />

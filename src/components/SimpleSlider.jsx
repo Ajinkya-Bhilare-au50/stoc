@@ -45,7 +45,7 @@ const SimpleSlider = () => {
   };
 
   return (
-    <Slider {...settings} className="mx-6 border bg-white shadow-md rounded-lg">
+    <Slider {...settings} className="mx-6 border bg-card shadow-card rounded-lg">
       <div className="flex flex-col items-center p-4">
         <img
           src={"https://www.alphacodingskills.com/imgfiles/linked-list.PNG"}
@@ -59,7 +59,7 @@ const SimpleSlider = () => {
           lists allow for dynamic memory allocation and efficient insertion and deletion operations.
         </p>
       </div>
-      <div className="flex flex-col items-center p-4 bg-white">
+      <div className="flex flex-col items-center p-4 bg-card">
         <img
           src={"https://introprogramming.info/wp-content/uploads/2013/07/clip_image00213.png"}
           alt="Coding 2"
@@ -96,7 +96,7 @@ const SimpleSlider = () => {
           </ul>
         </p>
       </div>
-      <div className="flex flex-col items-center p-4 bg-white">
+      <div className="flex flex-col items-center p-4 bg-card">
         <img
           src={
             "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221213113312/Queue-Data-Structures.png"
@@ -110,7 +110,7 @@ const SimpleSlider = () => {
           like a line where elements are added at one end (rear) and removed from the other end (front).
         </p>
       </div>
-      <div className="flex flex-col items-center p-4 bg-white">
+      <div className="flex flex-col items-center p-4 bg-card">
         <img
           src={"https://cdn.programiz.com/sites/tutorial2program/files/stack.png"}
           alt="Coding 2"
@@ -123,7 +123,7 @@ const SimpleSlider = () => {
           from the top.
         </p>
       </div>
-      <div className="flex flex-col items-center p-4 bg-white">
+      <div className="flex flex-col items-center p-4 bg-card">
         <img
           src={"https://static.javatpoint.com/ds/images/hash-table.png"}
           alt="Coding 2"

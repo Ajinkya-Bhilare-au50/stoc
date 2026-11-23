@@ -20,7 +20,7 @@ const ReviewsUser = ({ name, rating, reviewContent, imageUrl }) => {
   const initials = firstName.charAt(0).toUpperCase() + (lastName ? lastName.charAt(0).toUpperCase() : "");
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex items-start">
+    <div className="bg-card shadow-card rounded-lg p-6 mb-4 flex items-start">
       <div className="">
         <div className="items-center mb-4 ">
           <div className="flex items-start p-2 gap-4 ">

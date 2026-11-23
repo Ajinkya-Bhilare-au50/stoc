@@ -141,7 +141,7 @@ const BlogPage = () => {
           <Blog3 />
           <Blog4 />
           <motion.div
-            className="w-full mx-auto px-4 py-8 bg-white rounded-lg shadow-lg border border-line"
+            className="w-full mx-auto px-4 py-8 bg-card rounded-lg shadow-card border border-line"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -151,7 +151,7 @@ const BlogPage = () => {
               {blogs.map((blog, index) => (
                 <motion.div
                   key={index}
-                  className={`bg-white rounded-lg shadow-lg border border-line transition-transform transform ${
+                  className={`bg-card rounded-lg shadow-card border border-line transition-transform transform ${
                     expandedBlogIndex === index ? "bg-warn/10" : "hover:scale-105"
                   }`}
                   variants={itemVariants}

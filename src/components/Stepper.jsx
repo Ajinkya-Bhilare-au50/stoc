@@ -89,7 +89,7 @@ const Stepper = () => {
         <div className="mt-5 flex justify-between items-center gap-x-2">
           <button
             type="button"
-            className="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-line bg-white text-ink shadow-sm hover:bg-surface disabled:opacity-50 disabled:pointer-events-none"
+            className="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-line bg-card text-ink shadow-sm hover:bg-surface disabled:opacity-50 disabled:pointer-events-none"
             onClick={handleBack}
             disabled={currentStep === 0}
           >

@@ -1,135 +1,88 @@
-import React, { useState, useEffect } from "react";
-import { AiOutlineClose, AiOutlineNotification } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+import { BellAlertIcon, CalendarDaysIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ROUTES } from "../config/routes";
 
-const Drawer = ({ courseType, batchStartInfo }) => {
+/** "Next batch" notice: button with a badge that opens a slide-over panel. */
+const Drawer = ({ courseType }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [commencementDate, setCommencementDate] = useState("");
 
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen);
-  };
+  const commencementDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-IN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   useEffect(() => {
-    const today = new Date();
-    const oneWeekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-    const formattedDate = oneWeekLater.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    setCommencementDate(formattedDate);
-  }, []);
+    if (!isOpen) return undefined;
+    const onKey = (e) => e.key === "Escape" && setIsOpen(false);
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
-    <div className="relative">
-      <button
-        onClick={toggleDrawer}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "start",
-          padding: "8px 16px",
-          backgroundColor: "#FFD700",
-          color: "#000",
-          borderRadius: "8px",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-          outline: "none",
-          position: "relative",
-        }}
-      >
-        <span
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            marginTop: "-4px",
-            marginRight: "-4px",
-            backgroundColor: "#FF0000",
-            color: "#FFF",
-            padding: "4px 8px",
-            borderRadius: "50%",
-            fontSize: "12px",
-            fontWeight: "600",
-            width: "20px", // Adjust the width and height to make it circular
-            height: "20px", // Adjust the width and height to make it circular
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+    <>
+      <button type="button" onClick={() => setIsOpen(true)} className="btn btn-secondary relative">
+        <BellAlertIcon className="h-5 w-5 text-warn" aria-hidden />
+        Next batch
+        <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-down text-[11px] font-bold text-white">
           1
         </span>
-        <AiOutlineNotification size={34} style={{ marginRight: "8px" }} />
-        <span style={{ fontSize: "1.25rem", fontWeight: "600" }}></span>
       </button>
+
       {isOpen && (
         <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            zIndex: 40,
-          }}
+          className="fixed inset-0 z-50 flex justify-end"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="batch-title"
         >
-          <div
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              width: "100%",
-              height: "100%",
-              position: "absolute",
-              right: 0,
-            }}
-            onClick={toggleDrawer}
-          ></div>
-          <div
-            style={{
-              backgroundColor: "#EEE",
-              width: "100%", // Full width on mobile
-              maxWidth: "320px", // Maximum width on larger screens
-              position: "absolute",
-              right: 0,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              padding: "16px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "16px",
-                  padding: "8px",
-                  backgroundColor: "#000",
-                }}
+          <button
+            type="button"
+            className="absolute inset-0 bg-canvas/70 backdrop-blur-sm"
+            aria-label="Close"
+            onClick={() => setIsOpen(false)}
+          />
+          <div className="relative flex h-full w-full max-w-sm flex-col border-l border-line bg-card p-6 shadow-pop motion-safe:animate-[toast-in_250ms_ease-out]">
+            <div className="flex items-center justify-between">
+              <h2 id="batch-title" className="text-lg font-semibold text-ink">
+                New batch start date
+              </h2>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="btn btn-ghost h-9 w-9 px-0"
+                aria-label="Close"
               >
-                <h2
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                    color: "#FFF",
-                  }}
-                >
-                  New Batch Start Date
-                </h2>
-                <button onClick={toggleDrawer}>
-                  <AiOutlineClose size={24} style={{ color: "#fff" }} />
-                </button>
-              </div>
-              <p style={{ fontSize: "1rem", color: "#333" }}>
-                {courseType} Batches will Start from {commencementDate}. Enroll now!
-              </p>
+                <XMarkIcon className="h-5 w-5" />
+              </button>
             </div>
-            <p style={{ fontSize: "0.875rem", color: "#555" }}>Commencement Date: {commencementDate}</p>
+            <div className="tile mt-6 flex items-center gap-3">
+              <CalendarDaysIcon className="h-6 w-6 text-accent" aria-hidden />
+              <div>
+                <p className="text-xs text-ink-subtle">Commencement date</p>
+                <p className="font-semibold text-ink">{commencementDate}</p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm text-ink-muted">
+              {courseType} batches start from {commencementDate}. Seats are limited — enrol now to reserve
+              yours.
+            </p>
+            <Link
+              to={ROUTES.enquiry}
+              className="btn btn-primary mt-auto w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              Reserve a seat
+            </Link>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
