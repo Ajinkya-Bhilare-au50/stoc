@@ -16,7 +16,9 @@ export default function Breadth({ breadth }) {
         </div>
         <div className="text-center">
           <dt className="text-xs text-market-subtle">Unchanged</dt>
-          <dd className="font-semibold tabular-nums text-market-muted">{unchanged.toLocaleString("en-IN")}</dd>
+          <dd className="font-semibold tabular-nums text-market-muted">
+            {unchanged.toLocaleString("en-IN")}
+          </dd>
         </div>
         <div className="text-right">
           <dt className="text-xs text-market-subtle">Declines</dt>

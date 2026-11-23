@@ -1,6 +1,6 @@
 import React from "react";
 import { FaStar } from "react-icons/fa"; // Import the star icon from react-icons library
-import MySVGComponent from "./MySvgComponent"
+import MySVGComponent from "./MySvgComponent";
 const profileImage = "https://cdn.devdojo.com/users/August2022/ajinkya0011.jpg";
 
 const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
@@ -10,18 +10,12 @@ const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
     </div>
     <div className="items-center">
       <div className="flex justify-center items-center relative">
-        <img
-          src={profileImage}
-          alt={name}
-          className="w-20 h-20 rounded-full mr-4"
-        />
+        <img src={profileImage} alt={name} className="w-20 h-20 rounded-full mr-4" />
         {/* Online status dot */}
-        {/* <div className="absolute top-0 right-0 -mt-1 -mr-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div> */}
+        {/* <div className="absolute top-0 right-0 -mt-1 -mr-1 w-4 h-4 bg-up rounded-full border-2 border-white"></div> */}
       </div>
       <div>
-        <h1 className="text-3xl font-bold text-white p-2 text-center">
-          {name}
-        </h1>
+        <h1 className="text-3xl font-bold text-white p-2 text-center">{name}</h1>
         <div className="flex justify-center items-center">
           <div className="flex justify-center items-center">
             <img
@@ -33,40 +27,30 @@ const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
           <div className="flex items-center">
             <div className="flex flex-col justify-center">
               <div className="flex">
-                <FaStar className="text-yellow-500" />
-                <FaStar className="text-yellow-500" />
-                <FaStar className="text-yellow-500" />
-                <FaStar className="text-yellow-500" />
-                <FaStar className="text-gray-500" />
+                <FaStar className="text-warn" />
+                <FaStar className="text-warn" />
+                <FaStar className="text-warn" />
+                <FaStar className="text-warn" />
+                <FaStar className="text-ink-subtle" />
               </div>
-              <p className="text-yellow-500 text-center">ratings</p>
+              <p className="text-warn text-center">ratings</p>
             </div>
-            <span className="text-lg text-yellow-500 font-semibold p-2">
-              {rating}k
-            </span>
+            <span className="text-lg text-warn font-semibold p-2">{rating}k</span>
           </div>
         </div>
         <div className="bg-white rounded-lg shadow-md p-2">
-          <p className="text-2xl text-center font-semibold text-gray-800 mb-1">
-            Course Stats
-          </p>
+          <p className="text-2xl text-center font-semibold text-ink mb-1">Course Stats</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <div className="flex flex-col items-center justify-center bg-[#231E39] p-4 rounded-md shadow-sm">
-              <span className="text-2xl text-blue-600 font-bold">
-                {reviews}
-              </span>
+              <span className="text-2xl text-accent font-bold">{reviews}</span>
               <p className="text-sm text-white">Reviews</p>
             </div>
             <div className="flex flex-col items-center justify-center bg-[#231E39] p-4 rounded-md shadow-sm">
-              <span className="text-2xl text-green-600 font-bold">
-                {students}
-              </span>
+              <span className="text-2xl text-up font-bold">{students}</span>
               <p className="text-sm text-white">Students</p>
             </div>
             <div className="flex flex-col items-center justify-center bg-[#231E39] p-4 rounded-md shadow-sm">
-              <span className="text-2xl text-yellow-300 font-bold">
-                {courses}
-              </span>
+              <span className="text-2xl text-warn font-bold">{courses}</span>
               <p className="text-sm text-white">Courses</p>
             </div>
           </div>
@@ -79,7 +63,7 @@ const ProfileHeader = ({ name, rating, reviews, students, courses }) => (
 const Sidebara = ({ bio }) => (
   <div className="mt-4">
     <h2 className="text-lg font-semibold mb-2 text-black">About Instructor</h2>
-    <p className="text-gray-900">{bio}</p>
+    <p className="text-ink">{bio}</p>
     {/* Add more Sidebara content as needed */}
   </div>
 );
@@ -89,7 +73,7 @@ const MainContent = ({ accomplishments }) => (
     <h2 className="text-lg font-semibold mb-2">Accomplishments</h2>
     <ul className="list-disc pl-4">
       {accomplishments.map((item, index) => (
-        <li key={index} className="text-gray-900">
+        <li key={index} className="text-ink">
           {item}
         </li>
       ))}

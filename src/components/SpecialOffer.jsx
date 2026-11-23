@@ -5,7 +5,11 @@ import { ROUTES } from "../config/routes";
 
 const OFFER_DAYS = 2;
 const DISCOUNT = 5;
-const INCLUDES = ["All premium stock market courses", "Coding & web development courses", "Learning paths and PRO plans"];
+const INCLUDES = [
+  "All premium stock market courses",
+  "Coding & web development courses",
+  "Learning paths and PRO plans",
+];
 
 function timeLeft(end) {
   const diff = Math.max(0, end - Date.now());
@@ -28,7 +32,11 @@ export default function SpecialOffer() {
     return () => clearInterval(t);
   }, [end]);
 
-  const endLabel = new Date(end).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  const endLabel = new Date(end).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 
   return (
     <section className="section">
@@ -39,7 +47,9 @@ export default function SpecialOffer() {
             <div>
               <span className="badge badge-warn">Limited time</span>
               <h1 className="page-title mt-4">Special offer: {DISCOUNT}% off premium courses</h1>
-              <p className="lead mt-3">Enrol before the offer ends and save on any course or learning path.</p>
+              <p className="lead mt-3">
+                Enrol before the offer ends and save on any course or learning path.
+              </p>
 
               <ul className="mt-6 space-y-2.5">
                 {INCLUDES.map((line) => (
@@ -68,7 +78,9 @@ export default function SpecialOffer() {
               <dl className="grid grid-cols-4 gap-2" aria-label="Time left">
                 {Object.entries(left).map(([unit, value]) => (
                   <div key={unit} className="tile w-16 px-2 text-center">
-                    <dd className="text-xl font-bold tabular-nums text-ink">{String(value).padStart(2, "0")}</dd>
+                    <dd className="text-xl font-bold tabular-nums text-ink">
+                      {String(value).padStart(2, "0")}
+                    </dd>
                     <dt className="text-[11px] uppercase tracking-wide text-ink-subtle">{unit}</dt>
                   </div>
                 ))}

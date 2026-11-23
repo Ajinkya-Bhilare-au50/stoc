@@ -6,8 +6,7 @@ import Spinner from "./Spinner";
  * `action` is either { label, onClick } or { label, to }.
  */
 export default function FullPageMessage({ loading = false, title, description, action, code }) {
-  const actionClass =
-    "btn btn-primary mt-6";
+  const actionClass = "btn btn-primary mt-6";
 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 py-16 text-center">

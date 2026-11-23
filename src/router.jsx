@@ -40,11 +40,19 @@ export const router = createBrowserRouter([
             lazy: page(sections, "HomePage"),
             handle: { chrome: { ...marketing.chrome, tickerTape: true } },
           },
-          { path: ROUTES.market, lazy: page(() => import("./features/market/NseMarketPage")), handle: standard },
+          {
+            path: ROUTES.market,
+            lazy: page(() => import("./features/market/NseMarketPage")),
+            handle: standard,
+          },
           { path: ROUTES.faq, lazy: page(sections, "FaqPage"), handle: marketing },
           { path: ROUTES.specialOffer, lazy: page(sections, "SpecialOfferPage"), handle: standard },
           { path: ROUTES.testimonials, lazy: page(sections, "TestimonialsPage"), handle: marketing },
-          { path: ROUTES.enquiry, lazy: page(() => import("./components/AdmissionForm")), handle: { chrome: { scrollWidgets: true } } },
+          {
+            path: ROUTES.enquiry,
+            lazy: page(() => import("./components/AdmissionForm")),
+            handle: { chrome: { scrollWidgets: true } },
+          },
           { path: ROUTES.contact, lazy: page(() => import("./components/Contactus")), handle: standard },
           { path: ROUTES.login, element: <AuthRedirectPage mode="login" /> },
           { path: ROUTES.signup, element: <AuthRedirectPage mode="signup" /> },
@@ -53,8 +61,16 @@ export const router = createBrowserRouter([
           {
             element: <RequireAuth />,
             children: [
-              { path: ROUTES.stockCourses, lazy: page(() => import("./components/StockCoursesPage")), handle: standard },
-              { path: ROUTES.codingCourses, lazy: page(() => import("./components/CodingCoursesPage")), handle: standard },
+              {
+                path: ROUTES.stockCourses,
+                lazy: page(() => import("./components/StockCoursesPage")),
+                handle: standard,
+              },
+              {
+                path: ROUTES.codingCourses,
+                lazy: page(() => import("./components/CodingCoursesPage")),
+                handle: standard,
+              },
               { path: ROUTES.blog, lazy: page(() => import("./components/BlogPage")), handle: marketing },
             ],
           },

@@ -21,8 +21,7 @@ const reviewsData = [
   {
     name: "Alok S.",
     rating: 4.5,
-    reviewContent:
-      "Course is more on practical rather theoretical, It helps on screening stocks ",
+    reviewContent: "Course is more on practical rather theoretical, It helps on screening stocks ",
   },
   {
     name: "Anurag M.",
@@ -73,8 +72,7 @@ const reviewsData = [
     rating: 5,
     reviewContent:
       "I am a beginner and its good learning. new concept learned , doubts cleared. Hope this course will help to buy good business",
-    imageUrl:
-      "https://miro.medium.com/v2/resize:fit:2400/1*8gue6aIsPhY82XRPfHPNDQ@2x.jpeg",
+    imageUrl: "https://miro.medium.com/v2/resize:fit:2400/1*8gue6aIsPhY82XRPfHPNDQ@2x.jpeg",
   },
   {
     name: "Abderrahmane D",
@@ -100,8 +98,7 @@ const reviewsData = [
   {
     name: "Ravi S.",
     rating: 4,
-    reviewContent:
-      "Great course overall, but I would have liked more real-world examples and case studies.",
+    reviewContent: "Great course overall, but I would have liked more real-world examples and case studies.",
     imageUrl: "",
   },
   {

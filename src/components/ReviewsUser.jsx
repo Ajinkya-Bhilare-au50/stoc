@@ -17,14 +17,12 @@ const ReviewsUser = ({ name, rating, reviewContent, imageUrl }) => {
 
   // Extract first letter of name and surname
   const [firstName, lastName] = name.split(" ");
-  const initials =
-    firstName.charAt(0).toUpperCase() +
-    (lastName ? lastName.charAt(0).toUpperCase() : "");
+  const initials = firstName.charAt(0).toUpperCase() + (lastName ? lastName.charAt(0).toUpperCase() : "");
 
   return (
-    <div className="bg-white   shadow-md rounded-lg p-6 mb-4 flex items-start">
+    <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex items-start">
       <div className="">
-        <div className=" items-center mb-4 ">
+        <div className="items-center mb-4 ">
           <div className="flex items-start p-2 gap-4 ">
             {imageUrl ? (
               <img
@@ -34,25 +32,19 @@ const ReviewsUser = ({ name, rating, reviewContent, imageUrl }) => {
                 style={{ width: "40px", height: "40px" }}
               />
             ) : (
-              <div className="bg-red-900" style={avatarStyle}>
+              <div className="bg-down" style={avatarStyle}>
                 {initials}
               </div>
             )}
             <div>
               <h3 className="text-sm font-semibold pl-1 ">{name}</h3>
               <div>
-                <Rating
-                  name="read-only"
-                  value={rating}
-                  readOnly
-                  precision={0.5}
-                  size="medium"
-                />
+                <Rating name="read-only" value={rating} readOnly precision={0.5} size="medium" />
               </div>
             </div>
           </div>
         </div>
-        <p className="text-gray-700">{reviewContent}</p>
+        <p className="text-ink-muted">{reviewContent}</p>
       </div>
     </div>
   );

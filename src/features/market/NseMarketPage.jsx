@@ -29,7 +29,9 @@ export default function NseMarketPage() {
         {/* Header */}
         <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-market-cyan">NSE · Equities</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-market-cyan">
+              NSE · Equities
+            </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Market overview</h1>
             <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-market-muted">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-market-border bg-market-card px-2.5 py-0.5 text-xs font-medium">
@@ -72,7 +74,9 @@ export default function NseMarketPage() {
                 <h2 className="text-sm font-semibold text-market-muted">Total value traded</h2>
                 {data ? (
                   <>
-                    <p className="mt-3 text-3xl font-bold tabular-nums">{formatRupeesCompact(data.totalTurnover)}</p>
+                    <p className="mt-3 text-3xl font-bold tabular-nums">
+                      {formatRupeesCompact(data.totalTurnover)}
+                    </p>
                     <p className="mt-1 text-xs text-market-subtle">
                       Across {data.breadth.total.toLocaleString("en-IN")} EQ-series stocks
                     </p>
@@ -103,7 +107,12 @@ export default function NseMarketPage() {
 
         <p className="mt-10 text-center text-xs leading-relaxed text-market-subtle">
           End-of-day data from NSE bhavcopy via{" "}
-          <a href="https://tejhq.dev" target="_blank" rel="noreferrer" className="underline hover:text-market-muted">
+          <a
+            href="https://tejhq.dev"
+            target="_blank"
+            rel="noreferrer"
+            className="underline hover:text-market-muted"
+          >
             TejHQ
           </a>
           , updated after market close (~6:30 PM IST). For education only — not investment advice.

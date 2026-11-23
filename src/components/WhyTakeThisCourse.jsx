@@ -19,23 +19,12 @@ const WhyTakeThisCourse = () => {
   };
 
   return (
-    <div
-      className={
-        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-      }
-    >
+    <div className={isDarkMode ? "bg-card text-white" : "bg-white text-ink"}>
       <div className="container mx-auto p-6 sm:p-8 lg:p-10 m-1">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-bold">Why Should I Take This Course?</h2>
-          <button
-            className="p-2 rounded-full focus:outline-none"
-            onClick={toggleDarkMode}
-          >
-            {isDarkMode ? (
-              <FaSun className="text-yellow-500" />
-            ) : (
-              <FaMoon className="text-gray-900" />
-            )}
+          <button className="p-2 rounded-full focus:outline-none" onClick={toggleDarkMode}>
+            {isDarkMode ? <FaSun className="text-warn" /> : <FaMoon className="text-ink" />}
           </button>
         </div>
         <ul className="list-disc pl-6 space-y-2">

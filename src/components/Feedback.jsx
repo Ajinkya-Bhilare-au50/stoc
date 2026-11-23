@@ -14,7 +14,9 @@ const Feedback = ({ name, role, avatarUrl, rating, content, googleicon }) => (
         <p className="truncate text-sm font-semibold text-ink">{name}</p>
         <p className="truncate text-xs text-ink-subtle">{role}</p>
       </figcaption>
-      {googleicon && <img src={googleicon} alt="Google review" className="h-5 w-5 shrink-0 opacity-90" loading="lazy" />}
+      {googleicon && (
+        <img src={googleicon} alt="Google review" className="h-5 w-5 shrink-0 opacity-90" loading="lazy" />
+      )}
     </div>
     <div className="flex gap-0.5" aria-label={`Rated ${rating} out of 5`}>
       {Array.from({ length: 5 }, (_, i) => (

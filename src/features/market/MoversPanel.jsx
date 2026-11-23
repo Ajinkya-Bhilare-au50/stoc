@@ -19,8 +19,12 @@ function MoverTable({ rows, metric, onSelect, selected }) {
       </colgroup>
       <thead>
         <tr className="text-left text-xs font-medium text-market-subtle">
-          <th scope="col" className="pb-2 font-medium">Stock</th>
-          <th scope="col" className="pb-2 text-right font-medium">Price</th>
+          <th scope="col" className="pb-2 font-medium">
+            Stock
+          </th>
+          <th scope="col" className="pb-2 text-right font-medium">
+            Price
+          </th>
           <th scope="col" className="pb-2 text-right font-medium">
             {metric === "turnover" ? "Value" : "Change"}
           </th>
@@ -56,7 +60,9 @@ function MoverTable({ rows, metric, onSelect, selected }) {
               {metric === "turnover" ? (
                 <span className="text-market-text">{formatRupeesCompact(r.turnover)}</span>
               ) : null}
-              <span className={`block text-xs font-semibold ${trendClass(r.changePct)} ${metric === "turnover" ? "" : "text-sm"}`}>
+              <span
+                className={`block text-xs font-semibold ${trendClass(r.changePct)} ${metric === "turnover" ? "" : "text-sm"}`}
+              >
                 {formatPct(r.changePct)}
               </span>
             </td>
@@ -87,7 +93,11 @@ export default function MoversPanel({ data, onSelect, selected }) {
   return (
     <>
       <Card className="lg:hidden">
-        <div role="tablist" aria-label="Market movers" className="grid grid-cols-3 gap-1 rounded-lg bg-market-panel p-1">
+        <div
+          role="tablist"
+          aria-label="Market movers"
+          className="grid grid-cols-3 gap-1 rounded-lg bg-market-panel p-1"
+        >
           {TABS.map((t) => (
             <button
               key={t.key}

@@ -60,9 +60,7 @@ const Drawer = ({ courseType, batchStartInfo }) => {
           1
         </span>
         <AiOutlineNotification size={34} style={{ marginRight: "8px" }} />
-        <span style={{ fontSize: "1.25rem", fontWeight: "600" }}>
-          
-        </span>
+        <span style={{ fontSize: "1.25rem", fontWeight: "600" }}></span>
       </button>
       {isOpen && (
         <div
@@ -124,13 +122,10 @@ const Drawer = ({ courseType, batchStartInfo }) => {
                 </button>
               </div>
               <p style={{ fontSize: "1rem", color: "#333" }}>
-                {courseType} Batches will Start from {commencementDate}. Enroll
-                now!
+                {courseType} Batches will Start from {commencementDate}. Enroll now!
               </p>
             </div>
-            <p style={{ fontSize: "0.875rem", color: "#555" }}>
-              Commencement Date: {commencementDate}
-            </p>
+            <p style={{ fontSize: "0.875rem", color: "#555" }}>Commencement Date: {commencementDate}</p>
           </div>
         </div>
       )}

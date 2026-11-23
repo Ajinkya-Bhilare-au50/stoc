@@ -108,9 +108,7 @@ export default function Dropdown({
         }}
         className={`absolute top-full z-50 pt-2 ${ALIGN[align]}`}
       >
-        <div
-          className={`rounded-panel border border-line bg-card shadow-pop ${panelClassName}`}
-        >
+        <div className={`rounded-panel border border-line bg-card shadow-pop ${panelClassName}`}>
           {children}
         </div>
       </div>

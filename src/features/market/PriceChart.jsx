@@ -47,7 +47,9 @@ export default function PriceChart({ data }) {
 
     const x = (i) => PAD.left + (i / (data.length - 1)) * plotW;
     const y = (v) => PAD.top + (1 - (v - min) / (max - min)) * priceH;
-    const line = data.map((d, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(d.chartClose).toFixed(1)}`).join("");
+    const line = data
+      .map((d, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(d.chartClose).toFixed(1)}`)
+      .join("");
     const area = `${line}L${x(data.length - 1).toFixed(1)},${PAD.top + priceH}L${x(0).toFixed(1)},${PAD.top + priceH}Z`;
     const barW = Math.max(1, plotW / data.length - 1);
     const volTop = PAD.top + plotH * (1 - VOLUME_SHARE) + 4;
@@ -168,7 +170,14 @@ export default function PriceChart({ data }) {
                 stroke="#94A3B8"
                 strokeDasharray="4 4"
               />
-              <circle cx={geo.x(active)} cy={geo.y(point.chartClose)} r="4.5" fill={color} stroke="#0B1220" strokeWidth="2" />
+              <circle
+                cx={geo.x(active)}
+                cy={geo.y(point.chartClose)}
+                r="4.5"
+                fill={color}
+                stroke="#0B1220"
+                strokeWidth="2"
+              />
             </g>
           )}
         </svg>
@@ -178,13 +187,13 @@ export default function PriceChart({ data }) {
         <div
           className="pointer-events-none absolute top-2 rounded-lg border border-market-border bg-market-elevated/95 px-3 py-2 text-xs shadow-lg"
           style={
-            geo.x(active) > width / 2
-              ? { right: width - geo.x(active) + 12 }
-              : { left: geo.x(active) + 12 }
+            geo.x(active) > width / 2 ? { right: width - geo.x(active) + 12 } : { left: geo.x(active) + 12 }
           }
         >
           <p className="font-medium text-market-muted">{formatDate(point.date)}</p>
-          <p className="mt-0.5 text-sm font-semibold tabular-nums text-market-text">₹{formatPrice(point.chartClose)}</p>
+          <p className="mt-0.5 text-sm font-semibold tabular-nums text-market-text">
+            ₹{formatPrice(point.chartClose)}
+          </p>
           <p className="tabular-nums text-market-subtle">Vol {formatCompact(point.volume)}</p>
         </div>
       )}

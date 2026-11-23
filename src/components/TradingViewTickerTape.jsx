@@ -1,41 +1,41 @@
 // TradingView ticker tape (third-party embed; prices are delayed, not TejHQ data).
 const SYMBOLS = [
   {
-    "description": "SENSEX",
-    "proName": "BSE:SENSEX"
+    description: "SENSEX",
+    proName: "BSE:SENSEX",
   },
   {
-    "description": "NIFTY 50",
-    "proName": "NSE:NIFTY"
+    description: "NIFTY 50",
+    proName: "NSE:NIFTY",
   },
   {
-    "description": "BANK NIFTY",
-    "proName": "NSE:BANKNIFTY"
+    description: "BANK NIFTY",
+    proName: "NSE:BANKNIFTY",
   },
   {
-    "description": "RELIANCE",
-    "proName": "NSE:RELIANCE"
+    description: "RELIANCE",
+    proName: "NSE:RELIANCE",
   },
   {
-    "description": "HDFC BANK",
-    "proName": "NSE:HDFCBANK"
+    description: "HDFC BANK",
+    proName: "NSE:HDFCBANK",
   },
   {
-    "description": "ICICI BANK",
-    "proName": "NSE:ICICIBANK"
+    description: "ICICI BANK",
+    proName: "NSE:ICICIBANK",
   },
   {
-    "description": "TCS",
-    "proName": "NSE:TCS"
+    description: "TCS",
+    proName: "NSE:TCS",
   },
   {
-    "description": "INFY",
-    "proName": "NSE:INFY"
+    description: "INFY",
+    proName: "NSE:INFY",
   },
   {
-    "description": "SBIN",
-    "proName": "NSE:SBIN"
-  }
+    description: "SBIN",
+    proName: "NSE:SBIN",
+  },
 ];
 
 const CONFIG = {

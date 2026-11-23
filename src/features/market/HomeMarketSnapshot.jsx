@@ -56,11 +56,16 @@ export default function HomeMarketSnapshot() {
   if (error) return null;
 
   return (
-    <section aria-labelledby="market-today" className="bg-market-bg px-4 py-12 text-market-text sm:px-6 lg:py-16">
+    <section
+      aria-labelledby="market-today"
+      className="bg-market-bg px-4 py-12 text-market-text sm:px-6 lg:py-16"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-market-cyan">NSE · Market today</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-market-cyan">
+              NSE · Market today
+            </p>
             <h2 id="market-today" className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
               How the market closed
             </h2>
@@ -87,7 +92,9 @@ export default function HomeMarketSnapshot() {
           <div className="mt-6 grid gap-6 border-t border-market-border pt-6 sm:grid-cols-3 sm:gap-8">
             {LISTS.map(({ key, label }) => (
               <div key={key}>
-                <h3 className="mb-1 text-xs font-semibold uppercase tracking-wide text-market-subtle">{label}</h3>
+                <h3 className="mb-1 text-xs font-semibold uppercase tracking-wide text-market-subtle">
+                  {label}
+                </h3>
                 {data ? (
                   <MoverList rows={data[key]} kind={key} />
                 ) : (

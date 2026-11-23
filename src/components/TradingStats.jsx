@@ -51,10 +51,7 @@ const TradingStats = () => {
       });
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
     observer.observe(happyTradersRef.current);
 
     return () => {
@@ -82,7 +79,9 @@ const TradingStats = () => {
           {STATS.map(({ label, ref }) => (
             <div key={label} className="card text-center">
               <dd className="flex items-baseline justify-center gap-0.5 text-3xl font-bold tabular-nums text-ink sm:text-4xl">
-                <span ref={ref} className="odometer">0</span>
+                <span ref={ref} className="odometer">
+                  0
+                </span>
                 <span className="text-accent">+</span>
               </dd>
               <dt className="mt-2 text-sm text-ink-muted">{label}</dt>

@@ -24,7 +24,9 @@ const linkClass = ({ isActive }) =>
   }`;
 
 const ActiveBar = ({ isActive }) =>
-  isActive ? <span className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-accent" aria-hidden /> : null;
+  isActive ? (
+    <span className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-accent" aria-hidden />
+  ) : null;
 
 function DropdownItem({ item }) {
   const Icon = ICONS[item.icon] ?? ChartBarIcon;
@@ -39,7 +41,9 @@ function DropdownItem({ item }) {
       <span className="min-w-0">
         <span className="flex items-center gap-1.5 text-sm font-semibold text-ink">
           {item.label}
-          {item.requiresAuth && <LockClosedIcon className="h-3 w-3 text-ink-subtle" aria-label="Sign-in required" />}
+          {item.requiresAuth && (
+            <LockClosedIcon className="h-3 w-3 text-ink-subtle" aria-label="Sign-in required" />
+          )}
         </span>
         <span className="mt-0.5 block text-xs text-ink-muted">{item.description}</span>
       </span>
@@ -86,7 +90,7 @@ function DesktopNav() {
               </>
             )}
           </NavLink>
-        )
+        ),
       )}
     </nav>
   );
@@ -113,7 +117,9 @@ function MobileNav() {
               <NavLink key={child.to} to={child.to} className={mobileLink}>
                 <span className="flex items-center gap-2">
                   {child.label}
-                  {child.requiresAuth && <LockClosedIcon className="h-3.5 w-3.5 text-ink-subtle" aria-hidden />}
+                  {child.requiresAuth && (
+                    <LockClosedIcon className="h-3.5 w-3.5 text-ink-subtle" aria-hidden />
+                  )}
                 </span>
               </NavLink>
             ))}
@@ -122,7 +128,7 @@ function MobileNav() {
           <NavLink key={item.to} to={item.to} className={mobileLink}>
             {item.label}
           </NavLink>
-        )
+        ),
       )}
     </nav>
   );
@@ -151,7 +157,11 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70">
       <div className="container-page flex h-header items-center justify-between gap-6">
-        <Link to={ROUTES.home} className="flex shrink-0 items-center gap-2.5" aria-label={`${SITE.name} home`}>
+        <Link
+          to={ROUTES.home}
+          className="flex shrink-0 items-center gap-2.5"
+          aria-label={`${SITE.name} home`}
+        >
           <img src={logo} alt="" width="32" height="32" className="h-8 w-8 rounded-full ring-1 ring-line" />
           <span className="text-base font-bold tracking-tight text-ink">
             Sniper<span className="text-accent">Coding</span>

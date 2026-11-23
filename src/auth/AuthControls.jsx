@@ -45,7 +45,10 @@ const btnOutline = "btn btn-outline";
 
 /** Short display name: Auth0 database users have their email as `name`. */
 const displayName = (user) =>
-  user?.given_name || user?.nickname || (user?.name?.includes("@") ? user.name.split("@")[0] : user?.name) || "Account";
+  user?.given_name ||
+  user?.nickname ||
+  (user?.name?.includes("@") ? user.name.split("@")[0] : user?.name) ||
+  "Account";
 
 const accountLinks = [
   { label: "Stock courses", to: ROUTES.stockCourses, icon: BookOpenIcon },
@@ -85,9 +88,7 @@ export function DesktopAuthControls() {
           aria-label="Account menu"
         >
           <Avatar user={user} size="h-8 w-8" />
-          <span className="max-w-[9rem] truncate text-sm font-medium text-ink">
-            {displayName(user)}
-          </span>
+          <span className="max-w-[9rem] truncate text-sm font-medium text-ink">{displayName(user)}</span>
           <ChevronDownIcon
             className={`h-4 w-4 text-ink-subtle transition-transform ${open ? "rotate-180" : ""}`}
             strokeWidth={2}

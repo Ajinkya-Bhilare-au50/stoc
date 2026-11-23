@@ -35,13 +35,19 @@ export default function SiteFooter() {
               <span>{SITE.contact.address}</span>
             </li>
             <li>
-              <a href={SITE.contact.phoneHref} className="flex gap-3 text-ink-muted transition-colors hover:text-ink">
+              <a
+                href={SITE.contact.phoneHref}
+                className="flex gap-3 text-ink-muted transition-colors hover:text-ink"
+              >
                 <PhoneIcon className="h-5 w-5 shrink-0 text-ink-subtle" aria-hidden />
                 {SITE.contact.phone}
               </a>
             </li>
             <li>
-              <a href={`mailto:${SITE.contact.email}`} className="flex gap-3 text-ink-muted transition-colors hover:text-ink">
+              <a
+                href={`mailto:${SITE.contact.email}`}
+                className="flex gap-3 text-ink-muted transition-colors hover:text-ink"
+              >
                 <EnvelopeIcon className="h-5 w-5 shrink-0 text-ink-subtle" aria-hidden />
                 {SITE.contact.email}
               </a>
@@ -73,7 +79,9 @@ export default function SiteFooter() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
           {FOOTER_LINKS.map((group) => (
             <div key={group.title}>
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink-subtle">{group.title}</h2>
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink-subtle">
+                {group.title}
+              </h2>
               <ul className="mt-4 space-y-3">
                 {group.links.map((link) => (
                   <li key={link.label}>
@@ -91,7 +99,8 @@ export default function SiteFooter() {
       <div className="border-t border-line">
         <div className="container-page flex flex-col gap-3 py-6 text-xs text-ink-subtle sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {SITE.name}. All rights reserved. Market data is for education only and is not investment advice.
+            © {year} {SITE.name}. All rights reserved. Market data is for education only and is not investment
+            advice.
           </p>
           <p>Designed &amp; developed in India by Ajinkya.</p>
         </div>

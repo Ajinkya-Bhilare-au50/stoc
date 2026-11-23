@@ -14,7 +14,11 @@ export default function OfferPopup() {
 
   const expires = new Date();
   expires.setDate(expires.getDate() + OFFER_DAYS);
-  const expiresLabel = expires.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  const expiresLabel = expires.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
   useEffect(() => {
     if (dismissed) return undefined;
@@ -45,7 +49,12 @@ export default function OfferPopup() {
             View offer
           </Link>
         </div>
-        <button type="button" onClick={close} className="btn btn-ghost -mr-1 -mt-1 h-8 w-8 px-0" aria-label="Close offer">
+        <button
+          type="button"
+          onClick={close}
+          className="btn btn-ghost -mr-1 -mt-1 h-8 w-8 px-0"
+          aria-label="Close offer"
+        >
           <XMarkIcon className="h-4 w-4" />
         </button>
       </div>

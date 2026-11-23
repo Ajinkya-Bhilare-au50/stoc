@@ -3,7 +3,13 @@ import { CheckCircleIcon, EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { SITE } from "../config/site";
 
-const SOCIAL_ICONS = { facebook: FaFacebook, twitter: FaTwitter, instagram: FaInstagram, linkedin: FaLinkedin, github: FaGithub };
+const SOCIAL_ICONS = {
+  facebook: FaFacebook,
+  twitter: FaTwitter,
+  instagram: FaInstagram,
+  linkedin: FaLinkedin,
+  github: FaGithub,
+};
 const EMPTY = { name: "", email: "", message: "" };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -64,7 +70,9 @@ export default function ContactUs() {
         <div className="max-w-2xl">
           <p className="eyebrow">Contact</p>
           <h1 className="page-title mt-2">Get in touch</h1>
-          <p className="lead mt-3">Questions about courses, batches or fees? Send us a message and we'll get back to you.</p>
+          <p className="lead mt-3">
+            Questions about courses, batches or fees? Send us a message and we'll get back to you.
+          </p>
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
@@ -72,11 +80,16 @@ export default function ContactUs() {
             <h2 className="card-title">Send us a message</h2>
 
             {status === "sent" ? (
-              <div role="status" className="mt-6 flex items-start gap-3 rounded-tile border border-up/30 bg-up/10 p-4">
+              <div
+                role="status"
+                className="mt-6 flex items-start gap-3 rounded-tile border border-up/30 bg-up/10 p-4"
+              >
                 <CheckCircleIcon className="h-6 w-6 shrink-0 text-up" aria-hidden />
                 <div>
                   <p className="font-semibold text-ink">Message sent</p>
-                  <p className="mt-0.5 text-sm text-ink-muted">Thanks for reaching out — we'll reply by email soon.</p>
+                  <p className="mt-0.5 text-sm text-ink-muted">
+                    Thanks for reaching out — we'll reply by email soon.
+                  </p>
                   <button type="button" className="link mt-2 text-sm" onClick={() => setStatus("idle")}>
                     Send another message
                   </button>
@@ -84,35 +97,102 @@ export default function ContactUs() {
               </div>
             ) : (
               <div className="mt-6 space-y-5">
-                <input type="text" name="bot-field" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
+                <input
+                  type="text"
+                  name="bot-field"
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                />
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="name" className="label label-required">Name</label>
-                    <input id="name" name="name" type="text" autoComplete="name" value={values.name} onChange={onChange}
-                      className={field("name")} placeholder="Your name" aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />
-                    {errors.name && <p id="name-error" className="field-error">{errors.name}</p>}
+                    <label htmlFor="name" className="label label-required">
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      value={values.name}
+                      onChange={onChange}
+                      className={field("name")}
+                      placeholder="Your name"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                    />
+                    {errors.name && (
+                      <p id="name-error" className="field-error">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
-                    <label htmlFor="email" className="label label-required">Email</label>
-                    <input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={onChange}
-                      className={field("email")} placeholder="you@example.com" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} />
-                    {errors.email && <p id="email-error" className="field-error">{errors.email}</p>}
+                    <label htmlFor="email" className="label label-required">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      value={values.email}
+                      onChange={onChange}
+                      className={field("email")}
+                      placeholder="you@example.com"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                    />
+                    {errors.email && (
+                      <p id="email-error" className="field-error">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="label label-required">Message</label>
-                  <textarea id="message" name="message" rows={5} value={values.message} onChange={onChange}
-                    className={field("message")} placeholder="How can we help?" aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} />
-                  {errors.message && <p id="message-error" className="field-error">{errors.message}</p>}
+                  <label htmlFor="message" className="label label-required">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={values.message}
+                    onChange={onChange}
+                    className={field("message")}
+                    placeholder="How can we help?"
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "message-error" : undefined}
+                  />
+                  {errors.message && (
+                    <p id="message-error" className="field-error">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
                 {status === "failed" && (
-                  <p role="alert" className="rounded-tile border border-down/30 bg-down/10 p-3 text-sm text-ink">
+                  <p
+                    role="alert"
+                    className="rounded-tile border border-down/30 bg-down/10 p-3 text-sm text-ink"
+                  >
                     Sorry, your message couldn't be sent. Please email{" "}
-                    <a className="link" href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a> or call{" "}
-                    <a className="link" href={SITE.contact.phoneHref}>{SITE.contact.phone}</a>.
+                    <a className="link" href={`mailto:${SITE.contact.email}`}>
+                      {SITE.contact.email}
+                    </a>{" "}
+                    or call{" "}
+                    <a className="link" href={SITE.contact.phoneHref}>
+                      {SITE.contact.phone}
+                    </a>
+                    .
                   </p>
                 )}
-                <button type="submit" className="btn btn-primary btn-lg w-full sm:w-auto" disabled={status === "sending"}>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-lg w-full sm:w-auto"
+                  disabled={status === "sending"}
+                >
                   {status === "sending" ? "Sending…" : "Send message"}
                 </button>
               </div>
@@ -145,7 +225,13 @@ export default function ContactUs() {
                   const Icon = SOCIAL_ICONS[name];
                   return (
                     <li key={name}>
-                      <a href={url} target="_blank" rel="noreferrer" aria-label={name} className="btn btn-secondary h-9 w-9 px-0">
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={name}
+                        className="btn btn-secondary h-9 w-9 px-0"
+                      >
                         <Icon className="h-4 w-4" aria-hidden />
                       </a>
                     </li>

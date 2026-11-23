@@ -59,7 +59,12 @@ export default function StickyFooter() {
             <Link to={ROUTES.enquiry} className="btn btn-primary btn-sm sm:h-9 sm:px-4 sm:text-sm">
               Enquire now
             </Link>
-            <button type="button" onClick={dismiss} className="btn btn-ghost h-8 w-8 px-0" aria-label="Dismiss offer bar">
+            <button
+              type="button"
+              onClick={dismiss}
+              className="btn btn-ghost h-8 w-8 px-0"
+              aria-label="Dismiss offer bar"
+            >
               <XMarkIcon className="h-4 w-4" />
             </button>
           </div>

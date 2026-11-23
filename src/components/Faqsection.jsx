@@ -36,8 +36,7 @@ const faqData = [
     isOpen: false,
   },
   {
-    question:
-      "Do I need any special software or tools for the trading courses?",
+    question: "Do I need any special software or tools for the trading courses?",
     answer:
       "While not mandatory, having access to trading platforms and financial analysis tools can enhance your learning experience in our trading courses.",
     isOpen: false,
@@ -82,7 +81,9 @@ export default function FAQSection() {
           <div className="card mt-8 hidden lg:block">
             <p className="card-title">Still have questions?</p>
             <p className="card-desc">Our team usually replies within a day.</p>
-            <Link to={ROUTES.contact} className="btn btn-primary mt-4">Contact us</Link>
+            <Link to={ROUTES.contact} className="btn btn-primary mt-4">
+              Contact us
+            </Link>
           </div>
         </div>
         <div className="card py-1 sm:py-1">
@@ -98,7 +99,9 @@ export default function FAQSection() {
         <div className="card lg:hidden">
           <p className="card-title">Still have questions?</p>
           <p className="card-desc">Our team usually replies within a day.</p>
-          <Link to={ROUTES.contact} className="btn btn-primary mt-4">Contact us</Link>
+          <Link to={ROUTES.contact} className="btn btn-primary mt-4">
+            Contact us
+          </Link>
         </div>
       </div>
     </section>

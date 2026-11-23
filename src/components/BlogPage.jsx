@@ -129,49 +129,43 @@ const BlogPage = () => {
 
   return (
     <div>
-      <div className="flex flex-col bg-gray-200 sm:flex-row justify-center items-center">
+      <div className="flex flex-col bg-elevated sm:flex-row justify-center items-center">
         <div className="w-full sm:w-3/4 order-1 sm:order-2">
           <BlogA />
           <BlogB />
           <GrowthMindsetBlog />
           <TraderBlog />
-          <PortfolioBlog/>
+          <PortfolioBlog />
           <Blog1 />
           <Blog2 />
           <Blog3 />
           <Blog4 />
           <motion.div
-            className="w-full mx-auto px-4 py-8 bg-white rounded-lg shadow-lg border border-gray-200"
+            className="w-full mx-auto px-4 py-8 bg-white rounded-lg shadow-lg border border-line"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
           >
-            <h1 className="text-4xl font-bold mb-8 text-center text-blue-700">
-              Latest Blogs
-            </h1>
+            <h1 className="text-4xl font-bold mb-8 text-center text-accent">Latest Blogs</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 cursor-pointer">
               {blogs.map((blog, index) => (
                 <motion.div
                   key={index}
-                  className={`bg-white rounded-lg shadow-lg border border-gray-200 transition-transform transform ${
-                    expandedBlogIndex === index
-                      ? "bg-yellow-50"
-                      : "hover:scale-105"
+                  className={`bg-white rounded-lg shadow-lg border border-line transition-transform transform ${
+                    expandedBlogIndex === index ? "bg-warn/10" : "hover:scale-105"
                   }`}
                   variants={itemVariants}
                   onClick={() => handleReadMore(index)}
                 >
                   <div className="p-4">
                     <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-ink-muted mb-4">
                       By {blog.author} on {blog.date}
                     </p>
                     {expandedBlogIndex === index ? (
-                      <p className="text-gray-800">{blog.content}</p>
+                      <p className="text-ink">{blog.content}</p>
                     ) : (
-                      <button className="text-blue-600 hover:underline">
-                        Read More
-                      </button>
+                      <button className="text-accent hover:underline">Read More</button>
                     )}
                   </div>
                 </motion.div>

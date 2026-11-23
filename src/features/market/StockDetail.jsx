@@ -101,8 +101,12 @@ export default function StockDetail({ symbol, name }) {
         </div>
         {latest ? (
           <div className="sm:text-right">
-            <p className="text-3xl font-bold tabular-nums tracking-tight text-market-text">₹{formatPrice(latest.close)}</p>
-            <p className={`mt-1 inline-flex items-center gap-1 text-sm font-semibold tabular-nums ${trendClass(latest.change)}`}>
+            <p className="text-3xl font-bold tabular-nums tracking-tight text-market-text">
+              ₹{formatPrice(latest.close)}
+            </p>
+            <p
+              className={`mt-1 inline-flex items-center gap-1 text-sm font-semibold tabular-nums ${trendClass(latest.change)}`}
+            >
               <Arrow className="h-4 w-4" aria-hidden />
               {formatChange(latest.change)} ({formatPct(latest.changePct)})
               <span className="font-normal text-market-subtle">· {formatDate(latest.date)}</span>
@@ -136,18 +140,17 @@ export default function StockDetail({ symbol, name }) {
           ))}
         </div>
         {data && !data.adjusted && (
-          <span className="hidden text-xs text-market-subtle sm:block" title="Prices are not adjusted for splits/bonuses">
+          <span
+            className="hidden text-xs text-market-subtle sm:block"
+            title="Prices are not adjusted for splits/bonuses"
+          >
             Unadjusted prices
           </span>
         )}
       </div>
 
       <div className="mt-4">
-        {data && !loading ? (
-          <PriceChart data={data.history} />
-        ) : (
-          <Skeleton className="h-[300px] w-full" />
-        )}
+        {data && !loading ? <PriceChart data={data.history} /> : <Skeleton className="h-[300px] w-full" />}
       </div>
 
       {latest && data && (
@@ -191,7 +194,9 @@ export default function StockDetail({ symbol, name }) {
                         {a.type}
                       </span>
                       <span className="min-w-0 flex-1 text-market-muted">{a.description}</span>
-                      <span className="shrink-0 text-xs tabular-nums text-market-subtle">{formatDate(a.exDate)}</span>
+                      <span className="shrink-0 text-xs tabular-nums text-market-subtle">
+                        {formatDate(a.exDate)}
+                      </span>
                     </li>
                   ))}
                 </ul>

@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
+const RAZORPAY_BUTTON_ID = "pl_OTFNWeRhhhwANi"; // Razorpay Payment Button ID
+
+/** Embeds the Razorpay payment button. Uses a ref so several can coexist. */
 function CoursePaymentButton() {
-  useEffect(() => {
-    const rzpPaymentForm = document.getElementById("rzp_payment_form");
+  const formRef = useRef(null);
 
-    if (!rzpPaymentForm.hasChildNodes()) {
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/payment-button.js";
-      script.async = true;
-      script.dataset.payment_button_id = "pl_OTFNWeRhhhwANi"; // Replace with your actual Razorpay Payment Button ID
-      rzpPaymentForm.appendChild(script);
-    }
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form || form.hasChildNodes()) return;
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/payment-button.js";
+    script.async = true;
+    script.dataset.payment_button_id = RAZORPAY_BUTTON_ID;
+    form.appendChild(script);
   }, []);
 
-  return (
-    <div className="m-2">
-     
-      <form id="rzp_payment_form"></form>
-      
-    </div>
-  );
+  return <form ref={formRef} className="min-h-[44px]" />;
 }
 
 export default CoursePaymentButton;

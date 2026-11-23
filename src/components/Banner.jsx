@@ -25,13 +25,17 @@ export default function Banner() {
     <section className="section">
       <div className="container-page">
         <div className="relative overflow-hidden rounded-panel border border-line bg-card p-6 shadow-card sm:p-10">
-          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/10 blur-3xl" aria-hidden />
+          <div
+            className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/10 blur-3xl"
+            aria-hidden
+          />
           <div className="relative grid items-center gap-8 lg:grid-cols-[1.3fr_1fr]">
             <div>
               <p className="eyebrow">Community</p>
               <h2 className="section-title mt-2">Join the Sniper Coders community</h2>
               <p className="lead mt-3 max-w-xl">
-                Learn alongside other students — share trade ideas, ask questions and get batch updates in one place.
+                Learn alongside other students — share trade ideas, ask questions and get batch updates in one
+                place.
               </p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {PERKS.map((perk) => (
@@ -42,7 +46,12 @@ export default function Banner() {
               </ul>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 {whatsapp ? (
-                  <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-success btn-lg">
+                  <a
+                    href={whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-success btn-lg"
+                  >
                     <FaWhatsapp className="h-5 w-5" aria-hidden />
                     Join WhatsApp group
                   </a>

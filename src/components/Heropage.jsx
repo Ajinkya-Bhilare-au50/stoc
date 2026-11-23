@@ -31,8 +31,14 @@ export default function HeroPage() {
         className="absolute inset-0 -z-10 h-full w-full object-cover object-right opacity-60"
         fetchpriority="high"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-canvas via-canvas/90 to-canvas/40" aria-hidden />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-canvas to-transparent" aria-hidden />
+      <div
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-canvas via-canvas/90 to-canvas/40"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-canvas to-transparent"
+        aria-hidden
+      />
 
       <motion.div
         className="container-page flex min-h-[560px] flex-col justify-center py-20 sm:min-h-[640px] lg:py-28"
@@ -51,8 +57,8 @@ export default function HeroPage() {
           <span className="block text-ink-muted">with mentors who trade.</span>
         </motion.h1>
         <motion.p variants={item} className="lead mt-6 max-w-xl">
-          Practical courses in trading, investing, F&amp;O and web development — structured for beginners, with
-          live batches and real-market examples.
+          Practical courses in trading, investing, F&amp;O and web development — structured for beginners,
+          with live batches and real-market examples.
         </motion.p>
 
         <motion.div variants={item} className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -80,9 +86,15 @@ export default function HeroPage() {
         </motion.dl>
 
         <motion.div variants={item} className="mt-10">
-          <Link to={ROUTES.market} className="group inline-flex items-center gap-2 text-sm font-medium text-ink-muted hover:text-ink">
+          <Link
+            to={ROUTES.market}
+            className="group inline-flex items-center gap-2 text-sm font-medium text-ink-muted hover:text-ink"
+          >
             See today's NSE market overview
-            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            <ArrowRightIcon
+              className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+              aria-hidden
+            />
           </Link>
         </motion.div>
       </motion.div>

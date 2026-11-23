@@ -31,10 +31,5 @@ export default function RequireAuth() {
     );
   }
 
-  return (
-    <FullPageMessage
-      loading
-      title={isLoading ? "Checking your session…" : "Redirecting to sign in…"}
-    />
-  );
+  return <FullPageMessage loading title={isLoading ? "Checking your session…" : "Redirecting to sign in…"} />;
 }

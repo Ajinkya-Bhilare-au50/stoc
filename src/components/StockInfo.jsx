@@ -3,7 +3,7 @@ import StockSlider from "./StockSlider"; // Import the StockSlider component
 
 function StockInfo() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-card text-white">
       <header className="flex flex-col items-center">
         <div className="relative w-70 h-70">
           <img
@@ -12,7 +12,7 @@ function StockInfo() {
             className="w-full h-full"
           />
           <div className="absolute text-4xl top-1/2 left-1/2 w-30 h-30 transform -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center">
-            <p className="font-bold text-red-100 ">Stocks</p>
+            <p className="font-bold text-down ">Stocks</p>
           </div>
         </div>
         <h1 className="mt-4 text-3xl font-bold">Latest Trending</h1>

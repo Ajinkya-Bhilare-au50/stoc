@@ -6,77 +6,58 @@ import ProgressBarModule from "@ramonak/react-progress-bar";
 import { interopDefault } from "../lib/interopDefault";
 import { FaStar } from "react-icons/fa"; // Import the star icon from react-icons
 import AjinkyaProfile from "./AjinkyaProfile";
-import {
-  FaBook,
-  FaChartLine,
-  FaBalanceScale,
-  FaLightbulb,
-} from "react-icons/fa";
+import { FaBook, FaChartLine, FaBalanceScale, FaLightbulb } from "react-icons/fa";
 const ProgressBar = interopDefault(ProgressBarModule);
 const CourseStructure = () => {
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-4xl font-bold mb-4 text-center">
-        How is the Course Structured?
-      </h2>
+      <h2 className="text-4xl font-bold mb-4 text-center">How is the Course Structured?</h2>
       <div className="space-y-6">
         <div className="flex ">
           <div>
-            <FaLightbulb size={45} className="text-yellow-900 text-3xl mr-4" />
+            <FaLightbulb size={45} className="text-warn text-3xl mr-4" />
           </div>
           <div>
-            <h3 className="text-2xl font-semibold mb-2">
-              1. Introduction to Stock Trading and Investing
-            </h3>
-            <p className="text-gray-700">
-              The first three sections address common queries that beginners
-              have about stock trading and investing.
+            <h3 className="text-2xl font-semibold mb-2">1. Introduction to Stock Trading and Investing</h3>
+            <p className="text-ink-muted">
+              The first three sections address common queries that beginners have about stock trading and
+              investing.
             </p>
           </div>
         </div>
         <div className="flex items-start">
           <div>
-            <FaBalanceScale
-              size={45}
-              className="text-green-500 text-3xl mr-4"
-            />
+            <FaBalanceScale size={45} className="text-up text-3xl mr-4" />
           </div>
           <div>
-            <h3 className="text-2xl font-semibold mb-2">
-              2. Financial Statement Analysis
-            </h3>
-            <p className="text-gray-700">
-              The next four sections focus on understanding and analyzing the
-              financial statements of companies, which is crucial for making
-              informed stock trading or investing decisions.
+            <h3 className="text-2xl font-semibold mb-2">2. Financial Statement Analysis</h3>
+            <p className="text-ink-muted">
+              The next four sections focus on understanding and analyzing the financial statements of
+              companies, which is crucial for making informed stock trading or investing decisions.
             </p>
           </div>
         </div>
         <div className="flex items-start">
           <div>
-            <FaChartLine size={45} className="text-blue-500 text-3xl mr-4" />
+            <FaChartLine size={45} className="text-accent text-3xl mr-4" />
           </div>
           <div>
-            <h3 className="text-2xl font-semibold mb-2">
-              3. Technical Analysis
-            </h3>
-            <p className="text-gray-700">
-              The following eight sections cover various technical analysis
-              techniques. These techniques are applicable not only to stock
-              trading but also to other asset classes.
+            <h3 className="text-2xl font-semibold mb-2">3. Technical Analysis</h3>
+            <p className="text-ink-muted">
+              The following eight sections cover various technical analysis techniques. These techniques are
+              applicable not only to stock trading but also to other asset classes.
             </p>
           </div>
         </div>
         <div className="flex items-start">
           <div>
-            <FaBook size={45} className="text-red-500 text-3xl mr-4" />
+            <FaBook size={45} className="text-down text-3xl mr-4" />
           </div>
           <div>
             <h3 className="text-2xl font-semibold mb-2">4. Option Basics</h3>
-            <p className="text-gray-700">
-              The final three sections provide a comprehensive overview of
-              options trading, which will be extremely beneficial if you want to
-              trade stocks using options.
+            <p className="text-ink-muted">
+              The final three sections provide a comprehensive overview of options trading, which will be
+              extremely beneficial if you want to trade stocks using options.
             </p>
           </div>
         </div>
@@ -111,8 +92,7 @@ const FAQSection = () => {
     },
     {
       question: "Can I trade stocks without a broker?",
-      answer:
-        "No, you need a brokerage account to trade stocks on stock exchanges.",
+      answer: "No, you need a brokerage account to trade stocks on stock exchanges.",
     },
     {
       question: "What is the difference between a bear market and a bull market",
@@ -130,30 +110,27 @@ const FAQSection = () => {
   };
 
   return (
-    <div className="container  p-6">
+    <div className="container p-6">
       <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
       <div className="space-y-4">
         {faqData.map((item, index) => (
-          <div
-            key={index}
-            className="border rounded-lg overflow-hidden w-full "
-          >
+          <div key={index} className="border rounded-lg overflow-hidden w-full ">
             <button
-              className="w-full flex items-center justify-between p-4 bg-gray-200 hover:bg-gray-300 focus:outline-none"
+              className="w-full flex items-center justify-between p-4 bg-elevated hover:bg-elevated focus:outline-none"
               onClick={() => handleToggle(index)}
             >
               <h3 className="text-lg font-semibold">{item.question}</h3>
               <div className="ml-auto">
                 {expandedIndex === index ? (
-                  <FaMinus className="text-gray-600" />
+                  <FaMinus className="text-ink-muted" />
                 ) : (
-                  <FaPlus className="text-gray-600" />
+                  <FaPlus className="text-ink-muted" />
                 )}
               </div>
             </button>
             <Collapse isOpened={expandedIndex === index}>
-              <div className="p-4 bg-gray-100">
-                <p className="text-gray-700">{item.answer}</p>
+              <div className="p-4 bg-surface">
+                <p className="text-ink-muted">{item.answer}</p>
               </div>
             </Collapse>
           </div>
@@ -176,23 +153,16 @@ const LearnerReview = ({ inputPercentages = [80, 70, 60, 50, 10] }) => {
       <div className="flex justify-center items-center m-4 p-6">
         <div className="w-full max-w-2xl px-8 py-6 bg-white rounded-lg shadow-lg">
           <div className="flex items-center mb-6">
-            <p className="text-7xl font-bold text-gray-800">4.5</p>
+            <p className="text-7xl font-bold text-ink">4.5</p>
             <div className="ml-4">
-              <Rating
-                name="size-medium"
-                defaultValue={4.5}
-                precision={0.5}
-                readOnly
-              />
-              <p className="text-gray-600">18 Reviews</p>
+              <Rating name="size-medium" defaultValue={4.5} precision={0.5} readOnly />
+              <p className="text-ink-muted">18 Reviews</p>
             </div>
           </div>
           <div className="flex flex-col gap-4 mt-4">
             {inputPercentages.map((percentage, index) => (
               <div key={index} className="flex items-center">
-                <div className="w-1/4 text-gray-700 text-right pr-4">
-                  {labels[index]}
-                </div>
+                <div className="w-1/4 text-ink-muted text-right pr-4">{labels[index]}</div>
                 <div className="flex-grow">
                   <ProgressBar
                     completed={percentage}
@@ -203,11 +173,9 @@ const LearnerReview = ({ inputPercentages = [80, 70, 60, 50, 10] }) => {
                     height="12px"
                   />
                 </div>
-                <span className="ml-4 flex items-center justify-center text-gray-700">
-                  <div className="text-lg font-medium">
-                    {(5.0 - index * 1).toFixed(1)}
-                  </div>
-                  <FaStar className="text-yellow-800 ml-2" />
+                <span className="ml-4 flex items-center justify-center text-ink-muted">
+                  <div className="text-lg font-medium">{(5.0 - index * 1).toFixed(1)}</div>
+                  <FaStar className="text-warn ml-2" />
                 </span>
               </div>
             ))}
