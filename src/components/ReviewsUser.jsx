@@ -1,52 +1,57 @@
-import React from "react";
-import Rating from "@mui/material/Rating";
+import { useState } from "react";
+import { StarIcon } from "@heroicons/react/24/solid";
 
+function Stars({ value }) {
+  return (
+    <span className="flex" aria-label={`Rated ${value} out of 5`}>
+      {Array.from({ length: 5 }, (_, i) => {
+        const fill = Math.max(0, Math.min(1, value - i));
+        return (
+          <span key={i} className="relative h-4 w-4" aria-hidden>
+            <StarIcon className="absolute inset-0 h-4 w-4 text-line" />
+            <span className="absolute inset-0 overflow-hidden" style={{ width: `${fill * 100}%` }}>
+              <StarIcon className="h-4 w-4 text-warn" />
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+/** Single course review card; falls back to initials if the photo fails. */
 const ReviewsUser = ({ name, rating, reviewContent, imageUrl }) => {
-  const avatarStyle = {
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%",
-    backgroundColor: "#000",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "#fff",
-    fontWeight: "bold",
-    textTransform: "uppercase", // Ensure text is in uppercase
-  };
-
-  // Extract first letter of name and surname
-  const [firstName, lastName] = name.split(" ");
-  const initials = firstName.charAt(0).toUpperCase() + (lastName ? lastName.charAt(0).toUpperCase() : "");
+  const [broken, setBroken] = useState(false);
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0].toUpperCase())
+    .join("");
 
   return (
-    <div className="bg-card shadow-card rounded-lg p-6 mb-4 flex items-start">
-      <div className="">
-        <div className="items-center mb-4 ">
-          <div className="flex items-start p-2 gap-4 ">
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={name}
-                className="rounded-full"
-                style={{ width: "40px", height: "40px" }}
-              />
-            ) : (
-              <div className="bg-down" style={avatarStyle}>
-                {initials}
-              </div>
-            )}
-            <div>
-              <h3 className="text-sm font-semibold pl-1 ">{name}</h3>
-              <div>
-                <Rating name="read-only" value={rating} readOnly precision={0.5} size="medium" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <p className="text-ink-muted">{reviewContent}</p>
+    <figure className="card flex h-full flex-col gap-3">
+      <div className="flex items-center gap-3">
+        {imageUrl && !broken ? (
+          <img
+            src={imageUrl}
+            alt=""
+            loading="lazy"
+            onError={() => setBroken(true)}
+            className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-line"
+          />
+        ) : (
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-elevated text-sm font-semibold text-ink-muted">
+            {initials}
+          </span>
+        )}
+        <figcaption>
+          <p className="text-sm font-semibold text-ink">{name}</p>
+          <Stars value={rating} />
+        </figcaption>
       </div>
-    </div>
+      <blockquote className="text-sm leading-6 text-ink-muted">{reviewContent}</blockquote>
+    </figure>
   );
 };
 

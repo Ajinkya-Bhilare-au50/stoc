@@ -1,7 +1,4 @@
-import React from "react";
-
-import { FaStar } from "react-icons/fa";
-import ReviewsUser from "./ReviewsUser";
+import ReviewsGrid from "../features/courses/ReviewsGrid";
 
 const codingReviewsData = [
   {
@@ -112,29 +109,7 @@ const codingReviewsData = [
 ];
 
 function CodingReviews() {
-  return (
-    <div>
-      <div>
-        <div className="container mx-auto p-6">
-          <h2 className="text-3xl font-bold mb-4">
-            <div className="flex justify-cent items-center pl-2 gap-2 ">
-              <FaStar size={20} color="#FAB000" />
-              <div>4.7 Course Reviews</div>
-            </div>
-          </h2>
-          {codingReviewsData.map((review, index) => (
-            <ReviewsUser
-              key={index}
-              name={review.name}
-              rating={review.rating}
-              reviewContent={review.reviewContent}
-              imageUrl={review.imageUrl}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+  return <ReviewsGrid title="Coding course reviews" reviews={codingReviewsData} />;
 }
 
 export default CodingReviews;

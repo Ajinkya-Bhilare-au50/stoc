@@ -11,6 +11,7 @@ import {
   ShareIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Collapse from "../../components/ui/Collapse";
 import { ROUTES } from "../../config/routes";
@@ -20,6 +21,12 @@ const UPI_APPS = ["Google Pay", "PhonePe", "Paytm", "BHIM UPI", "Amazon Pay"];
 /** "₹ 3999" | 3999 → 3999 */
 export const toAmount = (price) => Number(String(price).replace(/[^\d.]/g, "")) || 0;
 const rupees = (n) => `₹${Math.round(n).toLocaleString("en-IN")}`;
+
+/** <img> that swaps to `fallback` if the URL fails (external course photos go stale). */
+function SafeImage({ src, fallback, ...props }) {
+  const [broken, setBroken] = useState(!src);
+  return broken ? fallback : <img src={src} onError={() => setBroken(true)} {...props} />;
+}
 
 function Stars({ value }) {
   return (
@@ -143,11 +150,16 @@ export default function CourseCard({ course, isModuleOpen, onToggleModule, payme
     <article className="card overflow-hidden p-0 sm:p-0">
       <div className="grid gap-6 p-5 sm:p-6 md:grid-cols-[13rem_1fr]">
         <div className="relative">
-          <img
+          <SafeImage
             src={course.image}
             alt=""
             loading="lazy"
             className="aspect-[4/3] w-full rounded-tile bg-surface object-cover md:aspect-square"
+            fallback={
+              <div className="flex aspect-[4/3] w-full items-center justify-center rounded-tile border border-line bg-gradient-to-br from-accent/20 to-accent-2/10 md:aspect-square">
+                <PhotoIcon className="h-10 w-10 text-accent/70" aria-hidden />
+              </div>
+            }
           />
           <div className="absolute left-2 top-2 flex flex-col gap-1">
             {course.isTopSelling && <span className="badge bg-down text-white shadow">Top selling</span>}
@@ -215,10 +227,19 @@ export default function CourseCard({ course, isModuleOpen, onToggleModule, payme
 
           {course.instructor && (
             <div className="mt-5 flex items-center gap-3">
-              <img
+              <SafeImage
                 src={course.instructor.image}
                 alt=""
                 className="h-9 w-9 rounded-full object-cover ring-2 ring-line"
+                fallback={
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-xs font-semibold text-white">
+                    {course.instructor.name
+                      .split(" ")
+                      .map((p) => p[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </span>
+                }
               />
               <div className="text-sm">
                 <p className="text-xs text-ink-subtle">Instructor</p>

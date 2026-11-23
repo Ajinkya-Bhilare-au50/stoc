@@ -17,11 +17,7 @@ export default function CoursePageLayout({ eyebrow, title, description, actions,
 
       <div className="container-page grid gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:py-12 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="min-w-0 space-y-8">{children}</div>
-        {aside && (
-          <aside className="space-y-6 lg:sticky lg:top-[calc(var(--header-h)+1.5rem)] lg:max-h-[calc(100vh-var(--header-h)-3rem)] lg:self-start lg:overflow-y-auto lg:hide-scrollbar">
-            {aside}
-          </aside>
-        )}
+        {aside && <aside className="space-y-6">{aside}</aside>}
       </div>
 
       {after}
