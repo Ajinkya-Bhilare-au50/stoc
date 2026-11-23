@@ -3,6 +3,7 @@ import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate, Link } from "react-router";
+import { ROUTES } from "../config/routes";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const AdmissionForm = () => {
@@ -131,9 +132,9 @@ const AdmissionForm = () => {
       // Show thank you message for 3 seconds before redirecting
       setTimeout(() => {
         if (course === "Stock Courses") {
-          navigate("/stockcoursepage");
+          navigate(ROUTES.stockCourses);
         } else if (course === "Coding Courses") {
-          navigate("/codingcoursespage");
+          navigate(ROUTES.codingCourses);
         }
       }, 3000);
     } catch (e) {
@@ -143,67 +144,68 @@ const AdmissionForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="pt-6 flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-2 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">Thank You!</h2>
-          <div className="mb-4">
-            <FaCheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+      <section className="section">
+        <div className="container-page">
+        <div className="card mx-auto max-w-lg text-center">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-up/10">
+            <FaCheckCircle className="h-8 w-8 text-up" />
           </div>
-          <p className="text-lg text-gray-700 mb-6">
+          <h1 className="mt-5 text-3xl font-bold text-ink">Thank you!</h1>
+          <p className="lead mx-auto mt-3 max-w-sm">
             We have received your enquiry. Our team will shortly get in touch
             with you.
           </p>
-          <div className="flex flex-col gap-2 justify-center items-center">
-            <div>
-              <CircularProgress />
-            </div>
+          <div className="mt-6 flex flex-col items-center gap-4">
+            <CircularProgress size={28} sx={{ color: "rgb(var(--accent))" }} />
+            <p className="text-xs text-ink-subtle">Taking you to the course page…</p>
             <Link
-              to={`/${
-                course === "Stock Courses"
-                  ? "stockcoursepage"
-                  : "codingcoursespage"
-              }`}
-              className="hover:text-blue-500 "
+              to={course === "Stock Courses" ? ROUTES.stockCourses : ROUTES.codingCourses}
+              className="btn btn-primary"
             >
-              Explore
+              Explore the course now
             </Link>
           </div>
         </div>
-      </div>
+        </div>
+      </section>
     );
   }
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-2">
-      <h2 className="text-2xl font-bold mb-4 text-center">Enquiry Form</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Full Name <span className="text-red-500">*</span>
+    <section className="section">
+      <div className="container-page">
+      <div className="mx-auto max-w-3xl">
+      <p className="eyebrow">Admissions</p>
+      <h1 className="page-title mt-2">Admission enquiry</h1>
+      <p className="lead mt-3">Tell us a little about yourself and the course you're interested in. Our team will call you back.</p>
+      <form onSubmit={handleSubmit} className="card mt-8 grid gap-5 sm:grid-cols-2">
+        <div>
+          <label className="label">
+            Full Name <span className="text-down">*</span>
           </label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="input"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Email <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Email <span className="text-down">*</span>
           </label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="input"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Phone <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Phone <span className="text-down">*</span>
           </label>
           <input
             type="tel"
@@ -213,48 +215,48 @@ const AdmissionForm = () => {
               setPhoneError("");
             }}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="input"
           />
           {phoneError && (
-            <p className="text-red-500 text-sm mt-1">{phoneError}</p>
+            <p className="field-error">{phoneError}</p>
           )}
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Date of Birth <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Date of Birth <span className="text-down">*</span>
           </label>
           <input
             type="date"
             value={dob}
             onChange={(e) => setDob(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="input"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Course Interest <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Course Interest <span className="text-down">*</span>
           </label>
           <select
             value={course}
             onChange={(e) => setCourse(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="select"
           >
             <option value="">Select Course</option>
             <option value="Stock Courses">Stock Courses</option>
             <option value="Coding Courses">Coding Courses</option>
           </select>
         </div>
-        <div className="mb-4 cursor-pointer">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Gender <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Gender <span className="text-down">*</span>
           </label>
           <select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="select"
           >
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
@@ -262,78 +264,78 @@ const AdmissionForm = () => {
             <option value="Other">Other</option>
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Address <span className="text-red-500">*</span>
+        <div className="sm:col-span-2">
+          <label className="label">
+            Address <span className="text-down">*</span>
           </label>
           <textarea
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="textarea"
           ></textarea>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Mother's Name <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Mother's Name <span className="text-down">*</span>
           </label>
           <input
             type="text"
             value={mothersName}
             onChange={(e) => setMothersName(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="input"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Father's Name <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Father's Name <span className="text-down">*</span>
           </label>
           <input
             type="text"
             value={fathersName}
             onChange={(e) => setFathersName(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="input"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Father's Occupation <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Father's Occupation <span className="text-down">*</span>
           </label>
           <input
             type="text"
             value={occupation}
             onChange={(e) => setOccupation(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="input"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Do you have a demat account? <span className="text-red-500">*</span>
+        <div>
+          <label className="label">
+            Do you have a demat account? <span className="text-down">*</span>
           </label>
           <select
             value={dematAccount}
             onChange={(e) => setDematAccount(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="select"
           >
             <option value="">Select an option</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+        <div className="sm:col-span-2">
+          <label className="label">
             Are you a college student, working professional or graduated but not
-            working? <span className="text-red-500">*</span>
+            working? <span className="text-down">*</span>
           </label>
           <select
             value={educationStatus}
             onChange={(e) => setEducationStatus(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="select"
           >
             <option value="">Select an option</option>
             <option value="College Student">College Student</option>
@@ -343,35 +345,33 @@ const AdmissionForm = () => {
             </option>
           </select>
         </div>
-        <div className="mb-4">
-          <label className="inline-flex items-center">
+        <div className="sm:col-span-2 border-t border-line pt-5">
+          <label className="inline-flex cursor-pointer items-start gap-3 text-sm text-ink-muted">
             <input
               type="checkbox"
               checked={declaration}
               onChange={(e) => setDeclaration(e.target.checked)}
-              className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+              className="checkbox mt-0.5"
             />
-            <span className="ml-2">
+            <span>
               I confirm the information is true.
-              <span className="text-red-500">*</span>
+              <span className="text-down">*</span>
             </span>
           </label>
         </div>
-        <div className="flex justify-center">
+        <div className="sm:col-span-2">
           <button
             type="submit"
             disabled={!isSubmitEnabled}
-            className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-              isSubmitEnabled
-                ? "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                : "bg-gray-400 cursor-not-allowed"
-            }`}
+            className="btn btn-primary btn-lg w-full"
           >
             Submit
           </button>
         </div>
       </form>
-    </div>
+      </div>
+      </div>
+    </section>
   );
 };
 

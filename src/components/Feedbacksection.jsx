@@ -1,8 +1,6 @@
-import React from "react";
 import Feedback from "./Feedback";
 
 function Feedbacksection() {
-  // Array of testimonial data objects
   const testimonialDataArray = [
     {
       name: "Tania Andrew",
@@ -93,24 +91,35 @@ function Feedbacksection() {
     // Add more testimonial objects as needed
   ];
 
+  const average = (testimonialDataArray.reduce((s, t) => s + t.rating, 0) / testimonialDataArray.length).toFixed(1);
+
   return (
-    <div className="bg-gray-100 p-6">
-      <h1 className="text-center text-3xl font-bold m-3">Testimonial</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-4 my-10">
-        {testimonialDataArray.map((testimonial, index) => (
-          <div key={index} className="flex items-center justify-center">
-            <Feedback
-              name={testimonial.name}
-              role={testimonial.role}
-              avatarUrl={testimonial.avatarUrl}
-              rating={testimonial.rating}
-              content={testimonial.content}
-              googleicon={testimonial.googleicon}
-            />
+    <section className="section">
+      <div className="container-page">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow">Student reviews</p>
+            <h1 className="page-title mt-2">What our learners say</h1>
+            <p className="lead mt-3 max-w-2xl">Traders and developers who learned with Sniper Coding.</p>
           </div>
-        ))}
+          <div className="card flex items-center gap-3 px-5 py-3 sm:p-4">
+            <span className="text-3xl font-bold tabular-nums text-ink">{average}</span>
+            <span className="text-sm text-ink-muted">
+              average rating
+              <br />
+              from {testimonialDataArray.length} reviews
+            </span>
+          </div>
+        </div>
+        <div className="mt-10 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
+          {testimonialDataArray.map((testimonial) => (
+            <div key={testimonial.name} className="mb-6 break-inside-avoid">
+              <Feedback {...testimonial} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

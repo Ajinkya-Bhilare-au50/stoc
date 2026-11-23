@@ -1,111 +1,82 @@
-// src/components/SpecialOffer.js
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { ROUTES } from "../config/routes";
 
-const SpecialOffer = () => {
-  const endDate = new Date().getTime() + 2 * 24 * 60 * 60 * 1000; // 2 days from now
+const OFFER_DAYS = 2;
+const DISCOUNT = 5;
+const INCLUDES = ["All premium stock market courses", "Coding & web development courses", "Learning paths and PRO plans"];
 
-  const calculateTimeLeft = () => {
-    const difference = endDate - new Date().getTime();
-    let timeLeft = {};
-
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    }
-
-    return timeLeft;
+function timeLeft(end) {
+  const diff = Math.max(0, end - Date.now());
+  return {
+    days: Math.floor(diff / 86400000),
+    hours: Math.floor((diff / 3600000) % 24),
+    minutes: Math.floor((diff / 60000) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
   };
+}
 
-  const getEndDate = () => {
-    const date = new Date(endDate);
-    return date.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+export default function SpecialOffer() {
+  // Fixed once per visit (it used to be recalculated every second, so the
+  // countdown never moved).
+  const [end] = useState(() => Date.now() + OFFER_DAYS * 86400000);
+  const [left, setLeft] = useState(() => timeLeft(end));
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    const t = setInterval(() => setLeft(timeLeft(end)), 1000);
+    return () => clearInterval(t);
+  }, [end]);
 
-    return () => clearInterval(timer);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.2,
-        duration: 0.8,
-        when: "beforeChildren",
-        staggerChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
+  const endLabel = new Date(end).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-      <motion.div
-        className="max-w-md bg-white rounded-lg shadow-xl p-4 text-center text-gray-800"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.h1
-          className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-600"
-          variants={itemVariants}
-        >
-          Special Offer!
-        </motion.h1>
-        <motion.p className="text-sm mb-4" variants={itemVariants}>
-          Get 5% off on all our premium courses. Limited time offer, don't miss
-          out!
-        </motion.p>
-        <motion.img
-          src="https://img.freepik.com/premium-vector/square-sticker-with-5-percent-discount-sale-tag-yellow-red-offer-price-tag-price-discount-symbol_668376-114.jpg"
-          alt="Special Offer"
-          className="rounded-lg shadow-lg w-48 h-48 object-cover mx-auto mb-4"
-          whileHover={{ scale: 1.05 }}
-          variants={itemVariants}
-        />
-        <motion.button
-          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-full font-semibold hover:from-purple-600 hover:to-blue-500 transition-all mb-2"
-          variants={itemVariants}
-          whileHover={{ scale: 1.1 }}
-        >
-          Get Offer
-        </motion.button>
-        <motion.div className="text-xs" variants={itemVariants}>
-          Offer valid till:{" "}
-          <span className="font-semibold">{getEndDate()}</span>
-        </motion.div>
-        <motion.div className="text-xs mt-2" variants={itemVariants}>
-          <span className="font-semibold">{timeLeft.days || "0"}</span> Days{" "}
-          <span className="font-semibold">{timeLeft.hours || "0"}</span> Hours{" "}
-          <span className="font-semibold">{timeLeft.minutes || "0"}</span>{" "}
-          Minutes{" "}
-          <span className="font-semibold">{timeLeft.seconds || "0"}</span>{" "}
-          Seconds
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
+    <section className="section">
+      <div className="container-page">
+        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-panel border border-line bg-card shadow-card">
+          <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-warn/10 blur-3xl" aria-hidden />
+          <div className="relative grid gap-8 p-6 sm:p-10 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <span className="badge badge-warn">Limited time</span>
+              <h1 className="page-title mt-4">Special offer: {DISCOUNT}% off premium courses</h1>
+              <p className="lead mt-3">Enrol before the offer ends and save on any course or learning path.</p>
 
-export default SpecialOffer;
+              <ul className="mt-6 space-y-2.5">
+                {INCLUDES.map((line) => (
+                  <li key={line} className="flex items-center gap-2.5 text-sm text-ink-muted">
+                    <CheckCircleIcon className="h-5 w-5 shrink-0 text-up" aria-hidden />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link to={`${ROUTES.enquiry}?offer=${DISCOUNT}`} className="btn btn-primary btn-lg">
+                  Claim offer
+                </Link>
+                <p className="text-sm text-ink-subtle">
+                  Valid till <span className="font-semibold text-ink">{endLabel}</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex h-36 w-36 flex-col items-center justify-center rounded-full border-4 border-warn/40 bg-warn/10 text-warn">
+                <span className="text-5xl font-bold leading-none">{DISCOUNT}%</span>
+                <span className="mt-1 text-sm font-semibold uppercase tracking-widest">off</span>
+              </div>
+              <dl className="grid grid-cols-4 gap-2" aria-label="Time left">
+                {Object.entries(left).map(([unit, value]) => (
+                  <div key={unit} className="tile w-16 px-2 text-center">
+                    <dd className="text-xl font-bold tabular-nums text-ink">{String(value).padStart(2, "0")}</dd>
+                    <dt className="text-[11px] uppercase tracking-wide text-ink-subtle">{unit}</dt>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

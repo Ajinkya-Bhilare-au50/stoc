@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { motion } from "framer-motion";
+import { useId, useState } from "react";
+import { Link } from "react-router";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Collapse from "./ui/Collapse";
+import { ROUTES } from "../config/routes";
 
 const faqData = [
   {
@@ -42,54 +44,63 @@ const faqData = [
   },
 ];
 
-const FAQSection = () => {
-  const [faqItems, setFaqItems] = useState(faqData);
-
-  const toggleDrawer = (index) => {
-    const updatedItems = faqItems.map((item, i) =>
-      i === index ? { ...item, isOpen: !item.isOpen } : item
-    );
-    setFaqItems(updatedItems);
-  };
-
+function FaqItem({ item, open, onToggle }) {
+  const id = useId();
   return (
-    <div id="FAQsection" className="max-w-5xl mx-auto py-10 px-8 my-14">
-      <div className="flex justify-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-800">FAQs</h2>
-      </div>
-      <div className="space-y-6">
-        {faqItems.map((item, index) => (
-          <motion.div
-            key={index}
-            className="border-b pb-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <button
-              className="flex items-center justify-between w-full font-medium text-gray-900 p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all duration-200"
-              onClick={() => toggleDrawer(index)}
-            >
-              {item.question}
-              <span className="text-lg">
-                {item.isOpen ? <AiOutlineMinus /> : <AiOutlinePlus />}
-              </span>
-            </button>
-            {item.isOpen && (
-              <motion.p
-                className="text-gray-600 mt-2 px-4"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                {item.answer}
-              </motion.p>
-            )}
-          </motion.div>
-        ))}
-      </div>
+    <div className="border-b border-line last:border-b-0">
+      <h3>
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={id}
+          onClick={onToggle}
+          className="flex w-full items-center justify-between gap-4 py-5 text-left text-base font-medium text-ink transition-colors hover:text-accent"
+        >
+          {item.question}
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line text-ink-muted">
+            {open ? <MinusIcon className="h-4 w-4" /> : <PlusIcon className="h-4 w-4" />}
+          </span>
+        </button>
+      </h3>
+      <Collapse open={open} id={id}>
+        <p className="pb-5 pr-10 text-sm leading-6 text-ink-muted">{item.answer}</p>
+      </Collapse>
     </div>
   );
-};
+}
 
-export default FAQSection;
+export default function FAQSection() {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <section id="FAQsection" className="section">
+      <div className="container-page grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+        <div>
+          <p className="eyebrow">FAQ</p>
+          <h1 className="page-title mt-2">Frequently asked questions</h1>
+          <p className="lead mt-4">Everything you need to know about our coding and trading courses.</p>
+          <div className="card mt-8 hidden lg:block">
+            <p className="card-title">Still have questions?</p>
+            <p className="card-desc">Our team usually replies within a day.</p>
+            <Link to={ROUTES.contact} className="btn btn-primary mt-4">Contact us</Link>
+          </div>
+        </div>
+        <div className="card py-1 sm:py-1">
+          {faqData.map((item, index) => (
+            <FaqItem
+              key={item.question}
+              item={item}
+              open={openIndex === index}
+              onToggle={() => setOpenIndex((cur) => (cur === index ? -1 : index))}
+            />
+          ))}
+        </div>
+        <div className="card lg:hidden">
+          <p className="card-title">Still have questions?</p>
+          <p className="card-desc">Our team usually replies within a day.</p>
+          <Link to={ROUTES.contact} className="btn btn-primary mt-4">Contact us</Link>
+        </div>
+      </div>
+    </section>
+  );
+}
