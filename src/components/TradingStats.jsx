@@ -23,7 +23,7 @@ const TradingStats = () => {
             value: 0,
             format: "(,ddd)",
           });
-          happyTradersOdometer.update(1000);
+          happyTradersOdometer.update(15000);
 
           const yearsOfExpertiseOdometer = new Odometer({
             el: yearsOfExpertiseRef.current,

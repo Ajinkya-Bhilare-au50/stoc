@@ -16,7 +16,7 @@ const item = {
 
 const TRUST = [
   { value: "4.5", label: "average rating", icon: StarIcon },
-  { value: "1,000+", label: "students taught" },
+  { value: "15,000+", label: "students taught" },
   { value: "Online & offline", label: "batches" },
 ];
 

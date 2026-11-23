@@ -7,9 +7,9 @@ const AjinkyaProfile = () => {
     name: "Ajinkya Bhilare",
     rating: 4.5,
     reviews: 109,
-    students: 1000,
+    students: "15,000+",
     courses: 14,
-    bio: "Ajinkya is an esteemed Indian instructor renowned for teaching over 5,000 students worldwide...",
+    bio: "Ajinkya is an esteemed Indian instructor renowned for teaching over 15,000 students worldwide...",
     accomplishments: [
       "Founded LearnToProgram Media",
       "Operates an internet video network",
