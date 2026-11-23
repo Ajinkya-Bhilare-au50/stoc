@@ -25,7 +25,7 @@ export default function NseMarketPage() {
 
   return (
     <div className="min-h-screen bg-market-bg text-market-text">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
+      <div className="container-page py-8 lg:py-12">
         {/* Header */}
         <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>

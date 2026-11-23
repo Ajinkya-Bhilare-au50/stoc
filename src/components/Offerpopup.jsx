@@ -36,7 +36,7 @@ export default function OfferPopup() {
   return (
     <div
       role="status"
-      className="fixed bottom-20 left-4 right-4 z-30 sm:right-auto sm:w-80 motion-safe:animate-[toast-in_300ms_ease-out]"
+      className="fixed bottom-20 left-4 z-30 hidden w-80 sm:block motion-safe:animate-[toast-in_300ms_ease-out]"
     >
       <div className="flex gap-3 rounded-panel border border-line bg-elevated p-4 shadow-pop">
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-control bg-warn/15 text-warn">

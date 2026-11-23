@@ -45,7 +45,7 @@ const Stepper = () => {
   };
 
   return (
-    <div className="p-4">
+    <div>
       <ul className="relative flex flex-col sm:flex-row gap-y-2 sm:gap-x-2 mb-4">
         {steps.map((step, index) => (
           <li
@@ -77,19 +77,19 @@ const Stepper = () => {
         {steps.map((step, index) => (
           <div
             key={index}
-            className={`p-4 h-auto bg-surface flex flex-col justify-center items-center border border-dashed border-line rounded-xl dark:bg-card dark:border-line ${
+            className={`flex flex-col items-center justify-center rounded-tile border border-dashed border-line bg-surface p-6 ${
               currentStep === index ? "block" : "hidden"
             }`}
           >
-            <h3 className="text-ink-subtle dark:text-ink-subtle mb-2">{step.heading}</h3>
-            <img src={step.image} alt={step.heading} className="w-32 h-32 mb-2" />
+            <h3 className="mb-3 text-sm font-medium text-ink">{step.heading}</h3>
+            <img src={step.image} alt={step.heading} className="mb-2 h-32 w-32 rounded-tile bg-white object-contain p-2" />
           </div>
         ))}
 
         <div className="mt-5 flex justify-between items-center gap-x-2">
           <button
             type="button"
-            className="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-line bg-card text-ink shadow-sm hover:bg-surface disabled:opacity-50 disabled:pointer-events-none"
+            className="btn btn-secondary"
             onClick={handleBack}
             disabled={currentStep === 0}
           >
@@ -99,7 +99,7 @@ const Stepper = () => {
           {currentStep < steps.length - 1 && (
             <button
               type="button"
-              className="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-accent text-white hover:bg-accent disabled:opacity-50 disabled:pointer-events-none"
+              className="btn btn-primary"
               onClick={handleNext}
             >
               Next
@@ -109,7 +109,7 @@ const Stepper = () => {
           {currentStep === steps.length - 1 && (
             <button
               type="button"
-              className="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-accent text-white hover:bg-accent disabled:opacity-50 disabled:pointer-events-none"
+              className="btn btn-primary"
               onClick={handleReset}
             >
               Reset

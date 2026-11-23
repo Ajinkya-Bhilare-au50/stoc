@@ -58,9 +58,9 @@ export default function HomeMarketSnapshot() {
   return (
     <section
       aria-labelledby="market-today"
-      className="bg-market-bg px-4 py-12 text-market-text sm:px-6 lg:py-16"
+      className="section text-market-text"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="container-page">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-market-cyan">

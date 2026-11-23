@@ -32,7 +32,7 @@ To point at a different tenant, copy `.env.example` to `.env.local` and edit it.
 
 ## NSE market page (TejHQ)
 
-`/nse-stocks` shows end-of-day NSE data from [TejHQ](https://tejhq.dev): breadth, top
+`/market` shows end-of-day NSE data from [TejHQ](https://tejhq.dev): breadth, top
 gainers/losers, most active, stock search, price chart, 52-week range, corporate
 actions, and (with a key) delivery % and split-adjusted prices.
 
@@ -42,6 +42,45 @@ actions, and (with a key) delivery % and split-adjusted prices.
 - **API key:** set `TEJ_API_KEY` in Netlify → Project configuration → Environment
   variables (and in `.env.local` for local dev). Never use a `VITE_` prefix for it.
 - Data is end of day (refreshed ~18:30 IST). TejHQ has no live quotes or index levels.
+
+## Design system
+
+All styling goes through one set of tokens — change the look in one place:
+
+- **Tokens:** CSS variables in `src/index.css` (`:root`): colours (as RGB channels), radii,
+  shadows, header height, container width. Dark fintech palette; green = up, red = down.
+- **Tailwind theme:** `tailwind.config.js` maps the tokens to semantic classes —
+  `bg-canvas | bg-surface | bg-card | bg-elevated`, `text-ink | text-ink-muted | text-ink-subtle`,
+  `border-line`, `text-accent`, `text-up`, `text-down`, `text-warn`. Never use raw hex or
+  Tailwind's default palette (`gray-500`, `blue-600` …) in components.
+- **Component classes** (`src/index.css`, `@layer components`): `container-page`, `section`,
+  `eyebrow`, `page-title`, `section-title`, `lead`, `card`, `tile`, `btn` + `btn-primary |
+  btn-secondary | btn-outline | btn-ghost | btn-danger | btn-success` (+ `btn-sm | btn-lg`),
+  `label`, `input`, `select`, `textarea`, `field-error`, `badge-*`, `data-table`, `article`.
+- **Typography:** Inter; h1 36/40 → body 14/22 → small 12/18.
+
+## Routes
+
+| URL | Page |
+| --- | --- |
+| `/` | Home |
+| `/market` | NSE market overview (`?symbol=TCS`) |
+| `/courses/stock-market`, `/courses/coding` | Courses (sign-in required) |
+| `/blog`, `/blog/:slug` | Blog index and articles (sign-in required) |
+| `/reviews`, `/faq`, `/offers`, `/enquiry`, `/contact` | Content pages |
+
+Old URLs (`/nse-stocks`, `/stockcoursepage`, `/codingcoursespage`, `/blogpage`,
+`/testimonial`, `/specialoffer`) redirect automatically (see `LEGACY_REDIRECTS`).
+
+## Site settings
+
+`src/config/site.js` holds contact details, navigation, footer links, the WhatsApp
+community link and social profile URLs (empty = hidden).
+
+## Contact form
+
+Submissions go to **Netlify Forms** (form `contact`, registered in `index.html`). In Netlify:
+Forms → enable form detection, then add an email notification.
 
 ## Structure
 
