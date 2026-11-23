@@ -81,11 +81,11 @@ export default function Banner() {
                   </li>
                 ))}
                 <li className="flex h-14 w-14 items-center justify-center rounded-full bg-elevated text-sm font-bold text-ink ring-4 ring-card sm:h-16 sm:w-16">
-                  15+
+                  15K+
                 </li>
               </ul>
               <p className="text-sm text-ink-muted">
-                <span className="font-semibold text-ink">15+ learners</span> already enrolled this batch
+                <span className="font-semibold text-ink">15,000+ learners</span> have joined our community
               </p>
             </div>
           </div>
