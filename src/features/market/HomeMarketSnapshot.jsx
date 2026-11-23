@@ -79,7 +79,7 @@ export default function HomeMarketSnapshot() {
           </div>
           <Link
             to={ROUTES.nseStocks}
-            className="inline-flex h-10 items-center gap-2 self-start rounded-lg border border-market-border bg-market-card px-4 text-sm font-semibold text-market-text transition hover:border-market-accent hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-market-accent sm:self-auto"
+            className="inline-flex h-10 items-center gap-2 self-start rounded-lg border border-market-border bg-market-card px-4 text-sm font-semibold text-market-text transition hover:border-market-accent hover:text-market-text focus:outline-none focus-visible:ring-2 focus-visible:ring-market-accent sm:self-auto"
           >
             View full market
             <ArrowRightIcon className="h-4 w-4" aria-hidden />

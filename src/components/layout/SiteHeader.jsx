@@ -14,6 +14,7 @@ import { NAV, SITE } from "../../config/site";
 import { DesktopAuthControls, MobileAuthControls } from "../../auth/AuthControls";
 import Collapse from "../ui/Collapse";
 import Dropdown from "../ui/Dropdown";
+import ThemeToggle from "../../theme/ThemeToggle";
 
 const ICONS = { chart: ChartBarIcon, code: CodeBracketIcon, tag: TagIcon, inbox: InboxArrowDownIcon };
 const DESKTOP_BREAKPOINT = 1024;
@@ -172,7 +173,8 @@ export default function SiteHeader() {
           <DesktopNav />
         </div>
 
-        <div className="hidden lg:flex">
+        <div className="hidden items-center gap-2 lg:flex">
+          <ThemeToggle />
           <DesktopAuthControls />
         </div>
 
@@ -191,7 +193,8 @@ export default function SiteHeader() {
       <Collapse open={open} id="mobile-nav" className="lg:hidden">
         <div className="container-page max-h-[calc(100dvh-var(--header-h))] overflow-y-auto border-t border-line pb-6 pt-3">
           <MobileNav />
-          <div className="mt-4 border-t border-line pt-4">
+          <div className="mt-4 space-y-3 border-t border-line pt-4">
+            <ThemeToggle withLabel />
             <MobileAuthControls />
           </div>
         </div>

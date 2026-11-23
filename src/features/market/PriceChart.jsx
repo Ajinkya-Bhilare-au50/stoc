@@ -2,6 +2,8 @@ import { useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { formatCompact, formatDate, formatPrice } from "./format";
 
 const HEIGHT = 300;
+// Theme tokens (CSS variables) — resolved via inline style so the chart follows light/dark mode.
+const tok = (name) => `rgb(var(--${name}))`;
 const PAD = { top: 16, right: 56, bottom: 28, left: 8 };
 const VOLUME_SHARE = 0.18; // bottom part of the plot reserved for volume bars
 
@@ -69,7 +71,7 @@ export default function PriceChart({ data }) {
   }, [width, data]);
 
   const up = data.length > 1 && data[data.length - 1].chartClose >= data[0].chartClose;
-  const color = up ? "#22C55E" : "#EF4444"; // market-up / market-down tokens
+  const color = up ? tok("up") : tok("down");
 
   const pickIndex = (clientX) => {
     if (!geo) return;
@@ -111,8 +113,8 @@ export default function PriceChart({ data }) {
         <svg width={width} height={HEIGHT} className="block" aria-hidden>
           <defs>
             <linearGradient id={gradientId} x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor={color} stopOpacity="0.28" />
-              <stop offset="100%" stopColor={color} stopOpacity="0" />
+              <stop offset="0%" style={{ stopColor: color, stopOpacity: 0.28 }} />
+              <stop offset="100%" style={{ stopColor: color, stopOpacity: 0 }} />
             </linearGradient>
           </defs>
 
@@ -123,10 +125,15 @@ export default function PriceChart({ data }) {
                 x2={PAD.left + geo.plotW}
                 y1={geo.y(t)}
                 y2={geo.y(t)}
-                stroke="#293548"
+                style={{ stroke: tok("border") }}
                 strokeDasharray="3 4"
               />
-              <text x={width - PAD.right + 8} y={geo.y(t) + 4} fill="#64748B" fontSize="11">
+              <text
+                x={width - PAD.right + 8}
+                y={geo.y(t) + 4}
+                style={{ fill: tok("text-subtle") }}
+                fontSize="11"
+              >
                 {formatPrice(t)}
               </text>
             </g>
@@ -139,20 +146,20 @@ export default function PriceChart({ data }) {
               y={b.y}
               width={geo.barW}
               height={b.h}
-              fill={b.up ? "#22C55E" : "#EF4444"}
+              style={{ fill: b.up ? tok("up") : tok("down") }}
               opacity={active === i ? 0.8 : 0.35}
             />
           ))}
 
           <path d={geo.area} fill={`url(#${gradientId})`} />
-          <path d={geo.line} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" />
+          <path d={geo.line} fill="none" style={{ stroke: color }} strokeWidth="2" strokeLinejoin="round" />
 
           {geo.dates.map(({ i, date }) => (
             <text
               key={date}
               x={geo.x(i)}
               y={HEIGHT - 8}
-              fill="#64748B"
+              style={{ fill: tok("text-subtle") }}
               fontSize="11"
               textAnchor={i === 0 ? "start" : "middle"}
             >
@@ -167,15 +174,14 @@ export default function PriceChart({ data }) {
                 x2={geo.x(active)}
                 y1={PAD.top}
                 y2={HEIGHT - PAD.bottom}
-                stroke="#94A3B8"
+                style={{ stroke: tok("text-muted") }}
                 strokeDasharray="4 4"
               />
               <circle
                 cx={geo.x(active)}
                 cy={geo.y(point.chartClose)}
                 r="4.5"
-                fill={color}
-                stroke="#0B1220"
+                style={{ fill: color, stroke: tok("card") }}
                 strokeWidth="2"
               />
             </g>

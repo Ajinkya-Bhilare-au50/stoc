@@ -1,59 +1,48 @@
-// TradingView ticker tape (third-party embed; prices are delayed, not TejHQ data).
+import { useTheme } from "../theme/useTheme";
+
+// TradingView ticker tape (third-party embed; delayed prices, not TejHQ data).
+// Only BSE symbols work in TradingView's free widget — NSE symbols (incl. NIFTY)
+// show an error, so everything here is BSE-listed.
 const SYMBOLS = [
-  {
-    description: "SENSEX",
-    proName: "BSE:SENSEX",
-  },
-  {
-    description: "NIFTY 50",
-    proName: "NSE:NIFTY",
-  },
-  {
-    description: "BANK NIFTY",
-    proName: "NSE:BANKNIFTY",
-  },
-  {
-    description: "RELIANCE",
-    proName: "NSE:RELIANCE",
-  },
-  {
-    description: "HDFC BANK",
-    proName: "NSE:HDFCBANK",
-  },
-  {
-    description: "ICICI BANK",
-    proName: "NSE:ICICIBANK",
-  },
-  {
-    description: "TCS",
-    proName: "NSE:TCS",
-  },
-  {
-    description: "INFY",
-    proName: "NSE:INFY",
-  },
-  {
-    description: "SBIN",
-    proName: "NSE:SBIN",
-  },
-];
+  ["SENSEX", "BSE:SENSEX"],
+  ["RELIANCE", "BSE:RELIANCE"],
+  ["HDFC BANK", "BSE:HDFCBANK"],
+  ["ICICI BANK", "BSE:ICICIBANK"],
+  ["TCS", "BSE:TCS"],
+  ["INFOSYS", "BSE:INFY"],
+  ["SBI", "BSE:SBIN"],
+  ["BHARTI AIRTEL", "BSE:BHARTIARTL"],
+  ["ITC", "BSE:ITC"],
+  ["ADANI ENT", "BSE:ADANIENT"],
+].map(([description, proName]) => ({ description, proName }));
 
-const CONFIG = {
-  symbols: SYMBOLS,
-  showSymbolLogo: true,
-  colorTheme: "dark",
-  isTransparent: true,
-  displayMode: "regular",
-  width: "100%",
-  height: 46,
-};
-
-const SRC = `https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=in#${encodeURIComponent(JSON.stringify(CONFIG))}`;
+const src = (colorTheme) =>
+  `https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=in#${encodeURIComponent(
+    JSON.stringify({
+      symbols: SYMBOLS,
+      showSymbolLogo: true,
+      colorTheme,
+      isTransparent: true,
+      displayMode: "regular",
+      width: "100%",
+      height: 46,
+    }),
+  )}`;
 
 export default function TradingViewTickerTape() {
+  const { theme } = useTheme();
   return (
     <div className="h-[46px] overflow-hidden border-b border-line bg-surface">
-      <iframe title="Market ticker" src={SRC} width="100%" height="46" className="block" loading="lazy" />
+      {/* key: remount the iframe when the theme changes */}
+      <iframe
+        key={theme}
+        title="Market ticker"
+        src={src(theme)}
+        width="100%"
+        height="46"
+        className="block"
+        loading="lazy"
+      />
     </div>
   );
 }

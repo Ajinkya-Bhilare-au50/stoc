@@ -39,6 +39,40 @@
   color-scheme: dark;
 }
 
+/* Light theme — same tokens, light values. Toggled via <html data-theme="light">. */
+:root[data-theme="light"] {
+  --bg: 248 250 252; /* #F8FAFC */
+  --bg-2: 241 245 249; /* #F1F5F9 */
+  --card: 255 255 255; /* #FFFFFF */
+  --elevated: 236 241 247; /* #ECF1F7 */
+  --border: 222 229 238; /* #DEE5EE */
+
+  --text: 15 23 42; /* #0F172A */
+  --text-muted: 71 85 105; /* #475569 */
+  --text-subtle: 100 116 139; /* #64748B */
+
+  /* Slightly deeper hues keep 4.5:1+ contrast on white */
+  --accent: 37 99 235; /* #2563EB */
+  --accent-2: 8 145 178; /* #0891B2 */
+  --up: 22 163 74; /* #16A34A */
+  --down: 220 38 38; /* #DC2626 */
+  --warn: 217 119 6; /* #D97706 */
+
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 8px 24px -12px rgb(15 23 42 / 0.12);
+  --shadow-pop: 0 16px 40px -12px rgb(15 23 42 / 0.25);
+
+  color-scheme: light;
+}
+
+/* Smooth colour change when switching themes (not on first paint). */
+html.theme-transition,
+html.theme-transition * {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease !important;
+}
+
 /* ==========================================================================
    Base
    ========================================================================== */
@@ -156,7 +190,7 @@
     @apply border border-line bg-elevated text-ink hover:bg-elevated/70;
   }
   .btn-outline {
-    @apply border border-line bg-transparent text-ink hover:border-accent hover:text-white;
+    @apply border border-line bg-transparent text-ink hover:border-accent hover:bg-elevated/60;
   }
   .btn-ghost {
     @apply bg-transparent text-ink-muted hover:bg-elevated hover:text-ink;
