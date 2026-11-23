@@ -2,7 +2,7 @@ import React from "react";
 
 const Blog3 = () => {
   return (
-    <div className="w-full mx-auto p-6 bg-accent/10 rounded-lg shadow-card">
+    <div className="blog-post">
       <h1 className="text-3xl font-bold text-ink mb-4">Value Investing: A Comprehensive Guide</h1>
       <p className="text-ink-muted mb-6">
         Value investing is an investment strategy that involves picking stocks that appear to be trading for

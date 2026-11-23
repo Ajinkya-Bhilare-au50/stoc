@@ -72,6 +72,11 @@ export const router = createBrowserRouter([
                 handle: standard,
               },
               { path: ROUTES.blog, lazy: page(() => import("./components/BlogPage")), handle: marketing },
+              {
+                path: `${ROUTES.blog}/:slug`,
+                lazy: page(() => import("./features/blog/BlogPostPage")),
+                handle: marketing,
+              },
             ],
           },
 

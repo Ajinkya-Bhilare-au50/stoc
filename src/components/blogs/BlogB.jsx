@@ -2,7 +2,7 @@ import React from "react";
 
 const BlogB = () => {
   return (
-    <div className="w-full mx-auto p-6 bg-card rounded-lg shadow-card mt-10">
+    <div className="blog-post">
       <h1 className="text-3xl font-bold text-ink mb-4 text-center">Vijay Kedia: The Success Story</h1>
       <div className="flex flex-col md:flex-row gap-6 flex-wrap r">
         <div className="w-full flex justify-center items-center">

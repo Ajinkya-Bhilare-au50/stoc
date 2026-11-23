@@ -11,12 +11,14 @@ const Slider = interopDefault(SlickSlider);
 const NextArrow = (props) => {
   const { onClick } = props;
   return (
-    <div className="absolute right-4 top-6 z-10 cursor-pointer" onClick={onClick}>
-      <FaArrowRight
-        style={{ fontSize: "36px" }}
-        className="hover:text-white hover:bg-card transition duration-300 bg-accent/10 rounded-full p-2"
-      />
-    </div>
+    <button
+      type="button"
+      aria-label="Next concept"
+      onClick={onClick}
+      className="btn btn-secondary absolute right-3 top-3 z-10 h-9 w-9 rounded-full px-0"
+    >
+      <FaArrowRight className="h-3.5 w-3.5" />
+    </button>
   );
 };
 
@@ -24,12 +26,14 @@ const NextArrow = (props) => {
 const PrevArrow = (props) => {
   const { onClick } = props;
   return (
-    <div className="absolute left-4 top-6 z-10 cursor-pointer" onClick={onClick}>
-      <FaArrowLeft
-        style={{ fontSize: "36px" }}
-        className="hover:text-white hover:bg-card transition duration-300 bg-accent/10 rounded-full p-2"
-      />
-    </div>
+    <button
+      type="button"
+      aria-label="Previous concept"
+      onClick={onClick}
+      className="btn btn-secondary absolute left-3 top-3 z-10 h-9 w-9 rounded-full px-0"
+    >
+      <FaArrowLeft className="h-3.5 w-3.5" />
+    </button>
   );
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 
 const TraderBlog = () => {
   return (
-    <div className="container mx-auto p-6 bg-surface">
+    <div className="blog-post">
       <h1 className="text-4xl font-bold mb-4">The Life of a Trader: A Journey of Ups and Downs</h1>
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-2">Introduction</h2>

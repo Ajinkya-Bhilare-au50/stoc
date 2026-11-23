@@ -3,14 +3,14 @@ import { FaCheckCircle } from "react-icons/fa";
 
 const Blog1 = () => {
   return (
-    <div className="bg-down/10 min-h-screen w-/3">
+    <div className="blog-post">
       <div className="max-w-4xl mx-auto py-10 px-2">
         <h1 className="text-4xl lg:text-5xl font-bold text-center mb-8">
           The Art of Investing: Building Wealth and Securing Futures
         </h1>
 
         {/* Introduction Section */}
-        <section className="bg-card shadow-card rounded-lg p-6 mb-8">
+        <section className="rounded-lg p-6 mb-8">
           <img
             src="https://tradebrains.in/wp-content/uploads/2017/05/10-Reasons-To-Start-Investing-In-Stock-Market-Today-cover-1.jpg"
             alt="Banner"
@@ -25,7 +25,7 @@ const Blog1 = () => {
         </section>
 
         {/* Reasons to Invest Section */}
-        <section className="bg-card shadow-card rounded-lg p-6 mb-8">
+        <section className="rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Why Invest?</h2>
           <img
             src="https://cdn.corporatefinanceinstitute.com/assets/exponential-growth-1024x683.jpeg"
@@ -52,7 +52,7 @@ const Blog1 = () => {
         </section>
 
         {/* Key Concepts Section */}
-        <section className="bg-card shadow-card rounded-lg p-6 mb-8">
+        <section className="rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Key Concepts in Investing</h2>
           <p className="text-lg leading-relaxed mb-4">
             Before diving into investment strategies, it's crucial to grasp some foundational concepts:
@@ -71,7 +71,7 @@ const Blog1 = () => {
         </section>
 
         {/* Investment Strategies Section */}
-        <section className="bg-card shadow-card rounded-lg p-6 mb-8">
+        <section className="rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Investment Strategies</h2>
           <p className="text-lg leading-relaxed mb-4">
             Investment strategies vary based on factors such as financial goals, risk tolerance, and market
@@ -91,7 +91,7 @@ const Blog1 = () => {
         </section>
 
         {/* Mindset and Discipline Section */}
-        <section className="bg-card shadow-card rounded-lg p-6 mb-8">
+        <section className="rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Mindset and Discipline</h2>
           <p className="text-lg leading-relaxed mb-4">
             Successful investing requires a disciplined mindset and emotional resilience:
@@ -110,7 +110,7 @@ const Blog1 = () => {
         </section>
 
         {/* Conclusion Section */}
-        <section className="bg-card shadow-card rounded-lg p-6 mb-8">
+        <section className="rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">Conclusion</h2>
           <p className="text-lg leading-relaxed">
             Investing is both an art and a science, requiring a blend of knowledge, strategy, and discipline.
