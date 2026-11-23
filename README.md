@@ -30,6 +30,27 @@ survive reloads in browsers that block third-party cookies.
 
 To point at a different tenant, copy `.env.example` to `.env.local` and edit it.
 
+## Login & password emails (Auth0)
+
+Sign-up verification, password reset and welcome emails are sent by **Auth0**. Its built-in
+mailer is for testing only (rate-limited, often spam), so connect a real provider:
+
+1. Create an email provider account, e.g. **Brevo** (free 300/day) or **Resend**, and verify the
+   sender address you'll send from. (Gmail SMTP with an *App Password* also works for low volume.)
+2. Auth0 → **Branding → Email Provider** → *Use my own email provider* → **SMTP**, enter the
+   provider's host / port 587 / username / password, set **From** to your verified address, and
+   **Send test email**.
+3. Auth0 → **Branding → Email Templates**: for each template below, enable it, set the subject,
+   paste the HTML from `auth0/email-templates/`, and save.
+
+| Auth0 template | File | Subject |
+| --- | --- | --- |
+| Verification Email (using Link) | `verify-email.html` | Verify your email for Sniper Coding |
+| Change Password (Link) | `reset-password.html` | Reset your Sniper Coding password |
+| Welcome Email | `welcome.html` | Welcome to Sniper Coding |
+
+For *Change Password*, set **Redirect To** to `https://sniperscope.netlify.app/login`.
+
 ## NSE market page (TejHQ)
 
 `/market` shows end-of-day NSE data from [TejHQ](https://tejhq.dev): breadth, top
