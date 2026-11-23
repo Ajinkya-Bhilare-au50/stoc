@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate, useLocation } from "react-router";
 import RootLayout from "./layouts/RootLayout";
 import SiteLayout from "./layouts/SiteLayout";
 import RequireAuth from "./auth/RequireAuth";
@@ -6,7 +6,7 @@ import AuthRedirectPage from "./auth/AuthRedirectPage";
 import ErrorPage from "./pages/ErrorPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import FullPageMessage from "./components/ui/FullPageMessage";
-import { ROUTES } from "./config/routes";
+import { LEGACY_REDIRECTS, ROUTES } from "./config/routes";
 
 // Code-split every page. The router waits for the chunk before switching, so
 // the current page stays on screen (with a top progress bar) instead of
@@ -16,7 +16,14 @@ const page =
   async () => ({ Component: (await load())[name] });
 const sections = () => import("./pages/SectionPages");
 
-const withFooter = { chrome: { offerPopup: true, stickyFooter: true } };
+/** Old URL → new URL, keeping ?query and #hash (e.g. /nse-stocks?symbol=TCS). */
+function LegacyRedirect({ to }) {
+  const { search, hash } = useLocation();
+  return <Navigate to={`${to}${search}${hash}`} replace />;
+}
+
+const marketing = { chrome: { offerPopup: true, stickyFooter: true, scrollWidgets: true } };
+const standard = { chrome: { stickyFooter: true, scrollWidgets: true } };
 
 export const router = createBrowserRouter([
   {
@@ -31,33 +38,14 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.home,
             lazy: page(sections, "HomePage"),
-            handle: {
-              chrome: {
-                tickerTape: true,
-                offerPopup: true,
-                stickyFooter: true,
-                scrollWidgets: true,
-              },
-            },
+            handle: { chrome: { ...marketing.chrome, tickerTape: true } },
           },
-          {
-            path: ROUTES.nseStocks,
-            lazy: page(() => import("./features/market/NseMarketPage")),
-            handle: { chrome: { stickyFooter: true } },
-          },
-          {
-            path: ROUTES.contact,
-            lazy: page(() => import("./components/Contactus")),
-            handle: withFooter,
-          },
-          { path: ROUTES.faq, lazy: page(sections, "FaqPage"), handle: withFooter },
-          { path: ROUTES.specialOffer, lazy: page(sections, "SpecialOfferPage") },
-          {
-            path: ROUTES.testimonials,
-            lazy: page(sections, "TestimonialsPage"),
-            handle: { chrome: { stickyFooter: true, scrollWidgets: true } },
-          },
-          { path: ROUTES.enquiry, lazy: page(() => import("./components/AdmissionForm")) },
+          { path: ROUTES.market, lazy: page(() => import("./features/market/NseMarketPage")), handle: standard },
+          { path: ROUTES.faq, lazy: page(sections, "FaqPage"), handle: marketing },
+          { path: ROUTES.specialOffer, lazy: page(sections, "SpecialOfferPage"), handle: standard },
+          { path: ROUTES.testimonials, lazy: page(sections, "TestimonialsPage"), handle: marketing },
+          { path: ROUTES.enquiry, lazy: page(() => import("./components/AdmissionForm")), handle: { chrome: { scrollWidgets: true } } },
+          { path: ROUTES.contact, lazy: page(() => import("./components/Contactus")), handle: standard },
           { path: ROUTES.login, element: <AuthRedirectPage mode="login" /> },
           { path: ROUTES.signup, element: <AuthRedirectPage mode="signup" /> },
 
@@ -65,21 +53,17 @@ export const router = createBrowserRouter([
           {
             element: <RequireAuth />,
             children: [
-              {
-                path: ROUTES.stockCourses,
-                lazy: page(() => import("./components/StockCoursesPage")),
-              },
-              {
-                path: ROUTES.codingCourses,
-                lazy: page(() => import("./components/CodingCoursesPage")),
-              },
-              {
-                path: ROUTES.blog,
-                lazy: page(() => import("./components/BlogPage")),
-                handle: { chrome: { offerPopup: true } },
-              },
+              { path: ROUTES.stockCourses, lazy: page(() => import("./components/StockCoursesPage")), handle: standard },
+              { path: ROUTES.codingCourses, lazy: page(() => import("./components/CodingCoursesPage")), handle: standard },
+              { path: ROUTES.blog, lazy: page(() => import("./components/BlogPage")), handle: marketing },
             ],
           },
+
+          // Pre-redesign URLs keep working.
+          ...Object.entries(LEGACY_REDIRECTS).map(([path, to]) => ({
+            path,
+            element: <LegacyRedirect to={to} />,
+          })),
 
           { path: "*", element: <NotFoundPage /> },
         ],

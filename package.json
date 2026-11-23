@@ -36,17 +36,10 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@material-tailwind/react": "^2.1.10",
     "@vitejs/plugin-react": "^6.3.0",
     "autoprefixer": "^10.7.0",
     "postcss": "^8.5.33",
     "tailwindcss": "^3.4.19",
     "vite": "^8.3.8"
-  },
-  "overrides": {
-    "@material-tailwind/react": {
-      "react": "$react",
-      "react-dom": "$react-dom"
-    }
   }
 }

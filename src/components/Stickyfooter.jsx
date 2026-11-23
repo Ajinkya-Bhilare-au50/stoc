@@ -1,92 +1,70 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Developer from "./Developer";
-import Banner from "./Banner";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
-const StickyFooter = () => {
-  const [showFooter, setShowFooter] = useState(false);
-  const [timer, setTimer] = useState(7200); // Timer in seconds (2 hours)
+import { ClockIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ROUTES } from "../config/routes";
+import { useSessionFlag } from "./layout/useSessionFlag";
+
+const OFFER_SECONDS = 2 * 60 * 60; // 2-hour countdown
+const SHOW_AFTER_MS = 2000;
+
+const pad = (n) => String(n).padStart(2, "0");
+const formatTime = (s) => `${pad(Math.floor(s / 3600))}:${pad(Math.floor((s % 3600) / 60))}:${pad(s % 60)}`;
+
+/**
+ * Bottom enquiry bar with a limited-time countdown. Dismissible for the
+ * session; reserves its own height so it never covers the footer.
+ */
+export default function StickyFooter() {
+  const [visible, setVisible] = useState(false);
+  const [timer, setTimer] = useState(OFFER_SECONDS);
+  const [dismissed, dismiss] = useSessionFlag("promo:enquiry-bar");
 
   useEffect(() => {
-    // Start the timer when the component mounts
-    const interval = setInterval(() => {
-      setTimer((prevTimer) => prevTimer - 1);
-    }, 1000);
-
-    // Show the footer after 5 seconds
-    setTimeout(() => {
-      setShowFooter(true);
-    }, 2000);
-
+    if (dismissed) return undefined;
+    const show = setTimeout(() => setVisible(true), SHOW_AFTER_MS);
+    const tick = setInterval(() => setTimer((t) => Math.max(0, t - 1)), 1000);
     return () => {
-      clearInterval(interval);
+      clearTimeout(show);
+      clearInterval(tick);
     };
-  }, []);
+  }, [dismissed]);
 
-  const formatTime = (timeInSeconds) => {
-    const hours = Math.floor(timeInSeconds / 3600);
-    const minutes = Math.floor((timeInSeconds % 3600) / 60);
-    const seconds = timeInSeconds % 60;
-    return `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-  };
-
-  const handleEnrollNow = () => {
-    // Add your enrollment/Enquiry logic here
-    console.log("Enroll Now button clicked!");
-  };
+  if (dismissed) return null;
 
   return (
-    <div>
-      <div className=" h-64">
-        <div className="h-70">
-          {/* Your main content */}
-          <Developer />
-
-          <p className="text-center"></p>
-        </div>
-
-        {/* Sticky Footer */}
-        <div
-          className={`fixed z-10 bottom-0 left-0 right-0 bg-black text-white pyF-3 flex flex-col md:flex-row justify-center items-center ${
-            showFooter ? "block" : "hidden"
-          }`}
-        >
-          <div>
-            <div className="flex justify-center md:justify-between m-2">
-              
-              <Link
-                to={"/enquiry"}
-                onClick={handleEnrollNow}
-                className="bg-yellow-800 hover:bg-yellow-900 px-2 py-1 rounded-md text-black"
-              >
-                Enquire Now
-              </Link>
-            </div>
-          </div>
-          <div className="p-1 md:mb-0 md:mr-4 text-center md:text-left">
+    <>
+      {/* Spacer so page content/footer can scroll clear of the fixed bar */}
+      <div className="h-16" aria-hidden />
+      <div
+        role="region"
+        aria-label="Limited time offer"
+        className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-card/95 backdrop-blur-md transition-transform duration-300 ease-out ${
+          visible ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <div className="container-page flex h-16 items-center justify-between gap-3 sm:justify-center sm:gap-6">
+          <div className="flex min-w-0 items-center gap-2 text-sm">
+            <span className="badge badge-warn hidden sm:inline-flex">Limited time offer</span>
             {timer > 0 ? (
-              <p className="flex gap-1">
-                <div className="bg-green-900 text-center px-6 rounded-md">
-                  Limited Time Offer
-                </div>
-                <div className="bg-red-800 text-white px-3 rounded-lg text-1xl shadow-md text-center">
-                  {formatTime(timer)}
-                </div>
-              </p>
+              <span className="inline-flex items-center gap-1.5 font-semibold tabular-nums text-ink">
+                <ClockIcon className="h-4 w-4 text-warn" aria-hidden />
+                <span className="sr-only">Offer ends in </span>
+                {formatTime(timer)}
+              </span>
             ) : (
-              <div className="flex items-center justify-center">
-                <p className="px-2 text-lg  text-yellow-400 font-semibold">
-                  Time's up! Enroll now!
-                </p>
-              </div>
+              <span className="font-semibold text-warn">Time's up — enrol now!</span>
             )}
+          </div>
+          <div className="flex items-center gap-2">
+            <Link to={ROUTES.enquiry} className="btn btn-primary btn-sm sm:h-9 sm:px-4 sm:text-sm">
+              Enquire now
+            </Link>
+            <button type="button" onClick={dismiss} className="btn btn-ghost h-8 w-8 px-0" aria-label="Dismiss offer bar">
+              <XMarkIcon className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
-};
-
-export default StickyFooter;
+}

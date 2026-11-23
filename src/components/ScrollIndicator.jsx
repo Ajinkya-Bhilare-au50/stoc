@@ -6,19 +6,20 @@ const Scrollindicator = () => {
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
-      const fullHeight = document.body.clientHeight;
+      const fullHeight = document.documentElement.scrollHeight;
       const scrolled = window.scrollY;
       const percent = (scrolled / (fullHeight - windowHeight)) * 100;
-      setScrollPercent(percent);
+      setScrollPercent(Math.min(100, Math.max(0, percent || 0)));
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div
-      className="fixed top-0 left-0 h-2.5 bg-blue-500"
+      className="fixed left-0 top-0 z-50 h-0.5 bg-gradient-to-r from-accent to-accent-2"
+      aria-hidden
       style={{ width: `${scrollPercent}%` }}
     />
   );

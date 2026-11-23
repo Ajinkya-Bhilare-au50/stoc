@@ -1,91 +1,87 @@
-import React from "react";
+import { Link } from "react-router";
 import { FaWhatsapp } from "react-icons/fa";
-import AvatarGroupStack from "./AvatarGroupStack";
-import TooltipWithZoomImage from "./TooltipWithZoomImage";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import sujal from "./images/sujal.jpg";
 import sanjana from "./images/sanjana.jpg";
 import mahesh from "./images/mahesh.jpg";
 import varun from "./images/varun.jpg";
+import { ROUTES } from "../config/routes";
+import { SITE } from "../config/site";
 
-const bannerimage = "https://i.ibb.co/gZcRqBn/BannerBG.png";
-const imageArray = [
-  {
-    id: 1,
-    url: sujal,
-    name: "Sujal",
-  },
-  {
-    id: 2,
-    url: varun,
-    name: "Varun",
-  },
-  {
-    id: 3,
-    url: sanjana,
-    name: "Sanjana",
-  },
-  {
-    id: 4,
-    url: mahesh,
-    name: "Mahesh",
-  },
-
-  {
-    id: 5,
-    url: "https://i.ibb.co/D80qdsp/an-image-with-a-single-color-background-and-15-written-in-the-center-covering-70-percent-o.png",
-    name: "15+ Already Enrolled",
-  },
-  // Add more image objects as needed
+const MEMBERS = [
+  { name: "Sujal", photo: sujal },
+  { name: "Varun", photo: varun },
+  { name: "Sanjana", photo: sanjana },
+  { name: "Mahesh", photo: mahesh },
 ];
-function Banner() {
-  const handleJoinWhatsAppGroup = () => {
-    // Add your logic to join the WhatsApp group
-    window.open("https://chat.whatsapp.com/your-group-id", "_blank");
-  };
+
+const PERKS = ["Daily market discussion", "Doubt-clearing with mentors", "Batch updates & resources"];
+
+/** "Sniper Coders" community call-to-action. */
+export default function Banner() {
+  const whatsapp = SITE.whatsappGroup;
 
   return (
-    <div className="relative w-full overflow-hidden h-screen ">
-      <img
-        src={bannerimage}
-        alt="Banner Background"
-        className="w-full h-full object-cover object-center md:h-auto" // Set height to auto on medium and larger screens
-        style={{ objectPosition: "center bottom" }}
-      />
-      <div className="absolute inset-0 flex flex-col items-center justify-start pt-28 space-y-6">
-        <h1 className="text-white text-4xl sm:text-2xl lg:text-7xl font-bold text-capital">
-          {/* Adjusted text sizes for different screen sizes */}
-          Sniper Coders
-        </h1>
-        {/* <AvatarGroupStack /> */}
-        <TooltipWithZoomImage imageArray={imageArray} />
+    <section className="section">
+      <div className="container-page">
+        <div className="relative overflow-hidden rounded-panel border border-line bg-card p-6 shadow-card sm:p-10">
+          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/10 blur-3xl" aria-hidden />
+          <div className="relative grid items-center gap-8 lg:grid-cols-[1.3fr_1fr]">
+            <div>
+              <p className="eyebrow">Community</p>
+              <h2 className="section-title mt-2">Join the Sniper Coders community</h2>
+              <p className="lead mt-3 max-w-xl">
+                Learn alongside other students — share trade ideas, ask questions and get batch updates in one place.
+              </p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {PERKS.map((perk) => (
+                  <li key={perk} className="badge badge-neutral px-2.5 py-1">
+                    {perk}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                {whatsapp ? (
+                  <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-success btn-lg">
+                    <FaWhatsapp className="h-5 w-5" aria-hidden />
+                    Join WhatsApp group
+                  </a>
+                ) : (
+                  <Link to={ROUTES.contact} className="btn btn-primary btn-lg">
+                    <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden />
+                    Ask to join the group
+                  </Link>
+                )}
+                <Link to={ROUTES.testimonials} className="btn btn-outline btn-lg">
+                  Read student reviews
+                </Link>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-4 lg:items-center">
+              <ul className="flex -space-x-3" aria-label="Community members">
+                {MEMBERS.map((m) => (
+                  <li key={m.name}>
+                    <img
+                      src={m.photo}
+                      alt={m.name}
+                      title={m.name}
+                      loading="lazy"
+                      className="h-14 w-14 rounded-full object-cover ring-4 ring-card transition-transform hover:z-10 hover:scale-110 sm:h-16 sm:w-16"
+                    />
+                  </li>
+                ))}
+                <li className="flex h-14 w-14 items-center justify-center rounded-full bg-elevated text-sm font-bold text-ink ring-4 ring-card sm:h-16 sm:w-16">
+                  15+
+                </li>
+              </ul>
+              <p className="text-sm text-ink-muted">
+                <span className="font-semibold text-ink">15+ learners</span> already enrolled this batch
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="absolute bottom-0 left-0 p-4 flex items-center space-x-2">
-        <a
-          href="https://api.whatsapp.com/send?phone=whatsapp-number"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-green-500 text-2xl md:text-3xl " // Resize WhatsApp icon for mobile and larger screens
-        >
-          <FaWhatsapp />
-        </a>
-        <button
-          onClick={handleJoinWhatsAppGroup}
-          className="bg-green-500 text-white px-4 py-2 rounded-lg hidden md:block hover:bg-green-700" // Hide button on small screens, show on medium and larger screens
-        >
-          Join WhatsApp Group
-        </button>
-      </div>
-      <div className="md:hidden absolute bottom-0 left-0 p-4 flex items-center justify-center w-full">
-        {/* Show button on small screens, center it horizontally */}
-        <button
-          onClick={handleJoinWhatsAppGroup}
-          className="bg-green-500 text-white px-4 py-1 rounded-lg w-full md:w-auto hover:bg-green-700" // Make button full width on small screens, auto width on larger screens
-        >
-          Join WhatsApp Group
-        </button>
-      </div>
-    </div>
+    </section>
   );
 }
-
-export default Banner;

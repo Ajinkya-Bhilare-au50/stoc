@@ -2,6 +2,331 @@
 @tailwind components;
 @tailwind utilities;
 
-.react-tabs__tab--selected:focus {
-  border-bottom: 2px solid #011121; /* Blue color for the bottom border */
+/* ==========================================================================
+   SniperScope design tokens — the single source of truth.
+   Colours are RGB channels so Tailwind can apply opacity (bg-accent/10).
+   ========================================================================== */
+:root {
+  /* Surfaces */
+  --bg: 11 18 32; /* #0B1220 page */
+  --bg-2: 17 24 39; /* #111827 secondary / inputs */
+  --card: 23 34 53; /* #172235 cards */
+  --elevated: 30 41 59; /* #1E293B menus, hovers */
+  --border: 41 53 72; /* #293548 */
+
+  /* Text */
+  --text: 248 250 252; /* #F8FAFC */
+  --text-muted: 148 163 184; /* #94A3B8 */
+  --text-subtle: 100 116 139; /* #64748B */
+
+  /* Brand & status (green = up, red = down — trading convention) */
+  --accent: 59 130 246; /* #3B82F6 */
+  --accent-2: 6 182 212; /* #06B6D4 */
+  --up: 34 197 94; /* #22C55E */
+  --down: 239 68 68; /* #EF4444 */
+  --warn: 245 158 11; /* #F59E0B */
+
+  /* Shape, depth, motion, layout */
+  --radius-control: 8px;
+  --radius-tile: 12px;
+  --radius-panel: 16px;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  --shadow-pop: 0 16px 40px -12px rgb(0 0 0 / 0.6);
+  --transition: 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  --container: 80rem; /* 1280px */
+  --header-h: 4rem; /* 64px */
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+  }
+
+  body {
+    @apply bg-canvas font-sans text-sm text-ink antialiased;
+    font-feature-settings: "cv11", "ss01";
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-bold tracking-tight text-ink;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.35);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  /* Native form controls & scrollbars follow the dark theme */
+  * {
+    scrollbar-color: rgb(var(--border)) transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Components — use these instead of re-styling the same thing per page.
+   ========================================================================== */
+@layer components {
+  /* Layout */
+  .container-page {
+    @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8;
+  }
+  .section {
+    @apply py-12 sm:py-16;
+  }
+  .section-tight {
+    @apply py-8 sm:py-12;
+  }
+
+  /* Typography */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-2;
+  }
+  .page-title {
+    @apply text-3xl font-bold tracking-tight text-ink sm:text-4xl;
+  }
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-ink sm:text-3xl;
+  }
+  .lead {
+    @apply text-base text-ink-muted;
+  }
+  .link {
+    @apply font-medium text-accent underline-offset-4 transition-colors hover:underline;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-panel border border-line bg-card p-5 shadow-card sm:p-6;
+  }
+  .card-interactive {
+    @apply transition duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/50;
+  }
+  .tile {
+    @apply rounded-tile bg-surface/70 px-4 py-3;
+  }
+  .card-title {
+    @apply text-lg font-semibold text-ink;
+  }
+  .card-desc {
+    @apply mt-1 text-sm text-ink-muted;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex h-10 select-none items-center justify-center gap-2 whitespace-nowrap rounded-control px-4 text-sm font-semibold transition duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-sm {
+    @apply h-8 px-3 text-xs;
+  }
+  .btn-lg {
+    @apply h-12 px-6 text-base;
+  }
+  .btn-block {
+    @apply w-full;
+  }
+  .btn-primary {
+    @apply bg-accent text-white shadow-sm hover:bg-accent/90 active:bg-accent/80;
+  }
+  .btn-secondary {
+    @apply border border-line bg-elevated text-ink hover:bg-elevated/70;
+  }
+  .btn-outline {
+    @apply border border-line bg-transparent text-ink hover:border-accent hover:text-white;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-ink-muted hover:bg-elevated hover:text-ink;
+  }
+  .btn-danger {
+    @apply bg-down text-white hover:bg-down/90;
+  }
+  .btn-success {
+    @apply bg-up text-canvas hover:bg-up/90;
+  }
+
+  /* Forms */
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+  .label-required::after {
+    content: " *";
+    @apply text-down;
+  }
+  .input,
+  .select,
+  .textarea {
+    @apply block w-full rounded-control border border-line bg-surface px-3.5 text-sm text-ink transition placeholder:text-ink-subtle focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 disabled:opacity-60;
+  }
+  .input,
+  .select {
+    @apply h-11;
+  }
+  .textarea {
+    @apply min-h-[7.5rem] py-3;
+  }
+  .select {
+    @apply appearance-none bg-no-repeat pr-10;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394A3B8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+  }
+  .input-error {
+    @apply border-down focus:border-down focus:ring-down/30;
+  }
+  .field-error {
+    @apply mt-1.5 text-xs text-down;
+  }
+  .field-hint {
+    @apply mt-1.5 text-xs text-ink-subtle;
+  }
+  .checkbox {
+    @apply h-4 w-4 rounded border-line bg-surface text-accent accent-[rgb(var(--accent))];
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-semibold;
+  }
+  .badge-accent {
+    @apply bg-accent/10 text-accent;
+  }
+  .badge-up {
+    @apply bg-up/10 text-up;
+  }
+  .badge-down {
+    @apply bg-down/10 text-down;
+  }
+  .badge-warn {
+    @apply bg-warn/10 text-warn;
+  }
+  .badge-neutral {
+    @apply bg-elevated text-ink-muted;
+  }
+
+  /* Tables */
+  .data-table {
+    @apply w-full text-sm;
+  }
+  .data-table th {
+    @apply pb-2 text-left text-xs font-medium text-ink-subtle;
+  }
+  .data-table td {
+    @apply border-t border-line/60 py-3;
+  }
+  .data-table tbody tr {
+    @apply transition-colors hover:bg-elevated/50;
+  }
+  .num {
+    @apply text-right tabular-nums;
+  }
+
+  /* Long-form content (blog posts, course descriptions) */
+  .article {
+    @apply text-base leading-7 text-ink-muted;
+  }
+  .article h1 {
+    @apply mb-4 text-3xl text-ink sm:text-4xl;
+  }
+  .article h2 {
+    @apply mb-3 mt-10 text-2xl text-ink;
+  }
+  .article h3 {
+    @apply mb-2 mt-8 text-xl text-ink;
+  }
+  .article h4 {
+    @apply mb-2 mt-6 text-lg text-ink;
+  }
+  .article p {
+    @apply mb-4;
+  }
+  .article ul {
+    @apply mb-4 list-disc space-y-1.5 pl-6;
+  }
+  .article ol {
+    @apply mb-4 list-decimal space-y-1.5 pl-6;
+  }
+  .article strong {
+    @apply font-semibold text-ink;
+  }
+  .article a {
+    @apply link;
+  }
+  .article blockquote {
+    @apply my-6 border-l-2 border-accent pl-4 italic text-ink;
+  }
+  .article img {
+    @apply my-6 rounded-tile;
+  }
+}
+
+/* ==========================================================================
+   Third-party widget theming (react-tabs, react-slick, odometer)
+   ========================================================================== */
+.react-tabs__tab-list {
+  @apply flex gap-1 overflow-x-auto rounded-control border-0 bg-surface p-1 hide-scrollbar;
+}
+.react-tabs__tab {
+  @apply bottom-0 flex shrink-0 items-center gap-2 rounded-md border-0 px-4 py-2 text-sm font-medium text-ink-muted transition hover:text-ink;
+}
+.react-tabs__tab--selected {
+  @apply rounded-md border-0 bg-elevated text-ink shadow-sm;
+}
+.react-tabs__tab--selected:focus,
+.react-tabs__tab:focus {
+  @apply outline-none;
+}
+.react-tabs__tab:focus-visible {
+  @apply ring-2 ring-accent;
+}
+.react-tabs__tab:focus::after {
+  display: none;
+}
+.react-tabs__tab-panel--selected {
+  @apply pt-6;
+}
+
+.slick-dots li button::before {
+  color: rgb(var(--text-subtle));
+}
+.slick-dots li.slick-active button::before {
+  color: rgb(var(--accent));
+}
+.slick-prev::before,
+.slick-next::before {
+  color: rgb(var(--text-muted));
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

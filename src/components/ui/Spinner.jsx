@@ -3,7 +3,7 @@ export default function Spinner({ className = "h-8 w-8" }) {
     <span
       role="status"
       aria-label="Loading"
-      className={`inline-block animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600 ${className}`}
+      className={`inline-block animate-spin rounded-full border-[3px] border-line border-t-accent ${className}`}
     />
   );
 }

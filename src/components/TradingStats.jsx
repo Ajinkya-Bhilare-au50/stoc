@@ -62,52 +62,35 @@ const TradingStats = () => {
     };
   }, []);
 
+  const STATS = [
+    { label: "Happy traders", ref: happyTradersRef },
+    { label: "Years of expertise", ref: yearsOfExpertiseRef },
+    { label: "Followers", ref: followersRef },
+    { label: "Trading programs", ref: tradingProgramRef },
+  ];
+
   return (
-    <div className="m-5 py-8 px-4 sm:px-6 lg:px-8 text-center">
-      <h1 className="text-3xl font-bold mb-6">Trading Statistics</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="flex flex-col items-center">
-          <h2 className="font-semibold mb-2 text-xl">Happy Traders</h2>
-          <div className="flex justify-center items-center">
-            <div
-              ref={happyTradersRef}
-              className="odometer text-3xl text-blue-900"
-            ></div>
-            <p className="text-lg text-blue-900">+</p>
-          </div>
+    <section className="section border-t border-line" aria-labelledby="stats-title">
+      <div className="container-page">
+        <div className="text-center">
+          <p className="eyebrow">By the numbers</p>
+          <h2 id="stats-title" className="section-title mt-2">
+            Trading statistics
+          </h2>
         </div>
-        <div className="flex flex-col items-center">
-          <h2 className="font-semibold mb-2 text-xl">Years of Expertise</h2>
-          <div className="flex justify-center items-center">
-            <div
-              ref={yearsOfExpertiseRef}
-              className="odometer text-3xl text-blue-900"
-            ></div>
-            <p className="text-lg">+</p>
-          </div>
-        </div>
-        <div className="flex flex-col items-center">
-          <h2 className="font-semibold mb-2 text-xl">Followers</h2>
-          <div className="flex justify-center items-center">
-            <div
-              ref={followersRef}
-              className="odometer text-3xl text-blue-900"
-            ></div>
-            <p className="text-lg">+</p>
-          </div>
-        </div>
-        <div className="flex flex-col items-center">
-          <h2 className="font-semibold mb-2 text-xl">Trading Programs</h2>
-          <div className="flex justify-center items-center">
-            <div
-              ref={tradingProgramRef}
-              className="odometer text-3xl text-blue-900"
-            ></div>
-            <p className="text-lg">+</p>
-          </div>
-        </div>
+        <dl className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+          {STATS.map(({ label, ref }) => (
+            <div key={label} className="card text-center">
+              <dd className="flex items-baseline justify-center gap-0.5 text-3xl font-bold tabular-nums text-ink sm:text-4xl">
+                <span ref={ref} className="odometer">0</span>
+                <span className="text-accent">+</span>
+              </dd>
+              <dt className="mt-2 text-sm text-ink-muted">{label}</dt>
+            </div>
+          ))}
+        </dl>
       </div>
-    </div>
+    </section>
   );
 };
 

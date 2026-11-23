@@ -13,7 +13,7 @@ const ScrollUpButton = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -25,16 +25,16 @@ const ScrollUpButton = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-10">
-      {showButton && (
-        <button
-          onClick={scrollToTop}
-          className="bg-yellow-800 hover:bg-blue-900 text-white rounded-full p-2 shadow-md"
-        >
-          <FaArrowUp />
-        </button>
-      )}
-    </div>
+    <button
+      type="button"
+      onClick={scrollToTop}
+      aria-label="Back to top"
+      className={`btn btn-secondary fixed bottom-20 right-4 z-30 h-10 w-10 rounded-full px-0 shadow-pop transition-all duration-200 ${
+        showButton ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0"
+      }`}
+    >
+      <FaArrowUp className="h-3.5 w-3.5" aria-hidden />
+    </button>
   );
 };
 

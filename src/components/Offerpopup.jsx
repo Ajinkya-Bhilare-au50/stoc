@@ -1,71 +1,54 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+import { TagIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ROUTES } from "../config/routes";
+import { useSessionFlag } from "./layout/useSessionFlag";
 
-const OfferPopup = () => {
-  const [showPopup, setShowPopup] = useState(true);
-  const [expirationDate, setExpirationDate] = useState(null);
+const AUTO_HIDE_MS = 15000;
+const OFFER_DAYS = 2;
 
-  const handleClose = () => {
-    setShowPopup(false);
-  };
+/** Discount toast (bottom-left). Auto-hides; once closed, stays closed this session. */
+export default function OfferPopup() {
+  const [dismissed, dismiss] = useSessionFlag("promo:offer-toast");
+  const [visible, setVisible] = useState(!dismissed);
+
+  const expires = new Date();
+  expires.setDate(expires.getDate() + OFFER_DAYS);
+  const expiresLabel = expires.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
 
   useEffect(() => {
-    // Calculate expiration date 2 days from the current date
-    const currentDate = new Date();
-    const expiration = new Date(currentDate);
-    expiration.setDate(expiration.getDate() + 2);
+    if (dismissed) return undefined;
+    const t = setTimeout(() => setVisible(false), AUTO_HIDE_MS);
+    return () => clearTimeout(t);
+  }, [dismissed]);
 
-    const options = { day: "2-digit", month: "short", year: "numeric" };
-    const formattedDate = expiration.toLocaleDateString("en-US", options);
-    setExpirationDate(formattedDate);
+  if (dismissed || !visible) return null;
 
-    // Close the popup after expiration
-    const expirationTimeout = setTimeout(() => {
-      setShowPopup(false);
-    }, expiration.getTime() - currentDate.getTime());
-
-    // Close the popup after 4 seconds
-    const hideTimeout = setTimeout(() => {
-      setShowPopup(false);
-    }, 15000);
-
-    // Clear the timeout when component unmounts
-    return () => {
-      clearTimeout(expirationTimeout);
-      clearTimeout(hideTimeout);
-    };
-  }, []);
+  const close = () => {
+    setVisible(false);
+    dismiss();
+  };
 
   return (
     <div
-      className={`fixed bottom-0 left-0 w-full p-4 bg-gradient-to-r from-yellow-800 to-yellow-900 shadow-lg rounded-lg ${
-        showPopup ? "block" : "hidden"
-      } md:w-80 z-20`}
+      role="status"
+      className="fixed bottom-20 left-4 right-4 z-30 sm:right-auto sm:w-80 motion-safe:animate-[toast-in_300ms_ease-out]"
     >
-      <div className="flex justify-between items-center max-w-md mx-auto gap-4">
-        <p className="text-white font-bold text-center flex-grow">
-          🎉 Get Up to 5% OFF on Courses, Learning Paths & PRO | Sale Ends on{" "}
-          {expirationDate}
-        </p>
-        <button
-          onClick={handleClose}
-          className="text-black-900 focus:outline-none self-start"
-        >
-          <svg
-            className="w-6 h-6 fill-current"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 11.414l3.293 3.293a1 1 0 101.414-1.414L11.414 10l3.293-3.293a1 1 0 10-1.414-1.414L10 8.586 6.707 5.293a1 1 0 00-1.414 1.414L8.586 10l-3.293 3.293a1 1 0 001.414 1.414L10 11.414z"
-              clipRule="evenodd"
-            />
-          </svg>
+      <div className="flex gap-3 rounded-panel border border-line bg-elevated p-4 shadow-pop">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-control bg-warn/15 text-warn">
+          <TagIcon className="h-5 w-5" aria-hidden />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold text-ink">Up to 5% off courses</p>
+          <p className="mt-0.5 text-xs text-ink-muted">Learning paths &amp; PRO · sale ends {expiresLabel}</p>
+          <Link to={ROUTES.specialOffer} onClick={close} className="link mt-2 inline-block text-xs">
+            View offer
+          </Link>
+        </div>
+        <button type="button" onClick={close} className="btn btn-ghost -mr-1 -mt-1 h-8 w-8 px-0" aria-label="Close offer">
+          <XMarkIcon className="h-4 w-4" />
         </button>
       </div>
     </div>
   );
-};
-
-export default OfferPopup;
+}
